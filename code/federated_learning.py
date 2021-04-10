@@ -95,6 +95,7 @@ def run_experiment(exp, exp_count, n_experiments):
         #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
         #participating_workers = workers
         for worker in workers:
+            print("WORKER: "+str(worker.id))
             
             # Get Aggregated Prediction Matrix
             worker.get_from_server(server)
@@ -102,8 +103,10 @@ def run_experiment(exp, exp_count, n_experiments):
             # Local Training / Distillation ??
             train_stats = worker.train(epochs=hp["local_epochs"])
             
+            print("Computing Predictions")
+            
             # Compute Predictions
-            worker.compute_prediction_matrix(distill_loader, argmax=True)
+            worker.compute_prediction_matrix(argmax=True)
             
             # Send Predictions + Frequency Vector to Server
             worker.send_to_server(server)

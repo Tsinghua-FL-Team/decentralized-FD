@@ -6,6 +6,7 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
+import torch.nn.functional as F
 import numpy as np
 
 
@@ -87,13 +88,13 @@ class Worker():
     def predict(self, x):
         """Softmax prediction on input"""
         with torch.no_grad():
-            y_ = nn.softmax(1)(self.predict_logits(x))
+            y_ = F.softmax(self.predict_logit(x), dim = 1)
         return y_
     
     def compute_prediction_matrix(self, argmax=True):
         predictions = []
         idcs = []
-        for x, _, idx in self.distill_loader:
+        for x, idx in self.distill_loader:
             x = x.to(self.device)
             s_predict = self.predict(x).detach()
             predictions += [s_predict]
@@ -104,7 +105,6 @@ class Worker():
         
         if argmax:
             predictions = np.argmax(predictions, axis=-1).astype("uint8")
-            print(predictions.shape)
         else:
            predictions = predictions.astype("float16")
         
@@ -123,7 +123,7 @@ class Worker():
         # compute label distribution in my predictions
         _ , label_distribution = np.unique(self.predictions, return_counts=True)
         # send both predictions and distribution to the server
-        server.receive_prediction(w_id=self.id, prediction=self.predictions, freq=label_distribution)
+        server.receive_prediction(w_id=self.id, predictions=self.predictions, freq=label_distribution)
 
 
     #---------------------------------------------------------------------#

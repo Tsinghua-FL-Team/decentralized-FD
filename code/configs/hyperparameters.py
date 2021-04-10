@@ -18,7 +18,7 @@ def init( ):
          "model": "vgg11",
          "dataset": "cifar10",
          "distill-dataset": "stl10",
-         "n_workers": 10,
+         "n_workers": 5,
          "classes_per_worker": 4,
          "participation_rate": 1,
          "batch_size": 32,

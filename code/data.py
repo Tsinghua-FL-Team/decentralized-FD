@@ -136,6 +136,7 @@ def load_stl10(path):
     dataset = torchvision.datasets.STL10(
         root=path+"STL10", download=True, transform=transform
     )
+    #, split="train"
 
     # Return the datasets
     return dataset
@@ -153,7 +154,11 @@ def split_dirichlet(labels, n_workers, n_data, alpha, double_stochstic=True):
 
     if isinstance(labels, torch.Tensor):
       labels = labels.numpy()
+    
     n_classes = np.max(labels)+1
+    
+#    if alpha == 0:
+#        alpha = n_classes
     label_distribution = np.random.dirichlet([alpha]*n_workers, n_classes)
 
     if double_stochstic:
@@ -162,16 +167,16 @@ def split_dirichlet(labels, n_workers, n_data, alpha, double_stochstic=True):
     class_idcs = [np.argwhere(np.array(labels)==y).flatten() 
            for y in range(n_classes)]
 
-    client_idcs = [[] for _ in range(n_workers)]
+    worker_idcs = [[] for _ in range(n_workers)]
     for c, fracs in zip(class_idcs, label_distribution):
         for i, idcs in enumerate(np.split(c, (np.cumsum(fracs)[:-1]*len(c)).astype(int))):
-            client_idcs[i] += [idcs]
+            worker_idcs[i] += [idcs]
 
-    client_idcs = [np.concatenate(idcs) for idcs in client_idcs]
+    worker_idcs = [np.concatenate(idcs) for idcs in worker_idcs]
 
-    #print_split(client_idcs, labels)
+    #print_split(worker_idcs, labels)
   
-    return client_idcs
+    return worker_idcs
 
 def make_double_stochstic(x):
     rsum = None
@@ -214,7 +219,7 @@ def split_data(train_data, n_workers=10, classes_per_worker=0, n_data=None):
         train_data.targets, 
         n_workers, 
         n_data, 
-        classes_per_workers
+        classes_per_worker
         )
     
     # Compute labels per worker

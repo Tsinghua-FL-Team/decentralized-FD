@@ -40,7 +40,7 @@ class Worker():
     #   Train Worker using its local dataset.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def train(self, epochs=1, loader=None, reset_optimizer=False, **kwargs):
+    def train(self, epochs=1, loader=None, reset_optimizer=False):
         
         if reset_optimizer:
             self.optimizer = self.optimizer_fn(self.model.parameters())  
@@ -50,7 +50,7 @@ class Worker():
         running_loss, samples = 0.0, 0
         
         for ep in range(epochs):
-            for x, y, source, index in loader:   
+            for x, y, step in self.loader:   
                 x, y = x.to(self.device), y.to(self.device)
                 
                 self.optimizer.zero_grad()
@@ -103,10 +103,29 @@ class Worker():
         predictions =  torch.cat(predictions, dim=0)[argidx].detach().cpu().numpy()
         
         if argmax:
-            return np.argmax(predictions, axis=-1).astype("uint8")
+            predictions = np.argmax(predictions, axis=-1).astype("uint8")
+            print(predictions.shape)
         else:
-            return predictions.astype("float16")
+           predictions = predictions.astype("float16")
         
+        self.predictions = predictions
+
+        
+    #---------------------------------------------------------------------#
+    #                                                                     #
+    #   Functions used by workers to communicate with server.             #
+    #                                                                     #
+    #---------------------------------------------------------------------#
+    def get_from_server (self, server):
+        self.distill_labels = server.global_labels()
+
+    def send_to_server (self, server):
+        # compute label distribution in my predictions
+        _ , label_distribution = np.unique(self.predictions, return_counts=True)
+        # send both predictions and distribution to the server
+        server.receive_prediction(w_id=self.id, prediction=self.predictions, freq=label_distribution)
+
+
     #---------------------------------------------------------------------#
     #                                                                     #
     #   Performs federated distillation step.                             #

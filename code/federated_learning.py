@@ -3,10 +3,9 @@
 #   I M P O R T     L I B R A R I E S                                         #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-import os, argparse
+import argparse, time
 import torch
 from torch.utils.data import DataLoader
-#import torchvision.transforms as transforms
 import numpy as np
 
 #----------------------------------------------------------------------------#
@@ -18,6 +17,7 @@ from configs.hyperparameters import hyperparams as hp_dicts
 import experiment_manager as expm
 import models, data
 from worker import Worker
+from contract import Server
 
 
 np.set_printoptions(precision=4, suppress=True)
@@ -45,6 +45,7 @@ args = parser.parse_args()
 #*****************************************************************************#
 def run_experiment(exp, exp_count, n_experiments):
     # print log information
+    print("Running Experimemt {} of {} with".format(exp_count+1, n_experiments))
     print(exp)
     
     # get hyperparameters of current experiment
@@ -67,9 +68,9 @@ def run_experiment(exp, exp_count, n_experiments):
         )
     
     # create dataloaders for all datasets loaded so far
-    worker_loaders = [DataLoader(local_data) for local_data in worker_data]
-    test_loader = DataLoader(test_data)
-    distill_loader = DataLoader(distill_data)
+    worker_loaders = [DataLoader(local_data, batch_size=hp["batch_size"], shuffle=True) for local_data in worker_data]
+    test_loader = DataLoader(test_data, batch_size=hp["batch_size"], shuffle=True)
+    distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
     
     # create instances of workers and the server (i.e. smart contract)
     workers = [
@@ -81,11 +82,38 @@ def run_experiment(exp, exp_count, n_experiments):
                distill_loader = distill_loader) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
+    server = Server(n_samples=len(distill_loader.dataset), n_classes=10, n_workers=hp["n_workers"])
     
+    print("Starting Distributed Training..\n")
+    t1 = time.time()
     
+    # start training each client individually
+    for c_round in range(1, hp["communication_rounds"]+1):
+        print("Communication Round: " + str(c_round))
+        # sample workers for current round of training
+        #participating_workers = server.select_workers(workers, hp["participation_rate"])
+        #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
+        #participating_workers = workers
+        for worker in workers:
+            
+            # Get Aggregated Prediction Matrix
+            worker.get_from_server(server)
+            
+            # Local Training / Distillation ??
+            train_stats = worker.train(epochs=hp["local_epochs"])
+            
+            # Compute Predictions
+            worker.compute_prediction_matrix(distill_loader, argmax=True)
+            
+            # Send Predictions + Frequency Vector to Server
+            worker.send_to_server(server)
+        
+        # Aggregate the predictions and compute reward
+        server.aggregate_and_compute_reward()
     
-    return 0
-
+    # Free up memory
+    del server; workers.clear()
+    torch.cuda.empyt_cache()
 
 #*****************************************************************************#
 #                                                                             #
@@ -97,7 +125,7 @@ def run():
     # create instances of experiment manager class for each setup
     experiments = [expm.Experiment(hyperparameters=hp) for hp in hp_dicts]
     
-    print("Running {} Experiments..\n".format(len(experiments)))
+    print("Running a total of {} Experiments..\n".format(len(experiments)))
     for exp_count, experiment in enumerate(experiments):
         run_experiment(experiment, exp_count, len(experiments))
 

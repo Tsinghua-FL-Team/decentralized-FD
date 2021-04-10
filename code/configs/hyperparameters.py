@@ -15,17 +15,17 @@ def init( ):
     hyperparams = [
         {
          # Experiment 1
-         "model": "vgg16",
+         "model": "vgg11",
          "dataset": "cifar10",
          "distill-dataset": "stl10",
-         "n_workers": 2,
-         "classes_per_worker": 0,
+         "n_workers": 10,
+         "classes_per_worker": 4,
          "participation_rate": 1,
          "batch_size": 32,
          "data_balance": 1.0,
          "communication_rounds": 10,
-         "local_epochs": 25,
-         "distill_epochs": 10,
+         "local_epochs": 1,
+         "distill_epochs": 1,
          "n_distill": 512,
          "distill_mode": "regular",
          "aggregation_mode": "FD",

@@ -12,8 +12,12 @@ from torchvision.models.resnet import ResNet, BasicBlock
 import numpy as np
 import torchvision
 
-#from functools import partial
 
+#-----------------------------------------------------------------------------#
+#                                                                             #
+#   Define global parameters to be used through out the program               #
+#                                                                             #
+#-----------------------------------------------------------------------------#
 #device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 

@@ -46,12 +46,8 @@ class Server():
         for (prediction, freq) in zip(self.wr_predict, self.label_dist):
             Sum += freq
             for j, sample_predict in enumerate(prediction):
-                Votes(j, sample_predict)
+                Votes[j, sample_predict]
             
-        # Print
-        print(Sum)
-        print(Votes)
-        
         # compute reward for each worker
         for j in range(0, self.n_samples):
             for i in range(0, self.n_workers):
@@ -64,9 +60,9 @@ class Server():
                     if i == p:
                         continue
                     # Compute reward
-                    t0 += (1.0/Ri[self.wr_predict[i,j]]) if self.wr_predict[i,j] == self.wr_predict[p,j] else -1
+                    t0 += (1.0/Ri[self.wr_predict[i][j]]) if self.wr_predict[i][j] == self.wr_predict[p][j] else -1
                 # Reward Share for worker i
-                rewardShare[i] += self.alpha * (1.0/(self.n_worker-1)) * t0
+                rewardShare[i] += self.alpha * (1.0/(self.n_workers-1)) * t0
         
         # Compute the majority vote
         self.majorityVote.append(np.argmax(Votes, axis=-1).astype("uint8"))

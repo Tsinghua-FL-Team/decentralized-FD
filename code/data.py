@@ -200,7 +200,7 @@ class IdxSubset(torch.utils.data.Dataset):
         self.indices = indices
 
     def __getitem__(self, idx):
-        return (*self.dataset[self.indices[idx]], idx)
+        return (idx, *self.dataset[self.indices[idx]])
 
     def __len__(self):
         return len(self.indices)

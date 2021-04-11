@@ -36,6 +36,10 @@ parser.add_argument("--CHECKPOINT_PATH", default=None, type=str)
 #parser.add_argument("--end", default=None, type=int)
 args = parser.parse_args()
 
+#DATA_PATH="E:\LAB\experiment\6. Decentralized FD\decentralized-FD\code\datasets\" 
+#RESULTS_PATH="E:\LAB\experiment\6. Decentralized FD\decentralized-FD\code\results\" 
+#CHECKPOINT_PATH="E:\LAB\experiment\6. Decentralized FD\decentralized-FD\code\checkpoints\"
+
 
 #*****************************************************************************#
 #                                                                             #
@@ -79,10 +83,13 @@ def run_experiment(exp, exp_count, n_experiments):
                loader,
                idnum = i,
                counts = counts,
-               distill_loader = distill_loader) 
+               n_classes=hp["n_classes"]) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
-    server = Server(n_samples=len(distill_loader.dataset), n_classes=10, n_workers=hp["n_workers"])
+    server = Server(n_samples=len(distill_loader.dataset), 
+                    n_classes=hp["n_classes"], 
+                    n_workers=hp["n_workers"]
+                )
     
     print("Starting Distributed Training..\n")
     t1 = time.time()
@@ -97,22 +104,55 @@ def run_experiment(exp, exp_count, n_experiments):
         for worker in workers:
             print("WORKER: "+str(worker.id))
             
-            # Get Aggregated Prediction Matrix
+            # get Aggregated Prediction Matrix
             worker.get_from_server(server)
             
-            # Local Training / Distillation ??
+            # local Training / Distillation ??
             train_stats = worker.train(epochs=hp["local_epochs"])
             
-            print("Computing Predictions")
+            print("Total train time: "+str(time.time() - t1))
             
-            # Compute Predictions
-            worker.compute_prediction_matrix(argmax=True)
+            # compute Predictions
+            worker.compute_prediction_matrix(loader=distill_loader, argmax=True)
             
-            # Send Predictions + Frequency Vector to Server
+            # send Predictions + Frequency Vector to Server
             worker.send_to_server(server)
         
-        # Aggregate the predictions and compute reward
+        # aggregate the predictions and compute reward
         server.aggregate_and_compute_reward()
+        
+        # logging the results as described
+        if exp.is_log_round(c_round):
+            
+            print("Experiment: ({}/{})".format(exp_count+1, 
+                                               n_experiments)
+                  )   
+            # log information about communication rounds and epochs
+            exp.log({'communication_round' : c_round, 
+                     'epochs' : c_round*hp['local_epochs']
+                     })
+            # log information about parameters on worker
+            exp.log({key : workers[0].optimizer.__dict__[
+                'param_groups'][0][key] for key in optimizer_hp
+                })
+            # evaluate and log evaluation results
+            for worker in workers:
+                # Evaluate each worker's performance 
+                exp.log({"worker_{}_{}".format(worker.id, key) : value 
+                         for key, value in worker.evaluate(
+                                 loader=test_loader).items()
+                         })
+                  
+            # save logging results to disk
+            try:
+              exp.save_to_disc(path=args.RESULTS_PATH, name=hp['log_path'])
+            except:
+              print("Saving results Failed!")
+    
+    # compute total time taken by the experiment
+    print("Experiment {} took time {} to run..".format(exp_count, 
+                                                       time.time() - t1)
+          )
     
     # Free up memory
     del server; workers.clear()

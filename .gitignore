@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 code/datasets
+code/results
+code/checkpoints
 .spyproject

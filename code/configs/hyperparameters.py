@@ -18,10 +18,11 @@ def init( ):
          "model": "vgg11",
          "dataset": "cifar10",
          "distill-dataset": "stl10",
+         "n_classes": 10,
          "n_workers": 5,
          "classes_per_worker": 4,
          "participation_rate": 1,
-         "batch_size": 32,
+         "batch_size": 64,
          "data_balance": 1.0,
          "communication_rounds": 10,
          "local_epochs": 1,
@@ -29,7 +30,9 @@ def init( ):
          "n_distill": 512,
          "distill_mode": "regular",
          "aggregation_mode": "FD",
-         "random_seed": 42
+         "random_seed": 42,
+         "log_frequency": 1,
+         "log_path": "experiment1"
         }, 
         {
          # Experiment 2
@@ -47,14 +50,15 @@ def init( ):
          "n_distill": 512,
          "distill_mode": "regular",
          "aggregation_mode": "FD",
-         "random_seed": 42
+         "random_seed": 42,
+         "log_frequency": 1,
+         "log_path": "experiment2"
          }
     ]
 
 
-        
-        
-############# KEY ###############
+
+#################   Hyperparameters Key   #################
 
 # model                 - Choose from: [simple-cnn, mlp-mnist]
 # dataset               - Choose from: [mnist, cifar10, cifar100, emnist]
@@ -76,4 +80,7 @@ def init( ):
 # aggregation_mode      - Aggregation mode used to synchronize
 #                         Choose from: ["FA", "FD"]
 # random_seed           - Random seed for model initializations
-    
+# log_frequency         - Number of communication rounds after which results 
+#                         are logged and saved to disk
+# log_path              - path of the log files
+

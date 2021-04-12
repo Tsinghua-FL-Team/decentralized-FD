@@ -24,15 +24,15 @@ def init( ):
          "participation_rate": 1,
          "batch_size": 64,
          "data_balance": 1.0,
-         "communication_rounds": 10,
-         "local_epochs": 1,
-         "distill_epochs": 1,
+         "communication_rounds": 2,
+         "local_epochs": 15,
+         "distill_epochs": 5,
          "n_distill": 512,
          "distill_mode": "regular",
          "aggregation_mode": "FD",
          "random_seed": 42,
          "log_frequency": 1,
-         "log_path": "experiment1"
+         "log_path": "experiment1\\"
         }, 
         {
          # Experiment 2
@@ -52,7 +52,7 @@ def init( ):
          "aggregation_mode": "FD",
          "random_seed": 42,
          "log_frequency": 1,
-         "log_path": "experiment2"
+         "log_path": "experiment2\\"
          }
     ]
 

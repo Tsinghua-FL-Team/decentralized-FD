@@ -7,6 +7,7 @@ import argparse, time
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
+import copy
 
 #----------------------------------------------------------------------------#
 #                                                                            #
@@ -31,9 +32,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--DATA_PATH", default=None, type=str)
 parser.add_argument("--RESULTS_PATH", default=None, type=str)
 parser.add_argument("--CHECKPOINT_PATH", default=None, type=str)
-#parser.add_argument("--schedule", default="main", type=str)
-#parser.add_argument("--start", default=0, type=int)
-#parser.add_argument("--end", default=None, type=int)
 args = parser.parse_args()
 
 #DATA_PATH="E:\LAB\experiment\6. Decentralized FD\decentralized-FD\code\datasets\" 
@@ -78,7 +76,7 @@ def run_experiment(exp, exp_count, n_experiments):
     
     # create instances of workers and the server (i.e. smart contract)
     workers = [
-        Worker(model_fn, 
+        Worker(model_fn,
                optimizer_fn, 
                loader,
                idnum = i,
@@ -102,18 +100,17 @@ def run_experiment(exp, exp_count, n_experiments):
         #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
         #participating_workers = workers
         for worker in workers:
-            print("WORKER: "+str(worker.id))
+            print("Train WORKER: "+str(worker.id))
             
             # get Aggregated Prediction Matrix
-            worker.get_from_server(server)
+            #worker.get_from_server(server)
             
             # local Training / Distillation ??
             train_stats = worker.train(epochs=hp["local_epochs"])
             
-            print("Total train time: "+str(time.time() - t1))
-            
             # compute Predictions
-            worker.compute_prediction_matrix(loader=distill_loader, argmax=True)
+            worker.compute_prediction_matrix(loader=distill_loader, 
+                                             argmax=True)
             
             # send Predictions + Frequency Vector to Server
             worker.send_to_server(server)
@@ -121,6 +118,17 @@ def run_experiment(exp, exp_count, n_experiments):
         # aggregate the predictions and compute reward
         server.aggregate_and_compute_reward()
         
+        # run federated distillation phase
+        for worker in workers:
+            print("Distill WORKER: "+str(worker.id))
+            
+            # get Aggregated Prediction Matrix
+            worker.get_from_server(server)
+            
+            # local Training / Distillation ??
+            distill_stats = worker.distill(distill_epochs=hp["distill_epochs"],
+                                           loader=distill_loader)
+                
         # logging the results as described
         if exp.is_log_round(c_round):
             

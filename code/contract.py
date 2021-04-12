@@ -46,7 +46,7 @@ class Server():
         for (prediction, freq) in zip(self.wr_predict, self.label_dist):
             Sum += freq
             for j, sample_predict in enumerate(prediction):
-                Votes[j, sample_predict]
+                Votes[j, sample_predict] += 1
             
         # compute reward for each worker
         for j in range(0, self.n_samples):
@@ -67,6 +67,11 @@ class Server():
         # Compute the majority vote
         self.majorityVote.append(np.argmax(Votes, axis=-1).astype("uint8"))
         self.rewardShares.append(rewardShare)
+        
+        # print
+        #print(Votes)
+        #print(self.majorityVote[-1])
+        
         
         # Clear local variables and reset caches for next round
         del Votes, Sum

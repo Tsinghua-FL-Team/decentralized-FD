@@ -7,8 +7,9 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.utils.data import DataLoader
 import numpy as np
-
+import copy
 
 #-----------------------------------------------------------------------------#
 #                                                                             #
@@ -31,14 +32,15 @@ class Worker():
         #self.distill_loader = distill_loader
         self.n_classes = n_classes
         # model parameters
-        self.model = model_fn().to(device)
+        self.train_model = copy.deepcopy(model_fn()).to(device) #(nn.Module) 
+        #self.distill_model = copy.deepcopy(model_fn).to(device)
         self.loader = loader
-        self.W = {key : value for key, value in self.model.named_parameters()}
-        self.dW = {key : torch.zeros_like(value) for key, value in self.model.named_parameters()}
-        self.W_old = {key : torch.zeros_like(value) for key, value in self.model.named_parameters()}
+        self.W = {key : value for key, value in self.train_model.named_parameters()}
+        self.dW = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
+        self.W_old = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
         # optimizer parameters        
         self.optimizer_fn = optimizer_fn
-        self.optimizer = optimizer_fn(self.model.parameters())   
+        self.optimizer = optimizer_fn(self.train_model.parameters())   
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=0.96)  
         self.c_round = 0
 
@@ -50,10 +52,10 @@ class Worker():
     def train(self, epochs=1, loader=None, reset_optimizer=False):
         """Training function to train local model"""
         if reset_optimizer:
-            self.optimizer = self.optimizer_fn(self.model.parameters())  
+            self.optimizer = self.optimizer_fn(self.train_model.parameters())  
         
         # start training the worker using local dataset
-        self.model.train()  
+        self.train_model.train()  
         running_loss, samples = 0.0, 0
         
         # check if a dataloader was provided for training
@@ -66,7 +68,7 @@ class Worker():
                 
                 self.optimizer.zero_grad()
                 
-                loss = nn.CrossEntropyLoss()(self.model(x), y)
+                loss = nn.CrossEntropyLoss()(self.train_model(x), y)
                 
                 #if lambda_fedprox != 0.0:
                 #  loss += lambda_fedprox * torch.sum((flatten(W0).cuda()-flatten(dict(model.named_parameters())).cuda())**2)
@@ -80,7 +82,7 @@ class Worker():
 
         train_stats = {"loss" : running_loss / samples}
         #print(self.label_counts)
-        #eval_scores(self.model, self.distill_loader)
+        #eval_scores(self.train_model, self.distill_loader)
           
         return train_stats
     
@@ -92,7 +94,7 @@ class Worker():
     def evaluate(self, loader=None):
         """Evaluation function to check performance"""
         # start evaluation of the model
-        self.model.eval()
+        self.train_model.eval()
         samples, correct = 0, 0
         
         # check if a dataloader was provided for evaluation
@@ -103,7 +105,7 @@ class Worker():
                 
                 x, y = x.to(device), y.to(device)
                 
-                y_ = self.model(x)
+                y_ = self.train_model(x)
                 _, predicted = torch.max(y_.detach(), 1)
                 
                 samples += y.shape[0]
@@ -121,7 +123,7 @@ class Worker():
     def predict_logit(self, x):
         """Logit prediction on input"""
         with torch.no_grad():
-            y_ = self.model(x)
+            y_ = self.train_model(x)
         return y_
 
     def predict(self, x):
@@ -129,6 +131,14 @@ class Worker():
         with torch.no_grad():
             y_ = F.softmax(self.predict_logit(x), dim = 1)
         return y_
+
+    def predict_max(self, x):
+        """Onehot Argmax prediction on input"""
+        y_ = self.predict(x)
+        amax = torch.argmax(y_, dim=1).detach()
+        t = torch.zeros_like(y_)
+        t[torch.arange(y_.shape[0]),amax] = 1
+        return t
     
     def compute_prediction_matrix(self, loader=None, argmax=True):
         predictions = []
@@ -161,6 +171,13 @@ class Worker():
     #---------------------------------------------------------------------#
     def get_from_server (self, server):
         self.distill_labels = server.global_labels()
+        
+        # get onehot encoding of the same        
+        self.onehot_distill_labels = np.zeros(
+            (self.distill_labels.size, self.n_classes))
+        self.onehot_distill_labels[
+            np.arange(self.distill_labels.size),self.distill_labels] = 1
+        
 
     def send_to_server (self, server):
         # compute label distribution in my predictions
@@ -177,8 +194,40 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distillation(self, loader=None):
+    def distill(self, distill_epochs=1, loader=None, reset_optimizer=False):
+        """Distillation function to perform Federated Distillation"""
+        if reset_optimizer:
+            self.optimizer = self.optimizer_fn(self.train_model.parameters())  
+
         # check if a dataloader was provided
         loader = self.loader if not loader else loader
         
-        return 0
+        # start training the worker using local dataset
+        self.train_model.train()  
+        running_loss, samples = 0.0, 0
+        
+        # check if a dataloader was provided for training
+        loader = self.loader if not loader else loader
+        
+        for ep in range(distill_epochs):
+            i = 0
+            for x, _ in loader:   
+                y = torch.Tensor(self.onehot_distill_labels[i:i+len(_)]).detach()
+                i += 1
+
+                x, y = x.to(device), y.to(device)
+                
+                self.optimizer.zero_grad()
+                y_ = F.softmax(self.train_model(x), dim=1)
+
+                # compute loss
+                loss = nn.KLDivLoss()(y_, y)
+                running_loss += loss.item()*y.shape[0]
+                samples += y.shape[0]
+                
+                loss.backward()
+                self.optimizer.step()  
+
+        distill_stats = {"loss" : running_loss / samples}
+          
+        return distill_stats

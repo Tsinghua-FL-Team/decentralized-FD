@@ -32,17 +32,17 @@ class Worker():
         #self.distill_loader = distill_loader
         self.n_classes = n_classes
         # model parameters
-        self.train_model = copy.deepcopy(model_fn()).to(device) #(nn.Module) 
+        self.train_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device) #(nn.Module) 
         #self.distill_model = copy.deepcopy(model_fn).to(device)
         self.loader = loader
-        self.W = {key : value for key, value in self.train_model.named_parameters()}
-        self.dW = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
-        self.W_old = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
+        #self.W = {key : value for key, value in self.train_model.named_parameters()}
+        #self.dW = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
+        #self.W_old = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
         # optimizer parameters        
         self.optimizer_fn = optimizer_fn
         self.optimizer = optimizer_fn(self.train_model.parameters())   
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=0.96)  
-        self.c_round = 0
+        #self.c_round = 0
 
     #---------------------------------------------------------------------#
     #                                                                     #
@@ -176,7 +176,7 @@ class Worker():
         self.onehot_distill_labels = np.zeros(
             (self.distill_labels.size, self.n_classes))
         self.onehot_distill_labels[
-            np.arange(self.distill_labels.size),self.distill_labels] = 1
+            np.arange(self.distill_labels.size),self.distill_labels] = 1.0
         
 
     def send_to_server (self, server):
@@ -194,7 +194,7 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distill(self, distill_epochs=1, loader=None, reset_optimizer=False):
+    def distill(self, distill_epochs=1, loader=None, reset_optimizer=True):
         """Distillation function to perform Federated Distillation"""
         if reset_optimizer:
             self.optimizer = self.optimizer_fn(self.train_model.parameters())  
@@ -212,7 +212,7 @@ class Worker():
         for ep in range(distill_epochs):
             i = 0
             for x, _ in loader:   
-                y = torch.Tensor(self.onehot_distill_labels[i:i+len(_)]).detach()
+                y = torch.Tensor(self.onehot_distill_labels[i*len(_):(i+1)*len(_)]).detach()
                 i += 1
 
                 x, y = x.to(device), y.to(device)
@@ -221,8 +221,8 @@ class Worker():
                 y_ = F.softmax(self.train_model(x), dim=1)
 
                 # compute loss
-                loss = nn.KLDivLoss()(y_, y)
-                running_loss += loss.item()*y.shape[0]
+                loss = self.kulbach_leibler_divergence(y_, y) #nn.KLDivLoss()(y_, y)
+                running_loss += loss.item() * y.shape[0]
                 samples += y.shape[0]
                 
                 loss.backward()
@@ -231,3 +231,6 @@ class Worker():
         distill_stats = {"loss" : running_loss / samples}
           
         return distill_stats
+    
+    def kulbach_leibler_divergence(self, predicted, target):
+        return -(target * torch.log(predicted.clamp_min(1e-7))).sum(dim=-1).mean() 

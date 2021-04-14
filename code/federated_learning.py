@@ -108,6 +108,12 @@ def run_experiment(exp, exp_count, n_experiments):
             # local Training / Distillation ??
             train_stats = worker.train(epochs=hp["local_epochs"])
             
+            # print training stats
+            print(train_stats)
+            
+            # Evaluate each worker's performance 
+            print(worker.evaluate(loader=test_loader))
+            
             # compute Predictions
             worker.compute_prediction_matrix(loader=distill_loader, 
                                              argmax=True)
@@ -128,6 +134,12 @@ def run_experiment(exp, exp_count, n_experiments):
             # local Training / Distillation ??
             distill_stats = worker.distill(distill_epochs=hp["distill_epochs"],
                                            loader=distill_loader)
+        
+            # print distill stats
+            print(distill_stats)
+
+            # Evaluate each worker's performance 
+            print(worker.evaluate(loader=test_loader))
                 
         # logging the results as described
         if exp.is_log_round(c_round):
@@ -164,7 +176,7 @@ def run_experiment(exp, exp_count, n_experiments):
     
     # Free up memory
     del server; workers.clear()
-    torch.cuda.empyt_cache()
+    #torch.cuda.empyt_cache()
 
 #*****************************************************************************#
 #                                                                             #

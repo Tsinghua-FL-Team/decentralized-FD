@@ -194,7 +194,7 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distill(self, distill_epochs=1, loader=None, reset_optimizer=True):
+    def distill(self, distill_epochs, loader=None, reset_optimizer=False):
         """Distillation function to perform Federated Distillation"""
         if reset_optimizer:
             self.optimizer = self.optimizer_fn(self.train_model.parameters())  

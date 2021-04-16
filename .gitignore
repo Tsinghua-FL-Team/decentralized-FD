@@ -4,3 +4,4 @@ code/datasets
 code/results
 code/checkpoints
 .spyproject
+code/accuracy_reward.png

@@ -7,6 +7,8 @@ import torch, torchvision
 import torchvision.transforms as transforms
 import numpy as np
 
+from torch.utils.data import Subset, Dataset
+from sklearn.model_selection import train_test_split as splitter
 
 #*****************************************************************************#
 #                                                                             #
@@ -147,13 +149,13 @@ def load_stl10(path):
 #   split given dataset among workers using dirichlet distribution.           #
 #                                                                             #
 #*****************************************************************************#
-def split_dirichlet(labels, n_workers, n_data, alpha, double_stochstic=True):
+def split_dirichlet(labels, n_workers, n_data, alpha=0.5, double_stochstic=True):
     """Splits data among the workers using dirichlet distribution"""
 
     #np.random.seed(0)
 
     if isinstance(labels, torch.Tensor):
-      labels = labels.numpy()
+        labels = labels.numpy()
     
     n_classes = np.max(labels)+1
     
@@ -174,7 +176,7 @@ def split_dirichlet(labels, n_workers, n_data, alpha, double_stochstic=True):
 
     worker_idcs = [np.concatenate(idcs) for idcs in worker_idcs]
 
-    #print_split(worker_idcs, labels)
+    print_split(worker_idcs, labels)
   
     return worker_idcs
 
@@ -208,6 +210,46 @@ class IdxSubset(torch.utils.data.Dataset):
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
+#   a class to create custom subsets, should be used to change all datasets.  #
+#                                                                             #
+#*****************************************************************************#
+class CustomSubset(Dataset):
+    r"""
+    Subset of a dataset at specified indices.
+
+    Arguments:
+        dataset (Dataset): The whole Dataset
+        indices (sequence): Indices in the whole set selected for subset
+        labels(sequence) : targets as required for the indices. 
+                                will be the same length as indices
+    """
+    def __init__(self, dataset, indices, labels=None):
+        self.dataset = dataset
+        self.indices = indices
+        if not labels:
+            targets = np.array(self.dataset.targets)[indices]
+            self.targets = torch.tensor(targets).long()
+            # original labels
+            self.oTargets = targets
+        else:
+            self.targets = torch.tensor(labels).long()
+   
+    def __getitem__(self, idx):
+        data = self.dataset[self.indices[idx]][0]
+        target = self.targets[idx]
+        return (data, target)
+
+    def __len__(self):
+        return len(self.targets)
+    
+    def setTargets(self, labels):
+        self.targets = torch.tensor(labels).long() #.astype("long")
+        
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
 #   split and return datasets for workers.                                    #
 #                                                                             #
 #*****************************************************************************#
@@ -236,6 +278,27 @@ def split_data(train_data, n_workers=10, classes_per_worker=0, n_data=None):
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
+#   split given dataset to create a test set and a ditillation set.           #
+#                                                                             #
+#*****************************************************************************#
+def create_distill(dataset, random_seed, distill_portion=0.5):
+    """Split dataset into test and distill set according to given ratio."""
+    test_idx, distill_idx = splitter(
+        np.arange(len(dataset.targets)), 
+        test_size=distill_portion,
+        shuffle=True,
+        stratify=dataset.targets, 
+        random_state=random_seed
+    )
+    
+    test_set = CustomSubset(dataset, test_idx)
+    distill_set = CustomSubset(dataset, distill_idx)
+
+    return test_set, distill_set
+    
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
 #   load dataset as required.                                                 #
 #                                                                             #
 #*****************************************************************************#
@@ -248,3 +311,17 @@ def load_data(dataset, path):
           }[dataset](path)
 
 
+def print_split(idcs, labels):
+    n_labels = np.max(labels) + 1 
+    print("Data split:")
+    splits = []
+    for i, idccs in enumerate(idcs):
+        split = np.sum(np.array(labels)[idccs].reshape(1,-1)==np.arange(n_labels).reshape(-1,1), axis=1)
+        splits += [split]
+        if len(idcs) < 30 or i < 10 or i>len(idcs)-10:
+            print(" - Client {}: {:55} -> sum={}".format(i,str(split), np.sum(split)), flush=True)
+        elif i==len(idcs)-10:
+            print(".  "*10+"\n"+".  "*10+"\n"+".  "*10)
+    
+    print(" - Total:     {}".format(np.stack(splits, axis=0).sum(axis=0)))
+    print()

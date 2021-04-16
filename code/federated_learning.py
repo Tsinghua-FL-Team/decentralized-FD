@@ -57,7 +57,12 @@ def run_experiment(exp, exp_count, n_experiments):
     
     # get datasets needed for training and distillation
     train_data, test_data = data.load_data(hp["dataset"], args.DATA_PATH)
-    distill_data = data.load_data(hp["distill-dataset"], args.DATA_PATH)
+    
+    # split test dataset into distill / test sets
+    test_set, distill_set = data.create_distill(test_data, 
+                                                random_seed=hp["random_seed"], 
+                                                distill_portion=0.5)
+    #distill_data = data.load_data(hp["distill-dataset"], args.DATA_PATH)
     
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
@@ -71,8 +76,8 @@ def run_experiment(exp, exp_count, n_experiments):
     
     # create dataloaders for all datasets loaded so far
     worker_loaders = [DataLoader(local_data, batch_size=hp["batch_size"], shuffle=True) for local_data in worker_data]
-    test_loader = DataLoader(test_data, batch_size=hp["batch_size"], shuffle=True)
-    distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
+    test_loader = DataLoader(test_set, batch_size=hp["batch_size"], shuffle=True)
+    distill_loader = DataLoader(distill_set, batch_size=hp["batch_size"])
     
     # create instances of workers and the server (i.e. smart contract)
     workers = [
@@ -102,27 +107,25 @@ def run_experiment(exp, exp_count, n_experiments):
         for worker in workers:
             print("Train WORKER: "+str(worker.id))
             
-            # get Aggregated Prediction Matrix
-            #worker.get_from_server(server)
-            
             # local Training / Distillation ??
             train_stats = worker.train(epochs=hp["local_epochs"])
             
             # print training stats
-            print(train_stats)
+            #print(train_stats)
             
             # Evaluate each worker's performance 
             print(worker.evaluate(loader=test_loader))
             
             # compute Predictions
-            worker.compute_prediction_matrix(loader=distill_loader, 
-                                             argmax=True)
+            worker.compute_distill_predictions(loader=distill_loader)
             
             # send Predictions + Frequency Vector to Server
             worker.send_to_server(server)
         
         # aggregate the predictions and compute reward
         server.aggregate_and_compute_reward()
+        
+        print("\n\n")
         
         # run federated distillation phase
         for worker in workers:
@@ -136,7 +139,7 @@ def run_experiment(exp, exp_count, n_experiments):
                                            loader=distill_loader)
         
             # print distill stats
-            print(distill_stats)
+            #print(distill_stats)
 
             # Evaluate each worker's performance 
             print(worker.evaluate(loader=test_loader))
@@ -169,6 +172,9 @@ def run_experiment(exp, exp_count, n_experiments):
             except:
               print("Saving results Failed!")
     
+    # create graphs
+    expm.plot_graphs(server=server, workers=workers, dataset=distill_set)
+
     # compute total time taken by the experiment
     print("Experiment {} took time {} to run..".format(exp_count, 
                                                        time.time() - t1)

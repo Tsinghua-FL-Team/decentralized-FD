@@ -30,7 +30,8 @@ class Server():
         self.rewardShares = []
         #self.S = np.zeros(self.n_classes, dtype=float)
         #self.Votes = np.zeros((self.n_samples, self.n_classes), dtype=int)
-        
+
+
     #---------------------------------------------------------------------#
     #                                                                     #
     #   Functions used to compute the aggregated labels and reward.       #
@@ -67,12 +68,7 @@ class Server():
         # Compute the majority vote
         self.majorityVote.append(np.argmax(Votes, axis=-1).astype("uint8"))
         self.rewardShares.append(rewardShare)
-        
-        # print
-        #print(Votes)
-        #print(self.majorityVote[-1])
-        
-        
+
         # Clear local variables and reset caches for next round
         del Votes, Sum
         self.clear_caches()
@@ -99,7 +95,8 @@ class Server():
     def receive_prediction(self, w_id, predictions, freq):
         self.wr_predict.append(predictions)
         self.label_dist.append(freq)
-    
+
+
     def global_labels(self):
         return self.majorityVote[-1] if len(self.majorityVote) > 0 else None
     

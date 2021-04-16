@@ -32,17 +32,19 @@ class Worker():
         #self.distill_loader = distill_loader
         self.n_classes = n_classes
         # model parameters
-        self.train_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device) #(nn.Module) 
+        self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device) #(nn.Module) 
         #self.distill_model = copy.deepcopy(model_fn).to(device)
         self.loader = loader
-        #self.W = {key : value for key, value in self.train_model.named_parameters()}
-        #self.dW = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
-        #self.W_old = {key : torch.zeros_like(value) for key, value in self.train_model.named_parameters()}
+        #self.W = {key : value for key, value in self.tr_model.named_parameters()}
+        #self.dW = {key : torch.zeros_like(value) for key, value in self.tr_model.named_parameters()}
+        #self.W_old = {key : torch.zeros_like(value) for key, value in self.tr_model.named_parameters()}
         # optimizer parameters        
         self.optimizer_fn = optimizer_fn
-        self.optimizer = optimizer_fn(self.train_model.parameters())   
+        self.optimizer = optimizer_fn(self.tr_model.parameters())   
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=0.96)  
         #self.c_round = 0
+        # result variables
+        self.predictions = []
 
     #---------------------------------------------------------------------#
     #                                                                     #
@@ -52,10 +54,10 @@ class Worker():
     def train(self, epochs=1, loader=None, reset_optimizer=False):
         """Training function to train local model"""
         if reset_optimizer:
-            self.optimizer = self.optimizer_fn(self.train_model.parameters())  
+            self.optimizer = self.optimizer_fn(self.tr_model.parameters())  
         
         # start training the worker using local dataset
-        self.train_model.train()  
+        self.tr_model.train()  
         running_loss, samples = 0.0, 0
         
         # check if a dataloader was provided for training
@@ -68,8 +70,8 @@ class Worker():
                 
                 self.optimizer.zero_grad()
                 
-                loss = nn.CrossEntropyLoss()(self.train_model(x), y)
-                
+                loss = nn.CrossEntropyLoss()(self.tr_model(x), y)
+
                 #if lambda_fedprox != 0.0:
                 #  loss += lambda_fedprox * torch.sum((flatten(W0).cuda()-flatten(dict(model.named_parameters())).cuda())**2)
                 
@@ -82,7 +84,7 @@ class Worker():
 
         train_stats = {"loss" : running_loss / samples}
         #print(self.label_counts)
-        #eval_scores(self.train_model, self.distill_loader)
+        #eval_scores(self.tr_model, self.distill_loader)
           
         return train_stats
     
@@ -94,7 +96,7 @@ class Worker():
     def evaluate(self, loader=None):
         """Evaluation function to check performance"""
         # start evaluation of the model
-        self.train_model.eval()
+        self.tr_model.eval()
         samples, correct = 0, 0
         
         # check if a dataloader was provided for evaluation
@@ -105,7 +107,7 @@ class Worker():
                 
                 x, y = x.to(device), y.to(device)
                 
-                y_ = self.train_model(x)
+                y_ = self.tr_model(x)
                 _, predicted = torch.max(y_.detach(), 1)
                 
                 samples += y.shape[0]
@@ -123,7 +125,7 @@ class Worker():
     def predict_logit(self, x):
         """Logit prediction on input"""
         with torch.no_grad():
-            y_ = self.train_model(x)
+            y_ = self.tr_model(x)
         return y_
 
     def predict(self, x):
@@ -140,28 +142,26 @@ class Worker():
         t[torch.arange(y_.shape[0]),amax] = 1
         return t
     
-    def compute_prediction_matrix(self, loader=None, argmax=True):
-        predictions = []
-        idcs = []
+    def compute_distill_predictions(self, loader=None):
         
         # check if a dataloader was provided
         loader = self.loader if not loader else loader
         
-        for x, idx in loader:
+        predictions = []
+
+        # compute predictions
+        for x, _ in loader:
             x = x.to(device)
-            s_predict = self.predict(x).detach()
-            predictions += [s_predict]
-            idcs += [idx]
+            predictions += [self.predict_max(x).detach()]
         
-        argidx = torch.argsort(torch.cat(idcs, dim=0))
-        predictions =  torch.cat(predictions, dim=0)[argidx].detach().cpu().numpy()
+        # collect results to cpu  memory and numpy arrays
+        predictions = torch.cat(predictions, dim=0).detach().cpu().numpy()
         
-        if argmax:
-            predictions = np.argmax(predictions, axis=-1).astype("uint8")
-        else:
-           predictions = predictions.astype("float16")
-        
-        self.predictions = predictions
+        # append past resutls
+        self.predictions.append(
+            np.argmax(predictions, axis=-1).astype("uint8")
+        )
+
 
         
     #---------------------------------------------------------------------#
@@ -170,23 +170,29 @@ class Worker():
     #                                                                     #
     #---------------------------------------------------------------------#
     def get_from_server (self, server):
-        self.distill_labels = server.global_labels()
+        self.global_labels =  server.global_labels()
         
         # get onehot encoding of the same        
-        self.onehot_distill_labels = np.zeros(
-            (self.distill_labels.size, self.n_classes))
-        self.onehot_distill_labels[
-            np.arange(self.distill_labels.size),self.distill_labels] = 1.0
+        #self.onehot_distill_labels = np.zeros(
+        #    (distill_labels.size, self.n_classes), dtype="long")
+        
+        #self.onehot_distill_labels[
+        #    np.arange(distill_labels.size),distill_labels] = 1
         
 
     def send_to_server (self, server):
         # compute label distribution in my predictions
-        label_distribution = [np.count_nonzero(self.predictions == c) 
-                              for c in range(self.n_classes)
-                             ]
+        label_distribution = [
+            np.count_nonzero(self.predictions[-1] == c) 
+            for c in range(self.n_classes)
+            ]
         #np.unique(self.predictions, return_counts=True)
         # send both predictions and distribution to the server
-        server.receive_prediction(w_id=self.id, predictions=self.predictions, freq=label_distribution)
+        server.receive_prediction(
+            w_id=self.id, 
+            predictions=self.predictions[-1], 
+            freq=label_distribution
+        )
     
     
     #---------------------------------------------------------------------#
@@ -197,31 +203,32 @@ class Worker():
     def distill(self, distill_epochs, loader=None, reset_optimizer=False):
         """Distillation function to perform Federated Distillation"""
         if reset_optimizer:
-            self.optimizer = self.optimizer_fn(self.train_model.parameters())  
+            self.optimizer = self.optimizer_fn(self.tr_model.parameters())  
 
         # check if a dataloader was provided
         loader = self.loader if not loader else loader
         
-        # start training the worker using local dataset
-        self.train_model.train()  
+        # start training the worker using distill dataset
+        self.tr_model.train()  
         running_loss, samples = 0.0, 0
-        
-        # check if a dataloader was provided for training
-        loader = self.loader if not loader else loader
+
+        # setup global labels
+        loader.dataset.setTargets(labels=self.global_labels)
         
         for ep in range(distill_epochs):
-            i = 0
-            for x, _ in loader:   
-                y = torch.Tensor(self.onehot_distill_labels[i*len(_):(i+1)*len(_)]).detach()
-                i += 1
+            for x, y in loader:   
+                # create onehot encoding
+                onehot_y = torch.zeros((len(y), self.n_classes))
+                onehot_y[torch.arange(len(y)), y] = 1
 
-                x, y = x.to(device), y.to(device)
+                x, onehot_y = x.to(device), onehot_y.to(device)
                 
                 self.optimizer.zero_grad()
-                y_ = F.softmax(self.train_model(x), dim=1)
-
+                y_ = F.softmax(self.tr_model(x), dim=1)
+                
                 # compute loss
-                loss = self.kulbach_leibler_divergence(y_, y) #nn.KLDivLoss()(y_, y)
+                loss = nn.KLDivLoss(reduction="batchmean")(y_, onehot_y.detach())
+                
                 running_loss += loss.item() * y.shape[0]
                 samples += y.shape[0]
                 
@@ -231,6 +238,3 @@ class Worker():
         distill_stats = {"loss" : running_loss / samples}
           
         return distill_stats
-    
-    def kulbach_leibler_divergence(self, predicted, target):
-        return -(target * torch.log(predicted.clamp_min(1e-7))).sum(dim=-1).mean() 

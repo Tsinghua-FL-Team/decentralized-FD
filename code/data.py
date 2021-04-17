@@ -149,18 +149,14 @@ def load_stl10(path):
 #   split given dataset among workers using dirichlet distribution.           #
 #                                                                             #
 #*****************************************************************************#
-def split_dirichlet(labels, n_workers, n_data, alpha=0.5, double_stochstic=True):
+def split_dirichlet(labels, n_workers, n_data, alpha, double_stochstic=True):
     """Splits data among the workers using dirichlet distribution"""
-
-    #np.random.seed(0)
 
     if isinstance(labels, torch.Tensor):
         labels = labels.numpy()
     
     n_classes = np.max(labels)+1
     
-#    if alpha == 0:
-#        alpha = n_classes
     label_distribution = np.random.dirichlet([alpha]*n_workers, n_classes)
 
     if double_stochstic:
@@ -243,8 +239,7 @@ class CustomSubset(Dataset):
         return len(self.targets)
     
     def setTargets(self, labels):
-        self.targets = torch.tensor(labels).long() #.astype("long")
-        
+        self.targets = torch.tensor(labels).long()        
 
 
 #*****************************************************************************#
@@ -253,7 +248,7 @@ class CustomSubset(Dataset):
 #   split and return datasets for workers.                                    #
 #                                                                             #
 #*****************************************************************************#
-def split_data(train_data, n_workers=10, classes_per_worker=0, n_data=None):
+def split_data(train_data, n_workers=10, alpha=0, n_data=None):
     """Split data among Worker nodes."""
     
     # Find allocated indices using dirichlet split
@@ -261,7 +256,7 @@ def split_data(train_data, n_workers=10, classes_per_worker=0, n_data=None):
         train_data.targets, 
         n_workers, 
         n_data, 
-        classes_per_worker
+        alpha
         )
     
     # Compute labels per worker
@@ -281,8 +276,11 @@ def split_data(train_data, n_workers=10, classes_per_worker=0, n_data=None):
 #   split given dataset to create a test set and a ditillation set.           #
 #                                                                             #
 #*****************************************************************************#
-def create_distill(dataset, random_seed, distill_portion=0.5):
+def create_distill(dataset, random_seed, n_distill):
     """Split dataset into test and distill set according to given ratio."""
+    distill_portion = float(n_distill / len(dataset.targets))
+    
+    # Get index for distill and test datasets
     test_idx, distill_idx = splitter(
         np.arange(len(dataset.targets)), 
         test_size=distill_portion,
@@ -291,6 +289,7 @@ def create_distill(dataset, random_seed, distill_portion=0.5):
         random_state=random_seed
     )
     
+    # create actual subsets
     test_set = CustomSubset(dataset, test_idx)
     distill_set = CustomSubset(dataset, distill_idx)
 
@@ -311,6 +310,12 @@ def load_data(dataset, path):
           }[dataset](path)
 
 
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   helper function to print data splits made for workers.                    #
+#                                                                             #
+#*****************************************************************************#
 def print_split(idcs, labels):
     n_labels = np.max(labels) + 1 
     print("Data split:")

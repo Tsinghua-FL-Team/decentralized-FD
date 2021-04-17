@@ -29,22 +29,17 @@ class Worker():
     def __init__(self, model_fn, optimizer_fn, loader, counts, n_classes, init=None, idnum=None):
         self.id = idnum
         self.feature_extractor = None
-        #self.distill_loader = distill_loader
         self.n_classes = n_classes
         # model parameters
         self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device) #(nn.Module) 
-        #self.distill_model = copy.deepcopy(model_fn).to(device)
         self.loader = loader
-        #self.W = {key : value for key, value in self.tr_model.named_parameters()}
-        #self.dW = {key : torch.zeros_like(value) for key, value in self.tr_model.named_parameters()}
-        #self.W_old = {key : torch.zeros_like(value) for key, value in self.tr_model.named_parameters()}
         # optimizer parameters        
         self.optimizer_fn = optimizer_fn
         self.optimizer = optimizer_fn(self.tr_model.parameters())   
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=1, gamma=0.96)  
-        #self.c_round = 0
         # result variables
         self.predictions = []
+
 
     #---------------------------------------------------------------------#
     #                                                                     #
@@ -71,9 +66,6 @@ class Worker():
                 self.optimizer.zero_grad()
                 
                 loss = nn.CrossEntropyLoss()(self.tr_model(x), y)
-
-                #if lambda_fedprox != 0.0:
-                #  loss += lambda_fedprox * torch.sum((flatten(W0).cuda()-flatten(dict(model.named_parameters())).cuda())**2)
                 
                 running_loss += loss.item()*y.shape[0]
                 samples += y.shape[0]
@@ -83,11 +75,11 @@ class Worker():
                 #scheduler.step()
 
         train_stats = {"loss" : running_loss / samples}
-        #print(self.label_counts)
-        #eval_scores(self.tr_model, self.distill_loader)
-          
+        
+        # return training statistics
         return train_stats
-    
+
+
     #---------------------------------------------------------------------#
     #                                                                     #
     #   Evaluate Worker to see if it is improving as expected or not.     #
@@ -159,9 +151,7 @@ class Worker():
         
         # append past resutls
         self.predictions.append(
-            np.argmax(predictions, axis=-1).astype("uint8")
-        )
-
+            np.argmax(predictions, axis=-1).astype("uint8"))
 
         
     #---------------------------------------------------------------------#
@@ -170,29 +160,20 @@ class Worker():
     #                                                                     #
     #---------------------------------------------------------------------#
     def get_from_server (self, server):
+        # fetch global aggregated labels from server / contract
         self.global_labels =  server.global_labels()
-        
-        # get onehot encoding of the same        
-        #self.onehot_distill_labels = np.zeros(
-        #    (distill_labels.size, self.n_classes), dtype="long")
-        
-        #self.onehot_distill_labels[
-        #    np.arange(distill_labels.size),distill_labels] = 1
-        
+
 
     def send_to_server (self, server):
+
         # compute label distribution in my predictions
-        label_distribution = [
-            np.count_nonzero(self.predictions[-1] == c) 
-            for c in range(self.n_classes)
-            ]
-        #np.unique(self.predictions, return_counts=True)
+        label_distribution = [np.count_nonzero(self.predictions[-1] == c) for c in range(self.n_classes)]
+
         # send both predictions and distribution to the server
         server.receive_prediction(
             w_id=self.id, 
             predictions=self.predictions[-1], 
-            freq=label_distribution
-        )
+            freq=label_distribution)
     
     
     #---------------------------------------------------------------------#
@@ -236,5 +217,6 @@ class Worker():
                 self.optimizer.step()  
 
         distill_stats = {"loss" : running_loss / samples}
-          
+
+        # return distillation statistics
         return distill_stats

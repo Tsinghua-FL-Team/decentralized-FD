@@ -4,10 +4,8 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 import argparse, time
-import torch
 from torch.utils.data import DataLoader
 import numpy as np
-import copy
 
 #----------------------------------------------------------------------------#
 #                                                                            #
@@ -19,6 +17,7 @@ import experiment_manager as expm
 import models, data
 from worker import Worker
 from contract import Server
+from graph import plot_graphs
 
 
 np.set_printoptions(precision=4, suppress=True)
@@ -61,8 +60,7 @@ def run_experiment(exp, exp_count, n_experiments):
     # split test dataset into distill / test sets
     test_set, distill_set = data.create_distill(test_data, 
                                                 random_seed=hp["random_seed"], 
-                                                distill_portion=0.5)
-    #distill_data = data.load_data(hp["distill-dataset"], args.DATA_PATH)
+                                                n_distill=hp["n_distill"])
     
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
@@ -71,7 +69,7 @@ def run_experiment(exp, exp_count, n_experiments):
     worker_data, label_counts = data.split_data(
         train_data,
         n_workers=hp["n_workers"],
-        classes_per_worker=hp["classes_per_worker"]
+        alpha=hp["alpha"]
         )
     
     # create dataloaders for all datasets loaded so far
@@ -144,41 +142,23 @@ def run_experiment(exp, exp_count, n_experiments):
             # Evaluate each worker's performance 
             print(worker.evaluate(loader=test_loader))
                 
-        # logging the results as described
-        if exp.is_log_round(c_round):
-            
-            print("Experiment: ({}/{})".format(exp_count+1, 
-                                               n_experiments)
-                  )   
-            # log information about communication rounds and epochs
-            exp.log({'communication_round' : c_round, 
-                     'epochs' : c_round*hp['local_epochs']
-                     })
-            # log information about parameters on worker
-            exp.log({key : workers[0].optimizer.__dict__[
-                'param_groups'][0][key] for key in optimizer_hp
-                })
-            # evaluate and log evaluation results
-            for worker in workers:
-                # Evaluate each worker's performance 
-                exp.log({"worker_{}_{}".format(worker.id, key) : value 
-                         for key, value in worker.evaluate(
-                                 loader=test_loader).items()
-                         })
-                  
-            # save logging results to disk
-            try:
-              exp.save_to_disc(path=args.RESULTS_PATH, name=hp['log_path'])
-            except:
-              print("Saving results Failed!")
-    
-    # create graphs
-    expm.plot_graphs(server=server, workers=workers, dataset=distill_set)
+    print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
+ 
+    # evaluate and log evaluation results
+    for worker in workers:
+        # Evaluate each worker's performance 
+        exp.log({"worker_{}_{}".format(worker.id, key) : value 
+                 for key, value in worker.evaluate(loader=test_loader).items()})
+          
+    # save logging results to disk
+    try:
+      exp.save_to_disc(path=args.RESULTS_PATH, name=hp['log_path'])
+    except:
+      print("Saving results Failed!")
 
     # compute total time taken by the experiment
-    print("Experiment {} took time {} to run..".format(exp_count, 
-                                                       time.time() - t1)
-          )
+    print("Experiment {} took time {} to run..".format(exp_count+1, 
+                                                       time.time() - t1))
     
     # Free up memory
     del server; workers.clear()
@@ -194,9 +174,13 @@ def run():
     # create instances of experiment manager class for each setup
     experiments = [expm.Experiment(hyperparameters=hp) for hp in hp_dicts]
     
+    # run all experiments
     print("Running a total of {} Experiments..\n".format(len(experiments)))
     for exp_count, experiment in enumerate(experiments):
         run_experiment(experiment, exp_count, len(experiments))
+        
+    # create graphs from all experiments
+    plot_graphs(experiments=experiments)
 
 # main program starts here
 if __name__ == "__main__":

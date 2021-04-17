@@ -3,22 +3,12 @@
 #   I M P O R T     L I B R A R I E S                                         #
 #                                                                             #
 #-----------------------------------------------------------------------------#
-import torch
+import torch, torchvision
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
-#from torchvision.models import alexnet
 from torchvision.models.resnet import ResNet, BasicBlock
 import numpy as np
-import torchvision
-
-
-#-----------------------------------------------------------------------------#
-#                                                                             #
-#   Define global parameters to be used through out the program               #
-#                                                                             #
-#-----------------------------------------------------------------------------#
-#device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
 #*****************************************************************************#
@@ -446,47 +436,6 @@ class simclrVGG11(nn.Module):
 
 
 
-class outlier_net(nn.Module):
-    def __init__(self):
-        super(outlier_net, self).__init__()
-        self.conv1 = nn.Conv2d(3, 8, 5, bias=False)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(8, 4, 5, bias=False)
-        self.fc1 = nn.Linear(4 * 5 * 5, 32, bias=False)
-        
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 4 * 5 * 5)
-        x = self.fc1(x)
-        return x
-
-
-
-
-
-
-class Autoencoder(nn.Module):
-    def __init__(self):
-        super(Autoencoder, self).__init__()
-        
-        self.f = nn.Sequential(nn.Linear(512, 128, bias=True), 
-                                nn.LeakyReLU(inplace=True), 
-                                nn.Linear(128, 32, bias=True),
-                                nn.LeakyReLU(inplace=True),
-                               nn.Linear(32, 128, bias=True),
-                                nn.LeakyReLU(inplace=True),
-                               nn.Linear(128, 512, bias=True))  
-        
-    def forward(self, x):
-        return self.f(x)
-    
-    def get_ae_loss(self, x):
-        x_ae = self.f(x)  
-
-        return torch.sum((x_ae - x) ** 2, dim=1)
-
-
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -538,10 +487,10 @@ def get_model(model):
 
 
 def print_model(model):
-  n = 0
-  print("Model:")
-  for key, value in model.named_parameters():
-    print(' -', '{:30}'.format(key), list(value.shape), "Requires Grad:", value.requires_grad)
-    n += value.numel()
-  print("Total number of Parameters: ", n) 
-  print()
+    n = 0
+    print("Model:")
+    for key, value in model.named_parameters():
+        print(' -', '{:30}'.format(key), list(value.shape), "Requires Grad:", value.requires_grad)
+        n += value.numel()
+    print("Total number of Parameters: ", n) 
+    print()

@@ -181,27 +181,3 @@ def load_results(path, filename, verbose=True):
     if verbose:
         print("Loaded results from "+path+filename)
     return results_dict
-
-#*****************************************************************************#
-#                                                                             #
-#   description:                                                              #
-#   helper functions to create graphs from data provided.                     #
-#                                                                             #
-#*****************************************************************************#
-def plot_graphs(server, workers, dataset=None, path=None):
-    accuracy_reward = []
-    
-    # Compute accuracy of prediction of each worker
-    for i, worker in enumerate(workers):
-        # accuracy per round of predictions
-        for j, prediction in enumerate(worker.predictions):
-            accurate = np.count_nonzero(worker.prediction==dataset.oTargets)
-            reward = server.rewardShares[j][i]
-            accuracy_reward.append((j, i, accurate/len(dataset), reward))
-
-    
-    # plot a graph
-    plt.plot(accuracy_reward, "ro")
-    plt.xlabel("accuracy")
-    plt.ylabel("reward")
-    plt.savefig("accuracy_reward.png", dpi=600)

@@ -28,8 +28,6 @@ class Server():
         # Stores results of aggregated predictions
         self.majorityVote = []
         self.rewardShares = []
-        #self.S = np.zeros(self.n_classes, dtype=float)
-        #self.Votes = np.zeros((self.n_samples, self.n_classes), dtype=int)
 
 
     #---------------------------------------------------------------------#

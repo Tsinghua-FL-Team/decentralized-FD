@@ -58,10 +58,14 @@ def run_experiment(exp, exp_count, n_experiments):
     train_data, test_data = data.load_data(hp["dataset"], args.DATA_PATH)
     
     # split test dataset into distill / test sets
-    test_set, distill_set = data.create_distill(test_data, 
-                                                random_seed=hp["random_seed"], 
-                                                n_distill=hp["n_distill"])
-    
+    if "distill-dataset" in hp.keys():
+        distill_data = data.load_data(hp["distill-dataset"], args.DATA_PATH)
+    else:
+        test_data, distill_data = data.create_distill(
+            test_data, 
+            random_seed=hp["random_seed"], 
+            n_distill=hp["n_distill"])
+
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
     
@@ -69,22 +73,27 @@ def run_experiment(exp, exp_count, n_experiments):
     worker_data, label_counts = data.split_data(
         train_data,
         n_workers=hp["n_workers"],
-        alpha=hp["alpha"]
+        alpha=hp["alpha"] if "alpha" in hp.keys() else None,
+        worker_data=hp["worker_data"] if "worker_data" in hp.keys() else None,
+        classes_per_worker=hp["classes_per_worker"] if "classes_per_worker" in hp.keys() else None
         )
     
     # create dataloaders for all datasets loaded so far
     worker_loaders = [DataLoader(local_data, batch_size=hp["batch_size"], shuffle=True) for local_data in worker_data]
-    test_loader = DataLoader(test_set, batch_size=hp["batch_size"], shuffle=True)
-    distill_loader = DataLoader(distill_set, batch_size=hp["batch_size"])
+    test_loader = DataLoader(test_data, batch_size=hp["batch_size"], shuffle=True)
+    distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
     
     # create instances of workers and the server (i.e. smart contract)
     workers = [
         Worker(model_fn,
                optimizer_fn, 
-               loader,
+               tr_loader=loader,
                idnum = i,
                counts = counts,
-               n_classes=hp["n_classes"]) 
+               n_classes=hp["n_classes"],
+               early_stop=hp["early_stop"][i],
+               ts_loader=test_loader,
+               ds_loader=distill_loader) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
     server = Server(n_samples=len(distill_loader.dataset), 
@@ -97,7 +106,7 @@ def run_experiment(exp, exp_count, n_experiments):
     
     # start training each client individually
     for c_round in range(1, hp["communication_rounds"]+1):
-        print("Communication Round: " + str(c_round))
+        print("\n\nCommunication Round: " + str(c_round))
         # sample workers for current round of training
         #participating_workers = server.select_workers(workers, hp["participation_rate"])
         #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
@@ -112,18 +121,21 @@ def run_experiment(exp, exp_count, n_experiments):
             #print(train_stats)
             
             # Evaluate each worker's performance 
-            print(worker.evaluate(loader=test_loader))
+            accuracy = worker.evaluate(ts_loader=test_loader)["accuracy"]
+            exp.log({"tr_accuracy_{}_worker_{}".format(c_round-1, worker.id): accuracy})
             
             # compute Predictions
-            worker.compute_distill_predictions(loader=distill_loader)
+            worker.compute_distill_predictions(ds_loader=distill_loader)
             
             # send Predictions + Frequency Vector to Server
             worker.send_to_server(server)
         
         # aggregate the predictions and compute reward
         server.aggregate_and_compute_reward()
+        exp.log({"reward_{}".format(c_round-1): server.rewardShares[-1]})
         
-        print("\n\n")
+        
+        print("\n")
         
         # run federated distillation phase
         for worker in workers:
@@ -134,13 +146,13 @@ def run_experiment(exp, exp_count, n_experiments):
             
             # local Training / Distillation ??
             distill_stats = worker.distill(distill_epochs=hp["distill_epochs"],
-                                           loader=distill_loader)
+                                           ds_loader=distill_loader)
         
             # print distill stats
             #print(distill_stats)
 
             # Evaluate each worker's performance 
-            print(worker.evaluate(loader=test_loader))
+            print(worker.evaluate(ts_loader=test_loader))
                 
     print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
  
@@ -148,7 +160,7 @@ def run_experiment(exp, exp_count, n_experiments):
     for worker in workers:
         # Evaluate each worker's performance 
         exp.log({"worker_{}_{}".format(worker.id, key) : value 
-                 for key, value in worker.evaluate(loader=test_loader).items()})
+                 for key, value in worker.evaluate(ts_loader=test_loader).items()})
           
     # save logging results to disk
     try:

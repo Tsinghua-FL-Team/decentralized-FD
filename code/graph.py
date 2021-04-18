@@ -4,6 +4,7 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 import numpy as np
+import math
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -144,6 +145,48 @@ def annotate_heatmap(im, data=None, valfmt="{x:.2f}",
 #                                                                             #
 #*****************************************************************************#
 def plot_graphs(experiments):
+    #create_heatmap(experiments)
+    create_graph_samples_vs_reward(experiments)
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   helper functions to create accuracy reward graph.                         #
+#                                                                             #
+#*****************************************************************************#
+def create_graph_samples_vs_reward(experiments):
+    # prepare data for the graph
+    for i, exp in enumerate(experiments):
+        yAxis = np.transpose(np.array(exp.results["reward_0"])).reshape(-1)
+        # create xticks to display on graph
+        xticks = [i+1 for i in range(exp.hyperparameters["n_workers"])]
+        labels = exp.hyperparameters["worker_data"]
+        # prepare a plot
+        fig, ax = plt.subplots()
+        ax.xaxis.grid(True, which="major")
+        ax.yaxis.grid(True, which="major")
+        # plot actual graph        
+        plt.xticks(xticks, labels)
+        plt.plot(xticks, yAxis, "x", color="blue")
+        plt.plot(xticks, yAxis)
+        plt.title("Local Training data vs Reward graph")
+        plt.xlabel("dataset size")
+        plt.ylabel("reward")
+        
+        #for xy in zip(xAxis, yAxis):                               
+        #    ax.annotate('(%s, %s)' % xy, xy=xy, textcoords='data')
+        
+        plt.savefig("train_samples_vs_reward.png", dpi=600)
+    
+    
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   helper functions to create heatmap graph from all experiments.            #
+#                                                                             #
+#*****************************************************************************#
+def create_heatmap(experiments):
     d1 = []
     xlabels = np.array([100, 200, 400, 800, 1600, 3200, 6400])
     ylabels = np.array([5, 10, 15, 20, 25, 30])

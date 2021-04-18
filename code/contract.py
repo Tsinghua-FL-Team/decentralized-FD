@@ -16,7 +16,7 @@ import numpy as np
 #                                                                             #
 #*****************************************************************************#
 class Server():
-    def __init__(self, n_samples, n_classes, n_workers, alpha = 1.0):
+    def __init__(self, n_samples, n_classes, n_workers, alpha=1.0):
         # meta-information about dataset
         self.n_samples = n_samples
         self.n_classes = n_classes
@@ -59,7 +59,7 @@ class Server():
                     if i == p:
                         continue
                     # Compute reward
-                    t0 += (1.0/Ri[self.wr_predict[i][j]]) if self.wr_predict[i][j] == self.wr_predict[p][j] else -1
+                    t0 += ((1.0/Ri[self.wr_predict[i][j]]) - 1) if self.wr_predict[i][j] == self.wr_predict[p][j] else -1
                 # Reward Share for worker i
                 rewardShare[i] += self.alpha * (1.0/(self.n_workers-1)) * t0
         

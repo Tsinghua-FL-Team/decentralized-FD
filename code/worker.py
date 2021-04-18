@@ -26,13 +26,17 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 #                                                                             #
 #*****************************************************************************#
 class Worker():
-    def __init__(self, model_fn, optimizer_fn, loader, counts, n_classes, init=None, idnum=None):
+    def __init__(self, model_fn, optimizer_fn, tr_loader, counts, n_classes, 
+                  ts_loader, ds_loader, early_stop=-1, init=None, idnum=None):
         self.id = idnum
         self.feature_extractor = None
         self.n_classes = n_classes
-        # model parameters
-        self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device) #(nn.Module) 
-        self.loader = loader
+        self.early_stop = early_stop
+        # local models and dataloaders
+        self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device)
+        self.tr_loader = tr_loader
+        self.ts_loader = ts_loader
+        self.ds_loader = ds_loader
         # optimizer parameters        
         self.optimizer_fn = optimizer_fn
         self.optimizer = optimizer_fn(self.tr_model.parameters())   
@@ -56,9 +60,16 @@ class Worker():
         running_loss, samples = 0.0, 0
         
         # check if a dataloader was provided for training
-        loader = self.loader if not loader else loader
+        loader = self.tr_loader if not loader else loader
         
         for ep in range(epochs):
+            # check for early stopping criteria
+            if self.early_stop != -1:
+                accuracy = self.evaluate()["accuracy"]
+                if accuracy >= self.early_stop:
+                    print("Stopping criteria reached for worker {}".format(self.id))
+                    break
+            # train next epoch
             for i, x, y in loader:   
 
                 x, y = x.to(device), y.to(device)
@@ -72,7 +83,6 @@ class Worker():
                 
                 loss.backward()
                 self.optimizer.step()  
-                #scheduler.step()
 
         train_stats = {"loss" : running_loss / samples}
         
@@ -85,14 +95,14 @@ class Worker():
     #   Evaluate Worker to see if it is improving as expected or not.     #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def evaluate(self, loader=None):
+    def evaluate(self, ts_loader=None):
         """Evaluation function to check performance"""
         # start evaluation of the model
         self.tr_model.eval()
         samples, correct = 0, 0
         
         # check if a dataloader was provided for evaluation
-        loader = self.loader if not loader else loader
+        loader = self.ts_loader if not ts_loader else ts_loader
         
         with torch.no_grad():
             for i, (x, y) in enumerate(loader):
@@ -134,10 +144,10 @@ class Worker():
         t[torch.arange(y_.shape[0]),amax] = 1
         return t
     
-    def compute_distill_predictions(self, loader=None):
+    def compute_distill_predictions(self, ds_loader=None):
         
         # check if a dataloader was provided
-        loader = self.loader if not loader else loader
+        loader = self.ds_loader if not ds_loader else ds_loader
         
         predictions = []
 
@@ -181,13 +191,13 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distill(self, distill_epochs, loader=None, reset_optimizer=False):
+    def distill(self, distill_epochs, ds_loader=None, reset_optimizer=False):
         """Distillation function to perform Federated Distillation"""
         if reset_optimizer:
             self.optimizer = self.optimizer_fn(self.tr_model.parameters())  
 
         # check if a dataloader was provided
-        loader = self.loader if not loader else loader
+        loader = self.ds_loader if not ds_loader else ds_loader
         
         # start training the worker using distill dataset
         self.tr_model.train()  

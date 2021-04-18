@@ -4,6 +4,69 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 
+#################   Hyperparameters Key   #################
+
+# model                -    string    - Choose from: [simple-cnn, mlp-mnist]
+
+# dataset              -    string    - Choose from: [mnist, cifar10, cifar100]
+
+# distill-dataset      -    string    - Choose from: [stl-10, emnist] 
+#                                       if skipped, the test set of dataset
+#                                       will be used to extract n_distill
+#                                       samples as distillation dataset.
+
+# n_workers            -     int      - Number of Workers.
+
+# worker_data          -   list[int]  - Number of data samples on each worker,
+#                                       if not provided then dirichlet function
+#                                       will be used, in which case "alpha" is 
+#                                       required parameter.
+
+# classes_per_worker    -     int     - Number of different classes every worker 
+#                                       holds in it's local data, 0 returns an iid
+#                                       split. Works in conjunction with worker_data.
+
+# alpha                 -    float    - alpha parameter for dirichlet distribution
+#                                       required if worker_data splits not defined,
+#                                       used only if worker_data not defined.
+
+# batch_size            -     int     - Batch-size used by the Workers.
+
+# communication_rounds  -     int     - Total number of communication rounds.
+
+# local_epochs          -     int     - Local training epochs at every worker.
+
+# early_stop            - list[float] - Early stopping accuracy, -1 means no criteria
+#                                       must be a list of size n_workers.
+
+# distill_epochs        -     int     - Number of epochs used for distillation.
+
+# n_distill             -     int     - Size of the distilation dataset. Needed
+#                                       only if distill-dataset not defined.
+
+# random_seed           -     int     - Random seed for model initializations.
+
+# log_path              -    string   - Path to store the log files.
+
+
+#################   Unused Hyperparameters   #################
+
+# data_balance          -    float    - Default 1.0, if <1.0 data will be more 
+#                                       concentrated on some clients
+
+# participation_rate    -    float    - Fraction of Workers which participate in 
+#                                       every Communication Round
+
+# distill_mode          -    string   - The distillation mode, chosse from 
+#                                       ("regular", "pate", "pate_up", ..)
+
+# aggregation_mode      -    string   - Aggregation mode used to synchronize
+#                                       Choose from: ["FA", "FD"]
+
+# log_frequency         -     int     - Number of communication rounds after which results 
+#                                       are logged and saved to disk
+
+
 #-----------------------------------------------------------------------------#
 #                                                                             #
 #   Define hyperparameters that will assit in running experiments.            #
@@ -14,915 +77,42 @@ def init( ):
     global hyperparams
     hyperparams = [
         {
-         # Experiment 1-A
+#          # Experiment 1 [Datasize vs Reward Graph]
+#          "model": "lenet_mnist",
+#          "dataset": "mnist",
+# #         "distill-dataset": "stl10",
+#          "n_classes": 10,
+#          "n_workers": 9,
+#          "classes_per_worker": 0,
+#          "worker_data": [50, 100, 200, 400, 800, 1600, 3200, 6400, 12800],
+#          "alpha": 0.1,
+#          "batch_size": 32,
+#          "communication_rounds": 1,
+#          "local_epochs": 5,
+#          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+#          "distill_epochs": 5,
+#          "n_distill": 1500,
+#          "random_seed": 42,
+#          "log_path": "experiment1\\"
+#         }, 
+        {
+         # Experiment 2
          "model": "lenet_mnist",
          "dataset": "mnist",
 #         "distill-dataset": "stl10",
          "n_classes": 10,
-         "n_workers": 10,
-         "alpha": 1.0,
-         "participation_rate": 1,
+         "n_workers": 9,
+         "classes_per_worker": 0,
+         "worker_data": [50, 100, 200, 400, 800, 1600, 3200, 6400, 12800],
+         "alpha": 0.1,
          "batch_size": 32,
-         "data_balance": 1.0,
          "communication_rounds": 1,
          "local_epochs": 5,
-         "distill_epochs": 30,
-         "n_distill": 100,
-         "distill_mode": "regular",
-         "aggregation_mode": "FD",
+         "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+         "distill_epochs": 5,
+         "n_distill": 1500,
          "random_seed": 42,
-         "log_frequency": 1,
-         "log_path": "experiment1A\\"
+         "log_path": "experiment1\\"
         }, 
-        {
-          # Experiment 1-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 100,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment1B\\"
-        }, 
-
-        {
-          # Experiment 1-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 100,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment1C\\"
-        }, 
-        {
-          # Experiment 1-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 100,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment1D\\"
-        }, 
-        {
-          # Experiment 1-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 100,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment1E\\"
-        }, 
-        {
-          # Experiment 1-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 100,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment1F\\"
-        }, 
-        {
-          # Experiment 2-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2A\\"
-        }, 
-        {
-          # Experiment 2-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2B\\"
-        }, 
-        {
-          # Experiment 2-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2C\\"
-        }, 
-        {
-          # Experiment 2-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2D\\"
-        }, 
-        {
-          # Experiment 2-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2E\\"
-        }, 
-        {
-          # Experiment 2-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment2F\\"
-        }, 
-        {
-          # Experiment 3-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3A\\"
-        }, 
-        {
-          # Experiment 3-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3B\\"
-        }, 
-        {
-          # Experiment 3-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3C\\"
-        }, 
-        {
-          # Experiment 3-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3D\\"
-        }, 
-        {
-          # Experiment 3-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3E\\"
-        }, 
-        {
-          # Experiment 3-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment3F\\"
-        }, 
-        {
-          # Experiment 4-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4A\\"
-        }, 
-        {
-          # Experiment 4-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4B\\"
-        }, 
-        {
-          # Experiment 4-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4C\\"
-        }, 
-        {
-          # Experiment 4-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4D\\"
-        }, 
-        {
-          # Experiment 4-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4E\\"
-        }, 
-        {
-          # Experiment 4-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 800,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment4F\\"
-        },
-        {
-          # Experiment 5-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5A\\"
-        }, 
-        {
-          # Experiment 5-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5B\\"
-        }, 
-        {
-          # Experiment 5-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5C\\"
-        }, 
-        {
-          # Experiment 5-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5D\\"
-        }, 
-        {
-          # Experiment 5-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5E\\"
-        }, 
-        {
-          # Experiment 5-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 1600,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment5F\\"
-        },        
-        {
-          # Experiment 6-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6A\\"
-        }, 
-        {
-          # Experiment 6-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6B\\"
-        }, 
-        {
-          # Experiment 6-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6C\\"
-        }, 
-        {
-          # Experiment 6-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6D\\"
-        }, 
-        {
-          # Experiment 6-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6E\\"
-        }, 
-        {
-          # Experiment 6-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 3200,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment6F\\"
-        },        
-        {
-          # Experiment 7-A
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 5,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7A\\"
-        }, 
-        {
-          # Experiment 7-B
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 10,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7B\\"
-        }, 
-        {
-          # Experiment 7-C
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 15,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7C\\"
-        }, 
-        {
-          # Experiment 7-D
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 20,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7D\\"
-        }, 
-        {
-          # Experiment 7-E
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 25,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7E\\"
-        }, 
-        {
-          # Experiment 7-F
-          "model": "lenet_mnist",
-          "dataset": "mnist",
-#         "distill-dataset": "stl10",
-          "n_classes": 10,
-          "n_workers": 10,
-          "alpha": 1.0,
-          "participation_rate": 1,
-          "batch_size": 32,
-          "data_balance": 1.0,
-          "communication_rounds": 1,
-          "local_epochs": 30,
-          "distill_epochs": 30,
-          "n_distill": 6400,
-          "distill_mode": "regular",
-          "aggregation_mode": "FD",
-          "random_seed": 42,
-          "log_frequency": 1,
-          "log_path": "experiment7F\\"
-        },        
     ]
-
-
-
-#################   Hyperparameters Key   #################
-
-# model                 - Choose from: [simple-cnn, mlp-mnist]
-# dataset               - Choose from: [mnist, cifar10, cifar100, emnist]
-# distill-dataset       - Choose from: [stl-10]
-# n_workers             - Number of Workers
-# classes_per_worker    - Number of different Classes every Worker holds 
-#                         in it's local data, 0 returns an iid split
-# participation_rate    - Fraction of Workers which participate in every 
-#                         Communication Round
-# batch_size            - Batch-size used by the Workers
-# data_balance          - Default 1.0, if <1.0 data will be more 
-#                         concentrated on some clients
-# communication_rounds  - Total number of communication rounds
-# local_epochs          - Local training epochs at every client
-# distill_epochs        - Number of epochs used for distillation
-# n_distill             - Size of the distilation dataset 
-# distill_mode          - The distillation mode, chosse from 
-#                         ("regular", "pate", "pate_up", ..)
-# aggregation_mode      - Aggregation mode used to synchronize
-#                         Choose from: ["FA", "FD"]
-# random_seed           - Random seed for model initializations
-# log_frequency         - Number of communication rounds after which results 
-#                         are logged and saved to disk
-# log_path              - path of the log files
 

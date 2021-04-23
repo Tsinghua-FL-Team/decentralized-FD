@@ -88,13 +88,14 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 def init( ):
+    # Collusion Branch
     # create a list of possible experimental setups
     global hyperparams
     hyperparams = [
 
         ###  alpha = 100.0  / beta = 3  ###
         {
-          # Experiment D-3a (Accuracy vs Reward Graph)
+          # Experiment D-3a (Accuracy vs Reward Graph) - 
           "model": "lenet_mnist",
           "dataset": "emnist",
           "distill-dataset": "mnist",

@@ -27,12 +27,12 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 #*****************************************************************************#
 class Worker():
     def __init__(self, model_fn, optimizer_fn, tr_loader, counts, n_classes, 
-                  ts_loader, ds_loader, collude, early_stop=-1, init=None, idnum=None):
+                  ts_loader, ds_loader, colluding, early_stop=-1, init=None, idnum=None):
         self.id = idnum
         self.feature_extractor = None
         self.n_classes = n_classes
         self.early_stop = early_stop
-        self.collude = collude
+        self.collude = colluding
         # local models and dataloaders
         self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device)
         self.tr_loader = tr_loader

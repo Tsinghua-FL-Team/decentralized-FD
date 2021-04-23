@@ -73,9 +73,7 @@ def run_experiment(exp, exp_count, n_experiments):
         train_data,
         n_workers=hp["n_workers"],
         alpha=hp["alpha"] if "alpha" in hp.keys() else None,
-        worker_data=hp["worker_data"] if "worker_data" in hp.keys() else None,
-        classes_per_worker=hp["classes_per_worker"] if "classes_per_worker" in hp.keys() else None
-        )
+        total_data=hp["total_data"])
     
     # create dataloaders for all datasets loaded so far
     worker_loaders = [DataLoader(local_data, batch_size=hp["batch_size"], shuffle=True) for local_data in worker_data]

@@ -60,12 +60,11 @@ class Worker():
         
         # check if a dataloader was provided for training
         loader = self.tr_loader if not loader else loader
-        end_training = False
-        itr = 0
+
         for ep in range(epochs):
             # train next epoch
             for i, x, y in loader:   
-                itr += 1    
+                
                 x, y = x.to(device), y.to(device)
                 
                 self.optimizer.zero_grad()
@@ -78,17 +77,6 @@ class Worker():
                 loss.backward()
                 self.optimizer.step()  
 
-                # check for early stopping criteria
-                if (self.early_stop != -1) and (itr % 5 == 0):
-                    print("Checking early stop criteria...")
-                    accuracy = self.evaluate()["accuracy"]
-                    if accuracy >= self.early_stop:
-                        print("Stopping criteria reached for worker {}...".format(self.id))
-                        end_training = True
-                        break
-            # check if early stop criteria was reached
-            if end_training:
-                break
         train_stats = {"loss" : running_loss / samples}
         
         # return training statistics

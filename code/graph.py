@@ -153,7 +153,7 @@ def annotate_heatmap(im, data=None, valfmt="{x:.2f}",
 #                                                                             #
 #*****************************************************************************#
 def plot_graphs(experiments):
-    pass
+    #pass
     #create_graph_samples_vs_reward(experiments)
     #create_graph_accuracy_vs_reward(experiments[:8], tag="alpha_100_beta_1")
     #create_graph_accuracy_vs_reward(experiments[8:16], tag="alpha_01_beta_1")
@@ -167,7 +167,8 @@ def plot_graphs(experiments):
     #create_graph_confid_vs_reward(experiments[:15], tag="beta_1")
     #create_graph_confid_vs_reward(experiments[15:30], tag="beta_3")
     #create_graph_confid_vs_reward(experiments[30:45], tag="beta_5")
-    create_heatmap(experiments)
+    create_heatmap(experiments[0:64], tag="alpha_100")
+    create_heatmap(experiments[64:128], tag="alpha_01")
 
 
 #*****************************************************************************#
@@ -285,7 +286,7 @@ def create_graph_confid_vs_reward(experiments, tag=""):
 #   helper functions to create heatmap graph from all experiments.            #
 #                                                                             #
 #*****************************************************************************#
-def create_heatmap(experiments):
+def create_heatmap(experiments, tag=""):
     d1 = []
     xlabels = np.array([100, 200, 400, 800, 1600, 3200, 6400, 12800])
     ylabels = np.array([100, 200, 400, 800, 1600, 3200, 6400, 12800])
@@ -313,6 +314,6 @@ def create_heatmap(experiments):
     annotate_heatmap(im, valfmt="{x:.2f}")
     
     fig.tight_layout()
-    plt.savefig("heatmap.png", dpi=600)
+    plt.savefig("heatmap_{}.png".format(tag), dpi=600)
     
     

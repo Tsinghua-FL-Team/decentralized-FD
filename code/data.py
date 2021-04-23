@@ -302,17 +302,21 @@ class CustomDataset(Dataset):
         labels(sequence) : targets as required for the indices. 
                                 will be the same length as indices
     """
-    def __init__(self, dataset, labels):
+    def __init__(self, dataset, indices):
         self.dataset = dataset
-        self.targets = torch.tensor(labels.copy()).long()
+        self.indices = indices
+        self.targets = dataset.targets[indices]
+        
+        print("DATASET CREATED: ")
+        print(len(self.targets))
 
     def __getitem__(self, idx):
-        data = self.dataset[idx][0]
-        target = self.targets[idx]
+        data = self.dataset[self.indices[idx]][0]
+        target = self.dataset[self.indices[idx]][1]
         return (data, target)
 
     def __len__(self):
-        return len(self.targets)
+        return len(self.indices)
 
 
 #*****************************************************************************#
@@ -450,58 +454,40 @@ def make_double_stochstic(x):
 #   split and return datasets for workers.                                    #
 #                                                                             #
 #*****************************************************************************#
-def split_data(train_data, alpha, n_workers=10, worker_data=None, classes_per_worker=None):
+def split_data(train_data, total_data, alpha, n_workers=10):
     """Split data among Worker nodes."""
     
+    # get meta information
+    labels = train_data.targets
+    labels = labels.numpy()
+    n_classes = np.max(labels) + 1
+    samples_per_class = int(total_data / n_classes)
+    
+    # get label indcs
+    label_idcs = {l : np.random.permutation(
+        np.argwhere(np.array(labels)==l).flatten()).tolist() for l in range(n_classes)}
+    
+    # create a new dataset with given indices
+    chosen_idcs = [value[:samples_per_class] for key, value in label_idcs.items()]
+    chosen_idcs = np.random.permutation(np.concatenate(chosen_idcs))
+
+    # create the actual dataset
+    chosen_dataset = CustomDataset(train_data, chosen_idcs)
+    print("Length of chosen dataset is: ")
+    print(len(chosen_dataset))
     # Find allocated indices using dirichlet split
-    if not worker_data:
-        subset_idx = split_dirichlet(train_data.targets, n_workers, alpha)
-    else:
-        subset_idx = uneven_split(train_data.targets, n_workers, worker_data, classes_per_worker)
+    subset_idx = split_dirichlet(chosen_dataset.targets, n_workers, alpha)
     
     # Compute labels per worker
-    label_counts = [np.bincount(np.array(train_data.targets)[i], minlength=10) 
+    label_counts = [np.bincount(np.array(chosen_dataset.targets)[i], minlength=10) 
                     for i in subset_idx]
     
     # Get actual worker data
-    worker_data = [IdxSubset(train_data, subset_idx[i]) 
+    worker_data = [IdxSubset(chosen_dataset, subset_idx[i]) 
                    for i in range(n_workers)]
 
     # Return worker data splits
     return worker_data, label_counts
-
-
-#*****************************************************************************#
-#                                                                             #
-#   description:                                                              #
-#   split given dataset to create a test set and a ditillation set.           #
-#                                                                             #
-#*****************************************************************************#
-# def prepare_distill(dataset, random_seed, n_distill=None):
-#     """Split dataset into test and distill set according to given ratio."""
-#     # create subset if entire dataset was requested
-#     if not n_distill:
-#         distill_set = CustomSubset(dataset, [i for i in range(len(dataset))])
-#         return None, distill_set
-    
-#     # split dataset otherwise
-#     distill_portion = float(n_distill / len(dataset.targets))
-    
-#     # Get index for distill and test datasets
-#     test_idx, distill_idx = splitter(
-#         np.arange(len(dataset.targets)), 
-#         test_size=distill_portion,
-#         shuffle=True,
-#         stratify=dataset.targets, 
-#         random_state=random_seed
-#     )
-    
-#     # create actual subsets
-#     test_set = CustomSubset(dataset, test_idx)
-#     distill_set = CustomSubset(dataset, distill_idx)
-
-#     return test_set, distill_set
-    
 
 #*****************************************************************************#
 #                                                                             #

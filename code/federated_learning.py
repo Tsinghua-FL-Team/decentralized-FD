@@ -184,7 +184,7 @@ def run_experiment(exp, exp_count, n_experiments):
 #*****************************************************************************#
 def run():
     # create instances of experiment manager class for each setup
-    experiments = [expm.Experiment(hyperparameters=hp) for hp in hp_dicts]
+    experiments = [expm.Experiment(hyperparameters=hp, log_id=i) for i, hp in enumerate(hp_dicts)]
     
     # run all experiments
     print("Running a total of {} Experiments..\n".format(len(experiments)))

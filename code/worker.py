@@ -27,11 +27,12 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 #*****************************************************************************#
 class Worker():
     def __init__(self, model_fn, optimizer_fn, tr_loader, counts, n_classes, 
-                  ts_loader, ds_loader, early_stop=-1, init=None, idnum=None):
+                  ts_loader, ds_loader, collude, early_stop=-1, init=None, idnum=None):
         self.id = idnum
         self.feature_extractor = None
         self.n_classes = n_classes
         self.early_stop = early_stop
+        self.collude = collude
         # local models and dataloaders
         self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device)
         self.tr_loader = tr_loader
@@ -61,12 +62,10 @@ class Worker():
         
         # check if a dataloader was provided for training
         loader = self.tr_loader if not loader else loader
-        end_training = False
-        itr = 0
         for ep in range(epochs):
             # train next epoch
             for i, x, y in loader:   
-                itr += 1    
+
                 x, y = x.to(device), y.to(device)
                 
                 self.optimizer.zero_grad()
@@ -79,17 +78,6 @@ class Worker():
                 loss.backward()
                 self.optimizer.step()  
 
-                # check for early stopping criteria
-                if (self.early_stop != -1) and (itr % 5 == 0):
-                    print("Checking early stop criteria...")
-                    accuracy = self.evaluate()["accuracy"]
-                    if accuracy >= self.early_stop:
-                        print("Stopping criteria reached for worker {}...".format(self.id))
-                        end_training = True
-                        break
-            # check if early stop criteria was reached
-            if end_training:
-                break
         train_stats = {"loss" : running_loss / samples}
         
         # return training statistics
@@ -183,7 +171,10 @@ class Worker():
         # collect results to cpu  memory and numpy arrays
         predictions = torch.cat(predictions, dim=0).detach().cpu().numpy().astype("uint8")
         
-        print((predictions == loader.dataset.oTargets).sum())
+        # check if I am a colluding worker
+        if self.collude:
+            predictions[predictions<=5] = 0
+            predictions[predictions>5] = 9
         
         # append past resutls
         self.predictions.append(predictions)
@@ -215,6 +206,11 @@ class Worker():
 
         # collect results to cpu  memory and numpy arrays
         predictions = torch.cat(predictions, dim=0).detach().cpu().numpy()
+
+        # check if I am a colluding worker
+        if self.collude:
+            predictions[predictions<=5] = 0
+            predictions[predictions>5] = 9
         
         # append past resutls
         self.predictions.append(predictions)

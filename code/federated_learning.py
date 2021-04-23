@@ -68,6 +68,11 @@ def run_experiment(exp, exp_count, n_experiments):
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
     
+    # Setup collusion matrices
+    colluding_workers = int(hp["collude_%age"] * hp["n_workers"])
+    collude = np.zeros(hp["n_workers"])
+    collude[:colluding_workers] = 1
+    
     # distributed the training dataset among worker nodes
     worker_data, label_counts = data.split_data(
         train_data,
@@ -87,9 +92,10 @@ def run_experiment(exp, exp_count, n_experiments):
         Worker(model_fn,
                optimizer_fn, 
                tr_loader=loader,
-               idnum = i,
-               counts = counts,
+               idnum=i,
+               counts=counts,
                n_classes=hp["n_classes"],
+               colluding=collude[i],
                early_stop=hp["early_stop"][i] if "early_stop" in hp.keys() else -1,
                ts_loader=test_loader,
                ds_loader=distill_loader) 
@@ -139,30 +145,30 @@ def run_experiment(exp, exp_count, n_experiments):
         
         print("\n")
         
-        # run federated distillation phase
-        for worker in workers:
-            print("Distill WORKER: "+str(worker.id))
+    #     # run federated distillation phase
+    #     for worker in workers:
+    #         print("Distill WORKER: "+str(worker.id))
             
-            # get Aggregated Prediction Matrix
-            worker.get_from_server(server)
+    #         # get Aggregated Prediction Matrix
+    #         worker.get_from_server(server)
             
-            # local Training / Distillation ??
-            distill_stats = worker.distill(distill_iter=hp["distill_iter"],
-                                            ds_loader=distill_loader)
+    #         # local Training / Distillation ??
+    #         distill_stats = worker.distill(distill_iter=hp["distill_iter"],
+    #                                         ds_loader=distill_loader)
         
-            # print distill stats
-            #print(distill_stats)
+    #         # print distill stats
+    #         #print(distill_stats)
 
-            # Evaluate each worker's performance 
-            print(worker.evaluate(ts_loader=test_loader))
+    #         # Evaluate each worker's performance 
+    #         print(worker.evaluate(ts_loader=test_loader))
 
-    print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
+    # print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
  
-    # evaluate and log evaluation results
-    for worker in workers:
-        # Evaluate each worker's performance 
-        exp.log({"worker_{}_{}".format(worker.id, key) : value 
-                 for key, value in worker.evaluate(ts_loader=test_loader).items()})
+    # # evaluate and log evaluation results
+    # for worker in workers:
+    #     # Evaluate each worker's performance 
+    #     exp.log({"worker_{}_{}".format(worker.id, key) : value 
+    #              for key, value in worker.evaluate(ts_loader=test_loader).items()})
           
     # save logging results to disk
     try:

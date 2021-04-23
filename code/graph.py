@@ -4,9 +4,17 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 import numpy as np
-import math
 import matplotlib
 import matplotlib.pyplot as plt
+
+
+#-----------------------------------------------------------------------------#
+#                                                                             #
+#   Define global parameters to be used through out the program               #
+#                                                                             #
+#-----------------------------------------------------------------------------#
+colors = ["blue", "red", "firebrick", "magenta", "chocolate", "black", 
+          "olive", "yellow", "green", "brown", "lime", "cyan"]
 
 
 #*****************************************************************************#
@@ -145,19 +153,33 @@ def annotate_heatmap(im, data=None, valfmt="{x:.2f}",
 #                                                                             #
 #*****************************************************************************#
 def plot_graphs(experiments):
+    pass
+    #create_graph_samples_vs_reward(experiments)
+    #create_graph_accuracy_vs_reward(experiments[:8], tag="alpha_100_beta_1")
+    #create_graph_accuracy_vs_reward(experiments[8:16], tag="alpha_01_beta_1")
+    #create_graph_accuracy_vs_reward(experiments[16:24], tag="alpha_100_beta_3")
+    #create_graph_accuracy_vs_reward(experiments[24:32], tag="alpha_01_beta_3")
+    #create_graph_accuracy_vs_reward(experiments[32:40], tag="alpha_100_beta_5")
+    #create_graph_accuracy_vs_reward(experiments[40:48], tag="alpha_01_beta_5")
+    #create_graph_accuracy_vs_reward(experiments[48], tag="heter_beta_1")
+    #create_graph_accuracy_vs_reward(experiments[49], tag="heter_beta_3")
+    #create_graph_accuracy_vs_reward(experiments[50], tag="heter_beta_5")
+    #create_graph_confid_vs_reward(experiments[:15], tag="beta_1")
+    #create_graph_confid_vs_reward(experiments[15:30], tag="beta_3")
+    #create_graph_confid_vs_reward(experiments[30:45], tag="beta_5")
     #create_heatmap(experiments)
-    create_graph_samples_vs_reward(experiments)
 
 
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
-#   helper functions to create accuracy reward graph.                         #
+#   helper functions to create # of samples vs reward graph.                  #
 #                                                                             #
 #*****************************************************************************#
 def create_graph_samples_vs_reward(experiments):
     # prepare data for the graph
     for i, exp in enumerate(experiments):
+        beta = exp.hyperparameters["r_beta"]
         yAxis = np.transpose(np.array(exp.results["reward_0"])).reshape(-1)
         # create xticks to display on graph
         xticks = [i+1 for i in range(exp.hyperparameters["n_workers"])]
@@ -173,13 +195,90 @@ def create_graph_samples_vs_reward(experiments):
         plt.title("Local Training data vs Reward graph")
         plt.xlabel("dataset size")
         plt.ylabel("reward")
-        
-        #for xy in zip(xAxis, yAxis):                               
-        #    ax.annotate('(%s, %s)' % xy, xy=xy, textcoords='data')
-        
-        plt.savefig("train_samples_vs_reward.png", dpi=600)
+        plt.savefig("samples_vs_reward_beta_{}.png".format(beta), dpi=600)
     
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   helper functions to create accuracy reward graph.                         #
+#                                                                             #
+#*****************************************************************************#
+def create_graph_accuracy_vs_reward(experiments, tag=""):
+    # Experiment legends
+    exp_legends = ["Test 1 (Accuracy: 60%)",
+                   "Test 2 (Accuracy: 65%)",
+                   "Test 3 (Accuracy: 70%)",
+                   "Test 4 (Accuracy: 75%)", 
+                   "Test 5 (Accuracy: 80%)",
+                   "Test 6 (Accuracy: 85%)",
+                   "Test 7 (Accuracy: 90%)",
+                   "Test 7 (Accuracy: 95%)"]
+    # prepare data for the graph
+    fig, ax = plt.subplots()
+    # go trough all experiments and plot them
+    for i, exp in enumerate(experiments):
+        xAxis = [exp.results["tr_accuracy_0_worker_{}".format(i)][0] * 100.0 
+                 for i in range(exp.hyperparameters["n_workers"])]
+        yAxis = np.transpose(np.array(exp.results["reward_0"])).reshape(-1).tolist()
+        # plot actual graph
+        ax.plot(xAxis, yAxis, ".", color=colors[i], label=exp_legends[i])
+    # create infomatics of the graph
+    plt.title("Accuracy vs Reward Graph") # (Heterogeneous Group)")
+    plt.xlabel("accuracy")
+    plt.ylabel("reward")
+    # create legend
+    #ax.legend(loc="upper left", frameon=True)
+    # save the figure
+    plt.savefig("accuracy_vs_reward_{}.png".format(tag), dpi=600)
     
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   helper functions to create # of samples vs reward graph.                  #
+#                                                                             #
+#*****************************************************************************#
+def create_graph_confid_vs_reward(experiments, tag=""):
+    # Experiment legends
+    exp_legends = ["Blind",
+                   "Confidence: 30%", 
+                   "Confidence: 50%", 
+                   "Confidence: 70%", 
+                   "Confidence: 90%"]
+    # prepare data for the graph
+    fig, ax = plt.subplots()
+
+    # go trough all experiments and collect results
+    xAxis = np.array([0, 2, 4])
+    yAxis = []
+    for i, exp in enumerate(experiments):
+        yAxis += [np.transpose(np.array(exp.results["reward_0"])).reshape(-1)[0]]
+
+    # reshape yAxis
+    yAxis = np.array(yAxis).reshape((3, 5)).T
+    bar_position = -0.50
+    for i, data in enumerate(yAxis):
+        plt.bar(xAxis+bar_position, data, color=colors[i], width = 0.25, label=exp_legends[i])
+        bar_position += 0.25
+        
+
+    # create infomatics of the graph
+    ax.set_title("Confidence vs Reward Graph")
+    ax.set_xlabel("alpha")
+    ax.set_ylabel("reward")
+    
+    # setup axis ticks
+    plt.xticks(xAxis, ("0.1", "1.0", "100.0"))
+    
+    # create legend
+    plt.legend()
+    
+    # save the figure
+    plt.tight_layout()
+    plt.savefig("confid_vs_reward_{}.png".format(tag), dpi=600)
+        
+
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -211,7 +310,7 @@ def create_heatmap(experiments):
     im = ax.imshow(data)
     
     im, cbar = heatmap(data, ylabels, xlabels, ax=ax, cmap="YlGn", cbarlabel="")
-    texts = annotate_heatmap(im, valfmt="{x:.2f}")
+    annotate_heatmap(im, valfmt="{x:.2f}")
     
     fig.tight_layout()
     plt.savefig("heatmap.png", dpi=600)

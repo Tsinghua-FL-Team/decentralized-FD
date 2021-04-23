@@ -7,7 +7,7 @@ import torch, torchvision
 import torchvision.transforms as transforms
 import numpy as np
 
-from torch.utils.data import Subset, Dataset
+from torch.utils.data import Dataset
 from sklearn.model_selection import train_test_split as splitter
 
 #*****************************************************************************#
@@ -37,6 +37,7 @@ def load_cifar10(path):
     # Return the datasets
     return trainset, testset
 
+
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -64,6 +65,7 @@ def load_cifar100(path):
     # Return the datasets
     return trainset, testset
 
+
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -74,21 +76,21 @@ def load_mnist(path):
     """Load MNIST (training and test set)."""
     
     # Define the transform for the data.
-    transform = transforms.Compose([torchvision.transforms.Resize((32,32)),
-                                    transforms.ToTensor(), 
-                                    transforms.Normalize((0.1307,), (0.3081,))
-                                    ])
+    transform = transforms.Compose([transforms.ToTensor(),
+                                   transforms.Normalize((0.1307,), (0.3081,))
+                                   ])
 
     # Initialize Datasets. MNIST will automatically download if not present
-    trainset = torchvision.datasets.MNIST(
-        root=path+"MNIST", train=True, download=True, transform=transform
+    trainset = torchvision.datasets.EMNIST(
+        root=path+"EMNIST", train=True, split="mnist", download=True, transform=transform
     )
-    testset = torchvision.datasets.MNIST(
-        root=path+"MNIST", train=False, download=True, transform=transform
+    testset = torchvision.datasets.EMNIST(
+        root=path+"EMNIST", train=False, split="mnist", download=True, transform=transform
     )
 
     # Return the datasets
     return trainset, testset
+
 
 #*****************************************************************************#
 #                                                                             #
@@ -100,21 +102,21 @@ def load_emnist(path):
     """Load EMNIST (training and test set)."""
     
     # Define the transform for the data.
-    transform = transforms.Compose([torchvision.transforms.Resize((32,32)),
-                                    transforms.ToTensor(), 
-                                    transforms.Normalize((0.1307,), (0.3081,))
-                                    ])
+    transform = transforms.Compose([transforms.ToTensor(),
+                                   transforms.Normalize((0.1307,), (0.3081,))
+                                   ])
 
     # Initialize Datasets. MNIST will automatically download if not present
     trainset = torchvision.datasets.EMNIST(
-        root=path+"EMNIST", train=True, download=True, transform=transform
+        root=path+"EMNIST", train=True, split="digits", download=True, transform=transform
     )
     testset = torchvision.datasets.EMNIST(
-        root=path+"EMNIST", train=False, download=True, transform=transform
+        root=path+"EMNIST", train=False, split="digits", download=True, transform=transform
     )
 
     # Return the datasets
     return trainset, testset
+
 
 #*****************************************************************************#
 #                                                                             #
@@ -136,12 +138,134 @@ def load_stl10(path):
 
     # Initialize Datasets. MNIST will automatically download if not present
     dataset = torchvision.datasets.STL10(
-        root=path+"STL10", download=True, transform=transform
+        root=path+"STL10", split="train", download=True, transform=transform
     )
-    #, split="train"
+
+    # Return the datasets
+    return dataset, None
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load and return the training and testing sets of CIFAR-10 dataset.        #
+#                                                                             #
+#*****************************************************************************#
+def load_cifar10_distill(path, dtrain=False):
+    """Load CIFAR-10 (training and test set)."""
+    
+    # Define the transform for the data.
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), 
+                             (0.2023, 0.1994, 0.2010))
+        ])
+    
+    # Initialize Datasets. CIFAR-10 will automatically download if not present
+    dataset = torchvision.datasets.CIFAR10(
+        root=path+"CIFAR10", train=dtrain, download=True, transform=transform
+    )
+    
+    # Return the datasets
+    return dataset
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load and return the training and testing sets of CIFAR-100 dataset.       #
+#                                                                             #
+#*****************************************************************************#
+def load_cifar100_distill(path, dtrain=False):
+    """Load CIFAR-100 (training and test set)."""
+    
+    # Define the transform for the data.
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), 
+                             (0.2023, 0.1994, 0.2010))
+        ])
+    
+    # Initialize Datasets. CIFAR-10 will automatically download if not present
+    dataset = torchvision.datasets.CIFAR10(
+        root=path+"CIFAR100", train=dtrain, download=True, transform=transform
+    )
+    
+    # Return the datasets
+    return dataset
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load and return the training and testing sets of MNIST dataset.           #
+#                                                                             #
+#*****************************************************************************#
+def load_mnist_distill(path, dtrain=False):
+    """Load MNIST (training and test set)."""
+    
+    # Define the transform for the data.
+    transform = transforms.Compose([transforms.ToTensor(),
+                                   transforms.Normalize((0.1307,), (0.3081,))
+                                   ])
+                                    
+
+    # Initialize Datasets. MNIST will automatically download if not present
+    dataset = torchvision.datasets.EMNIST(
+        root=path+"EMNIST", train=dtrain, split="mnist", download=True, transform=transform
+    )
 
     # Return the datasets
     return dataset
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load and return the training and testing sets of EMNIST dataset.          #
+#                                                                             #
+#*****************************************************************************#
+def load_emnist_distill(path, dtrain=False):
+    """Load EMNIST (training and test set)."""
+    
+    # Define the transform for the data.
+    transform = transforms.Compose([transforms.ToTensor(),
+                                   transforms.Normalize((0.1307,), (0.3081,))
+                                   ])
+                                    
+    # Initialize Datasets. MNIST will automatically download if not present
+    dataset = torchvision.datasets.EMNIST(
+        root=path+"EMNIST", train=dtrain, split="digits", download=True, transform=transform
+    )
+
+    # Return the dataset
+    return dataset
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load and return the training and testing sets of STL-10 dataset.          #
+#                                                                             #
+#*****************************************************************************#
+def load_stl10_distill(path, dtrain=False):
+    """Load STL-10 (training and test set)."""
+    
+    # Define the transform for the data.
+    transform = transforms.Compose([torchvision.transforms.Resize((32,32)),
+                                    transforms.ToTensor(), 
+                                    transforms.Normalize(
+                                    (0.4914, 0.4822, 0.4465), 
+                                    (0.2023, 0.1994, 0.2010))
+                                   ])
+
+    # Initialize Datasets. MNIST will automatically download if not present
+    dataset = torchvision.datasets.STL10(
+        root=path+"STL10", split="train", download=True, transform=transform
+    )
+
+    # Return the datasets
+    return CustomDataset(dataset, dataset.labels)
 
 
 #*****************************************************************************#
@@ -166,6 +290,34 @@ class IdxSubset(torch.utils.data.Dataset):
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
+#   create custom dataset, used for stl10 (labels -> targets) mapping.        #
+#                                                                             #
+#*****************************************************************************#
+class CustomDataset(Dataset):
+    r"""
+    Create a dataset with given data and labels
+
+    Arguments:
+        dataset (Dataset): The whole Dataset
+        labels(sequence) : targets as required for the indices. 
+                                will be the same length as indices
+    """
+    def __init__(self, dataset, labels):
+        self.dataset = dataset
+        self.targets = torch.tensor(labels.copy()).long()
+
+    def __getitem__(self, idx):
+        data = self.dataset[idx][0]
+        target = self.targets[idx]
+        return (data, target)
+
+    def __len__(self):
+        return len(self.targets)
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
 #   a class to create custom subsets, should be used to change all datasets.  #
 #                                                                             #
 #*****************************************************************************#
@@ -184,7 +336,7 @@ class CustomSubset(Dataset):
         self.indices = indices
         if not labels:
             targets = np.array(self.dataset.targets)[indices]
-            self.targets = torch.tensor(targets).long()
+            self.targets = torch.tensor(targets.copy()).long()
             # original labels
             self.oTargets = targets
         else:
@@ -214,8 +366,10 @@ def uneven_split(labels, n_workers, n_data, classes_per_worker):
         labels = labels.numpy()
     
     n_classes = np.max(labels) + 1
-    label_idcs = {l : np.argwhere(np.array(labels)==l).flatten().tolist() for l in range(n_classes)}
-    #class_idcs = [np.argwhere(np.array(labels)==y).flatten() for y in range(n_classes)]
+    # get label indcs
+    label_idcs = {l : np.random.permutation(
+        np.argwhere(np.array(labels)==l).flatten()
+        ).tolist() for l in range(n_classes) }
     
     classes_per_worker = n_classes if classes_per_worker == 0 else classes_per_worker
 
@@ -323,29 +477,36 @@ def split_data(train_data, alpha, n_workers=10, worker_data=None, classes_per_wo
 #   split given dataset to create a test set and a ditillation set.           #
 #                                                                             #
 #*****************************************************************************#
-def create_distill(dataset, random_seed, n_distill):
-    """Split dataset into test and distill set according to given ratio."""
-    distill_portion = float(n_distill / len(dataset.targets))
+# def prepare_distill(dataset, random_seed, n_distill=None):
+#     """Split dataset into test and distill set according to given ratio."""
+#     # create subset if entire dataset was requested
+#     if not n_distill:
+#         distill_set = CustomSubset(dataset, [i for i in range(len(dataset))])
+#         return None, distill_set
     
-    # Get index for distill and test datasets
-    test_idx, distill_idx = splitter(
-        np.arange(len(dataset.targets)), 
-        test_size=distill_portion,
-        shuffle=True,
-        stratify=dataset.targets, 
-        random_state=random_seed
-    )
+#     # split dataset otherwise
+#     distill_portion = float(n_distill / len(dataset.targets))
     
-    # create actual subsets
-    test_set = CustomSubset(dataset, test_idx)
-    distill_set = CustomSubset(dataset, distill_idx)
+#     # Get index for distill and test datasets
+#     test_idx, distill_idx = splitter(
+#         np.arange(len(dataset.targets)), 
+#         test_size=distill_portion,
+#         shuffle=True,
+#         stratify=dataset.targets, 
+#         random_state=random_seed
+#     )
+    
+#     # create actual subsets
+#     test_set = CustomSubset(dataset, test_idx)
+#     distill_set = CustomSubset(dataset, distill_idx)
 
-    return test_set, distill_set
+#     return test_set, distill_set
     
+
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
-#   load dataset as required.                                                 #
+#   load training dataset as requested.                                       #
 #                                                                             #
 #*****************************************************************************#
 def load_data(dataset, path):
@@ -356,6 +517,27 @@ def load_data(dataset, path):
             "cifar100" : load_cifar100
             }[dataset](path)
 
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   load distillation (public) dataset as requested.                          #
+#                                                                             #
+#*****************************************************************************#
+def load_distill(dataset, random_seed, n_distill, dtrain, path):
+    all_distill_data = {"cifar10" : load_cifar10_distill, 
+                        "mnist" : load_mnist_distill , 
+                        "emnist" : load_emnist_distill,
+                        "stl10" : load_stl10_distill, 
+                        "cifar100" : load_cifar100_distill
+                        }[dataset](path, dtrain)
+    
+    print("Distillation Data: Total Size {}".format(len(all_distill_data)))
+    distill_data = CustomSubset(all_distill_data, 
+                                np.random.permutation(len(all_distill_data))[:n_distill])
+    print("Distillation Data: Select Size {}".format(len(distill_data)))
+    # return the selected distillation data    
+    return distill_data
 
 #*****************************************************************************#
 #                                                                             #
@@ -372,7 +554,7 @@ def print_split(idcs, labels):
         split = np.sum(np.array(labels)[idccs].reshape(1,-1)==np.arange(n_labels).reshape(-1,1), axis=1)
         splits += [split]
         if len(idcs) < 30 or i < 10 or i>len(idcs)-10:
-            print(" - Client {}: {:55} -> sum={}".format(i,str(split), np.sum(split)), flush=True)
+            print(" - Worker {}: {:55} -> sum={}".format(i,str(split), np.sum(split)), flush=True)
         elif i==len(idcs)-10:
             print(".  "*10+"\n"+".  "*10+"\n"+".  "*10)
     

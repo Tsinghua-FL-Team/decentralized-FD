@@ -16,18 +16,21 @@ import numpy as np
 #                                                                             #
 #*****************************************************************************#
 class Server():
-    def __init__(self, n_samples, n_classes, n_workers, alpha=1.0):
+    def __init__(self, n_samples, n_classes, n_workers, alpha, beta):
         # meta-information about dataset
         self.n_samples = n_samples
         self.n_classes = n_classes
         self.n_workers = n_workers
+        # reward scalinga and penalty terms
         self.alpha = alpha
+        self.beta = beta
         # Collects worker predictions Cij matrix
         self.wr_predict = []
         self.label_dist = []
         # Stores results of aggregated predictions
         self.majorityVote = []
         self.rewardShares = []
+        
 
 
     #---------------------------------------------------------------------#
@@ -40,28 +43,40 @@ class Server():
         rewardShare = np.zeros(self.n_workers)
         Votes = np.zeros((self.n_samples, self.n_classes), dtype=int)
         Sum = np.zeros(self.n_classes, dtype=float)
+        samples_predicted = np.zeros(self.n_workers)
         
         # aggregate and store predictions
-        for (prediction, freq) in zip(self.wr_predict, self.label_dist):
+        for i, (prediction, freq) in enumerate(zip(self.wr_predict, self.label_dist)):
             Sum += freq
             for j, sample_predict in enumerate(prediction):
-                Votes[j, sample_predict] += 1
+                # compute this in vote only if prediction made by worker
+                if sample_predict != -1:
+                    Votes[j, sample_predict] += 1
+                    samples_predicted[i] += 1
             
         # compute reward for each worker
         for j in range(0, self.n_samples):
             for i in range(0, self.n_workers):
+                # skip if no prediction made by worker i
+                if self.wr_predict[i][j] == -1:
+                    continue
                 # Compute R_i
-                Ri = (1.0/(self.n_workers*self.n_samples)) * (Sum - self.label_dist[i])
+                Ri = (1.0/(self.n_workers*samples_predicted[i])) * (Sum - self.label_dist[i])
                 t0 = 0
+                nPeers = 1
                 # Reward worker i for each peer p
                 for p in range(0, self.n_workers):
                     # Skip if same worker
                     if i == p:
                         continue
+                    # skip if no prediction made by peer worker p
+                    if self.wr_predict[p][j] == -1:
+                        continue
+                    nPeers += 1
                     # Compute reward
-                    t0 += ((1.0/Ri[self.wr_predict[i][j]]) - 1) if self.wr_predict[i][j] == self.wr_predict[p][j] else -1
+                    t0 += ((1.0/Ri[self.wr_predict[i][j]]) - 1) if self.wr_predict[i][j] == self.wr_predict[p][j] else (-1 * self.beta)
                 # Reward Share for worker i
-                rewardShare[i] += self.alpha * (1.0/(self.n_workers-1)) * t0
+                rewardShare[i] += self.alpha * (1.0/nPeers) * t0
         
         # Compute the majority vote
         self.majorityVote.append(np.argmax(Votes, axis=-1).astype("uint8"))

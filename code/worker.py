@@ -7,9 +7,9 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.data import DataLoader
 import numpy as np
-import copy
+#from torch.utils.data import DataLoader
+#import copy
 
 #-----------------------------------------------------------------------------#
 #                                                                             #
@@ -61,17 +61,12 @@ class Worker():
         
         # check if a dataloader was provided for training
         loader = self.tr_loader if not loader else loader
-        
+        end_training = False
+        itr = 0
         for ep in range(epochs):
-            # check for early stopping criteria
-            if self.early_stop != -1:
-                accuracy = self.evaluate()["accuracy"]
-                if accuracy >= self.early_stop:
-                    print("Stopping criteria reached for worker {}".format(self.id))
-                    break
             # train next epoch
             for i, x, y in loader:   
-
+                itr += 1    
                 x, y = x.to(device), y.to(device)
                 
                 self.optimizer.zero_grad()
@@ -84,6 +79,17 @@ class Worker():
                 loss.backward()
                 self.optimizer.step()  
 
+                # check for early stopping criteria
+                if (self.early_stop != -1) and (itr % 5 == 0):
+                    print("Checking early stop criteria...")
+                    accuracy = self.evaluate()["accuracy"]
+                    if accuracy >= self.early_stop:
+                        print("Stopping criteria reached for worker {}...".format(self.id))
+                        end_training = True
+                        break
+            # check if early stop criteria was reached
+            if end_training:
+                break
         train_stats = {"loss" : running_loss / samples}
         
         # return training statistics
@@ -105,7 +111,7 @@ class Worker():
         loader = self.ts_loader if not ts_loader else ts_loader
         
         with torch.no_grad():
-            for i, (x, y) in enumerate(loader):
+            for x, y in loader:
                 
                 x, y = x.to(device), y.to(device)
                 
@@ -144,7 +150,46 @@ class Worker():
         t[torch.arange(y_.shape[0]),amax] = 1
         return t
     
-    def compute_distill_predictions(self, ds_loader=None):
+    #---------------------------------------------------------------------#
+    #                                                                     #
+    #   Prediction functions to make predictions on public dataset.       #
+    #                                                                     #
+    #---------------------------------------------------------------------#
+    def predict_public(self, ds_loader=None, use_confid=False, confid=None):
+        if use_confid:
+            self.distill_predict_with_confid(ds_loader=ds_loader, 
+                                             confidence=confid)
+        else:
+            self.distill_predict(ds_loader=ds_loader)
+
+    def distill_predict(self, ds_loader=None):
+        
+        # check if a dataloader was provided
+        loader = self.ds_loader if not ds_loader else ds_loader
+
+        predictions = []
+
+        # compute predictions
+        for x, _ in loader:
+            x = x.to(device)
+            #predictions += [self.predict_max(x).detach()]
+            # get prediction
+            y_ = self.predict(x)
+
+            # find agrument max
+            amax = torch.argmax(y_, dim=1).detach()
+            predictions += [amax]
+
+        # collect results to cpu  memory and numpy arrays
+        predictions = torch.cat(predictions, dim=0).detach().cpu().numpy().astype("uint8")
+        
+        print((predictions == loader.dataset.oTargets).sum())
+        
+        # append past resutls
+        self.predictions.append(predictions)
+                #np.argmax(predictions, axis=-1).astype("uint8")
+
+    def distill_predict_with_confid(self, confidence, ds_loader=None):
         
         # check if a dataloader was provided
         loader = self.ds_loader if not ds_loader else ds_loader
@@ -154,15 +199,25 @@ class Worker():
         # compute predictions
         for x, _ in loader:
             x = x.to(device)
-            predictions += [self.predict_max(x).detach()]
-        
+
+            # get prediction
+            y_ = self.predict(x)
+
+            # find agrument max
+            amax = torch.argmax(y_, dim=1).detach()
+
+            # get prediction confidence
+            pred_confid = y_[np.arange(y_.shape[0]), amax]
+
+            # apply the confidence threshold for predictions
+            amax[pred_confid < confidence] = -1
+            predictions += [amax]
+
         # collect results to cpu  memory and numpy arrays
         predictions = torch.cat(predictions, dim=0).detach().cpu().numpy()
         
         # append past resutls
-        self.predictions.append(
-            np.argmax(predictions, axis=-1).astype("uint8"))
-
+        self.predictions.append(predictions)
         
     #---------------------------------------------------------------------#
     #                                                                     #
@@ -191,23 +246,31 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distill(self, distill_epochs, ds_loader=None, reset_optimizer=False):
+    def distill(self, distill_iter, ds_loader=None, reset_optimizer=False):
         """Distillation function to perform Federated Distillation"""
+        print("Distilling on Worker {}...".format(self.id))
+        
         if reset_optimizer:
-            self.optimizer = self.optimizer_fn(self.tr_model.parameters())  
+            self.optimizer = self.optimizer_fn(self.tr_model.parameters())
+            print("optimizer reset...")
 
         # check if a dataloader was provided
         loader = self.ds_loader if not ds_loader else ds_loader
         
         # start training the worker using distill dataset
         self.tr_model.train()  
-        running_loss, samples = 0.0, 0
-
+        
         # setup global labels
         loader.dataset.setTargets(labels=self.global_labels)
         
-        for ep in range(distill_epochs):
+        print(np.count_nonzero(self.global_labels == loader.dataset.oTargets))
+        print(np.count_nonzero(self.predictions[-1] == loader.dataset.oTargets))
+        
+        itr = 0
+        while True:
+            running_loss, samples = 0.0, 0
             for x, y in loader:   
+                itr += 1
                 # create onehot encoding
                 onehot_y = torch.zeros((len(y), self.n_classes))
                 onehot_y[torch.arange(len(y)), y] = 1
@@ -226,7 +289,8 @@ class Worker():
                 loss.backward()
                 self.optimizer.step()  
 
-        distill_stats = {"loss" : running_loss / samples}
+            if itr >= distill_iter:
+                distill_stats = {"loss" : running_loss / samples}
 
         # return distillation statistics
         return distill_stats

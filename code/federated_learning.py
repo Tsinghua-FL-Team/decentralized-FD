@@ -57,14 +57,13 @@ def run_experiment(exp, exp_count, n_experiments):
     # get datasets needed for training and distillation
     train_data, test_data = data.load_data(hp["dataset"], args.DATA_PATH)
     
-    # split test dataset into distill / test sets
-    if "distill-dataset" in hp.keys():
-        distill_data = data.load_data(hp["distill-dataset"], args.DATA_PATH)
-    else:
-        test_data, distill_data = data.create_distill(
-            test_data, 
-            random_seed=hp["random_seed"], 
-            n_distill=hp["n_distill"])
+    # split test dataset into distill / test sets if requested otherwise
+    # load the required distillatio (public) dataset
+    distill_data = data.load_distill(dataset=hp["distill-dataset"],
+                                     random_seed=hp["random_seed"],
+                                     n_distill=hp["n_distill"],
+                                     dtrain=hp["dtrain"],
+                                     path=args.DATA_PATH)
 
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
@@ -91,15 +90,16 @@ def run_experiment(exp, exp_count, n_experiments):
                idnum = i,
                counts = counts,
                n_classes=hp["n_classes"],
-               early_stop=hp["early_stop"][i],
+               early_stop=hp["early_stop"][i] if "early_stop" in hp.keys() else -1,
                ts_loader=test_loader,
                ds_loader=distill_loader) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
     server = Server(n_samples=len(distill_loader.dataset), 
                     n_classes=hp["n_classes"], 
-                    n_workers=hp["n_workers"]
-                )
+                    n_workers=hp["n_workers"],
+                    alpha=hp["r_alpha"],
+                    beta=hp["r_beta"])
     
     print("Starting Distributed Training..\n")
     t1 = time.time()
@@ -125,7 +125,9 @@ def run_experiment(exp, exp_count, n_experiments):
             exp.log({"tr_accuracy_{}_worker_{}".format(c_round-1, worker.id): accuracy})
             
             # compute Predictions
-            worker.compute_distill_predictions(ds_loader=distill_loader)
+            worker.predict_public(ds_loader=distill_loader, 
+                                  use_confid=hp["use_confidence"], 
+                                  confid=hp["conf_measure"])
             
             # send Predictions + Frequency Vector to Server
             worker.send_to_server(server)
@@ -145,15 +147,15 @@ def run_experiment(exp, exp_count, n_experiments):
             worker.get_from_server(server)
             
             # local Training / Distillation ??
-            distill_stats = worker.distill(distill_epochs=hp["distill_epochs"],
-                                           ds_loader=distill_loader)
+            distill_stats = worker.distill(distill_iter=hp["distill_iter"],
+                                            ds_loader=distill_loader)
         
             # print distill stats
             #print(distill_stats)
 
             # Evaluate each worker's performance 
             print(worker.evaluate(ts_loader=test_loader))
-                
+
     print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
  
     # evaluate and log evaluation results

@@ -167,7 +167,7 @@ def plot_graphs(experiments):
     #create_graph_confid_vs_reward(experiments[:15], tag="beta_1")
     #create_graph_confid_vs_reward(experiments[15:30], tag="beta_3")
     #create_graph_confid_vs_reward(experiments[30:45], tag="beta_5")
-    #create_heatmap(experiments)
+    create_heatmap(experiments)
 
 
 #*****************************************************************************#
@@ -287,8 +287,8 @@ def create_graph_confid_vs_reward(experiments, tag=""):
 #*****************************************************************************#
 def create_heatmap(experiments):
     d1 = []
-    xlabels = np.array([100, 200, 400, 800, 1600, 3200, 6400])
-    ylabels = np.array([5, 10, 15, 20, 25, 30])
+    xlabels = np.array([100, 200, 400, 800, 1600, 3200, 6400, 12800])
+    ylabels = np.array([100, 200, 400, 800, 1600, 3200, 6400, 12800])
     
     # prepare data for the graph
     for exp in experiments:

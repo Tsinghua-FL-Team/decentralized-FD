@@ -27,12 +27,12 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 #*****************************************************************************#
 class Worker():
     def __init__(self, model_fn, optimizer_fn, tr_loader, counts, n_classes, 
-                  ts_loader, ds_loader, colluding, early_stop=-1, init=None, idnum=None):
+                  ts_loader, ds_loader, heuristic, early_stop=-1, init=None, idnum=None):
         self.id = idnum
         self.feature_extractor = None
         self.n_classes = n_classes
         self.early_stop = early_stop
-        self.collude = colluding
+        self.heuristic = heuristic
         # local models and dataloaders
         self.tr_model = model_fn().to(device) #copy.deepcopy(model_fn()).to(device)
         self.tr_loader = tr_loader
@@ -52,6 +52,10 @@ class Worker():
     #                                                                     #
     #---------------------------------------------------------------------#
     def train(self, epochs=1, loader=None, reset_optimizer=False):
+        
+        if self.heuristic:
+            return  {"loss" : 0}
+        
         """Training function to train local model"""
         if reset_optimizer:
             self.optimizer = self.optimizer_fn(self.tr_model.parameters())  
@@ -156,6 +160,15 @@ class Worker():
         loader = self.ds_loader if not ds_loader else ds_loader
 
         predictions = []
+        
+        # return random predictions if I am heuristic worker
+        if self.heuristic:
+            predictions = np.random.randint(low=0, 
+                                            high=self.n_classes-1, 
+                                            size=len(loader.dataset)
+                                           )
+            self.predictions.append(predictions)
+            return
 
         # compute predictions
         for x, _ in loader:
@@ -170,12 +183,7 @@ class Worker():
 
         # collect results to cpu  memory and numpy arrays
         predictions = torch.cat(predictions, dim=0).detach().cpu().numpy().astype("uint8")
-        
-        # check if I am a colluding worker
-        if self.collude:
-            predictions[predictions<=5] = 0
-            predictions[predictions>5] = 9
-        
+
         # append past resutls
         self.predictions.append(predictions)
                 #np.argmax(predictions, axis=-1).astype("uint8")
@@ -208,7 +216,7 @@ class Worker():
         predictions = torch.cat(predictions, dim=0).detach().cpu().numpy()
 
         # check if I am a colluding worker
-        if self.collude:
+        if self.heuristic:
             predictions[predictions<=5] = 0
             predictions[predictions>5] = 9
         

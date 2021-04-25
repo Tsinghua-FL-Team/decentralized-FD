@@ -69,9 +69,9 @@ def run_experiment(exp, exp_count, n_experiments):
     np.random.seed(hp["random_seed"])
     
     # Setup collusion matrices
-    colluding_workers = int(hp["collude_%age"] * hp["n_workers"])
-    collude = np.zeros(hp["n_workers"])
-    collude[:colluding_workers] = 1
+    heuristic_workers = int(hp["heuristic_%age"] * hp["n_workers"])
+    heuristic = np.zeros(hp["n_workers"])
+    heuristic[:heuristic_workers] = 1
     
     # distributed the training dataset among worker nodes
     worker_data, label_counts = data.split_data(
@@ -95,7 +95,7 @@ def run_experiment(exp, exp_count, n_experiments):
                idnum=i,
                counts=counts,
                n_classes=hp["n_classes"],
-               colluding=collude[i],
+               heuristic=heuristic[i],
                early_stop=hp["early_stop"][i] if "early_stop" in hp.keys() else -1,
                ts_loader=test_loader,
                ds_loader=distill_loader) 

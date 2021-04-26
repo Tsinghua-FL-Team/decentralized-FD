@@ -88,11 +88,11 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 def init( ):
-    # Collusion Branch
+    # Heuristic Branch
     # create a list of possible experimental setups
     global hyperparams
     hyperparams = [
-        ###  Collusion = 10%  / beta = 1  ###
+        ###  Heuristic = 10%  / beta = 1  ###
         {
           # Experiment F-1a
           "model": "lenet_mnist",
@@ -114,9 +114,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 20%  / beta = 1  ###
+        ###  Heuristic = 20%  / beta = 1  ###
         {
           # Experiment F-1b
           "model": "lenet_mnist",
@@ -138,9 +138,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 30%  / beta = 1  ###
+        ###  Heuristic = 30%  / beta = 1  ###
         {
           # Experiment F-1c
           "model": "lenet_mnist",
@@ -162,9 +162,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 40%  / beta = 1  ###
+        ###  Heuristic = 40%  / beta = 1  ###
         {
           # Experiment F-1d
           "model": "lenet_mnist",
@@ -186,9 +186,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 50%  / beta = 1  ###
+        ###  Heuristic = 50%  / beta = 1  ###
         {
           # Experiment F-1e
           "model": "lenet_mnist",
@@ -210,13 +210,133 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 60%  / beta = 1  ###
+        {
+          # Experiment F-1f
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.6,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 70%  / beta = 1  ###
+        {
+          # Experiment F-1g
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.7,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 80%  / beta = 1  ###
+        {
+          # Experiment F-1h
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.8,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 90%  / beta = 1  ###
+        {
+          # Experiment F-1i
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.9,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 100%  / beta = 1  ###
+        {
+          # Experiment F-1j
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 1.0,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
         }, 
 
 ###############################################################################
 ###############################################################################
 
-        ###  Collusion = 10%  / beta = 3  ###
+        ###  Heuristic = 10%  / beta = 3  ###
         {
           # Experiment F-2a
           "model": "lenet_mnist",
@@ -238,9 +358,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 20%  / beta = 3  ###
+        ###  Heuristic = 20%  / beta = 3  ###
         {
           # Experiment F-2b
           "model": "lenet_mnist",
@@ -262,9 +382,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 30%  / beta = 3  ###
+        ###  Heuristic = 30%  / beta = 3  ###
         {
           # Experiment F-2c
           "model": "lenet_mnist",
@@ -286,9 +406,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 40%  / beta = 3  ###
+        ###  Heuristic = 40%  / beta = 3  ###
         {
           # Experiment F-2d
           "model": "lenet_mnist",
@@ -310,9 +430,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 50%  / beta = 3  ###
+        ###  Heuristic = 50%  / beta = 3  ###
         {
           # Experiment F-2e
           "model": "lenet_mnist",
@@ -334,13 +454,134 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
+        }, 
+
+        ###  Heuristic = 60%  / beta = 3  ###
+        {
+          # Experiment F-2f
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.6,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 70%  / beta = 3  ###
+        {
+          # Experiment F-2g
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.7,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 80%  / beta = 3  ###
+        {
+          # Experiment F-2h
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.8,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 90%  / beta = 3  ###
+        {
+          # Experiment F-2i
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.9,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 100%  / beta = 3  ###
+        {
+          # Experiment F-2j
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 1.0,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
         }, 
 
 ###############################################################################
 ###############################################################################
 
-        ###  Collusion = 10%  / beta = 5  ###
+        ###  Heuristic = 10%  / beta = 5  ###
         {
           # Experiment F-3a
           "model": "lenet_mnist",
@@ -362,9 +603,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 20%  / beta = 5  ###
+        ###  Heuristic = 20%  / beta = 5  ###
         {
           # Experiment F-3b
           "model": "lenet_mnist",
@@ -386,9 +627,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 30%  / beta = 5  ###
+        ###  Heuristic = 30%  / beta = 5  ###
         {
           # Experiment F-3c
           "model": "lenet_mnist",
@@ -410,9 +651,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 40%  / beta = 5  ###
+        ###  Heuristic = 40%  / beta = 5  ###
         {
           # Experiment F-3d
           "model": "lenet_mnist",
@@ -434,9 +675,9 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
         }, 
-        ###  Collusion = 50%  / beta = 5  ###
+        ###  Heuristic = 50%  / beta = 5  ###
         {
           # Experiment F-3e
           "model": "lenet_mnist",
@@ -458,7 +699,127 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 60%  / beta = 5  ###
+        {
+          # Experiment F-3f
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.6,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 70%  / beta = 5  ###
+        {
+          # Experiment F-3g
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.7,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 80%  / beta = 5  ###
+        {
+          # Experiment F-3h
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.8,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 90%  / beta = 5  ###
+        {
+          # Experiment F-3i
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.9,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
+        }, 
+        ###  Heuristic = 100%  / beta = 5  ###
+        {
+          # Experiment F-3j
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "heuristic_%age": 0.5,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 1.0,
+          "random_seed": 42,
+          "log_path": "exp_heuristic\\"
         }, 
     ]
 

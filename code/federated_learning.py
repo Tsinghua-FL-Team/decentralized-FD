@@ -140,29 +140,29 @@ def run_experiment(exp, exp_count, n_experiments):
         print("\n")
         
         # run federated distillation phase
-        for worker in workers:
-            print("Distill WORKER: "+str(worker.id))
+    #     for worker in workers:
+    #         print("Distill WORKER: "+str(worker.id))
             
-            # get Aggregated Prediction Matrix
-            worker.get_from_server(server)
+    #         # get Aggregated Prediction Matrix
+    #         worker.get_from_server(server)
             
-            # local Training / Distillation ??
-            distill_stats = worker.distill(distill_iter=hp["distill_iter"],
-                                            ds_loader=distill_loader)
+    #         # local Training / Distillation ??
+    #         distill_stats = worker.distill(distill_iter=hp["distill_iter"],
+    #                                         ds_loader=distill_loader)
         
-            # print distill stats
-            #print(distill_stats)
+    #         # print distill stats
+    #         #print(distill_stats)
 
-            # Evaluate each worker's performance 
-            print(worker.evaluate(ts_loader=test_loader))
+    #         # Evaluate each worker's performance 
+    #         print(worker.evaluate(ts_loader=test_loader))
 
-    print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
+    # print("Experiment: ({}/{})".format(exp_count+1, n_experiments))
  
-    # evaluate and log evaluation results
-    for worker in workers:
-        # Evaluate each worker's performance 
-        exp.log({"worker_{}_{}".format(worker.id, key) : value 
-                 for key, value in worker.evaluate(ts_loader=test_loader).items()})
+    # # evaluate and log evaluation results
+    # for worker in workers:
+    #     # Evaluate each worker's performance 
+    #     exp.log({"worker_{}_{}".format(worker.id, key) : value 
+    #              for key, value in worker.evaluate(ts_loader=test_loader).items()})
           
     # save logging results to disk
     try:

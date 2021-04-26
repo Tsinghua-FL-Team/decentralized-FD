@@ -703,7 +703,125 @@ def init( ):
 #           "random_seed": 42,
 #           "log_path": "exp_collude\\"
 #         }, 
-
-
+        ###  Collusion = 60%  / beta = 5  ###
+        {
+          # Experiment F-3f
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "collude_%age": 0.6,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_collude\\"
+        }, 
+        ###  Collusion = 70%  / beta = 5  ###
+        {
+          # Experiment F-3g
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "collude_%age": 0.7,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_collude\\"
+        }, 
+        ###  Collusion = 80%  / beta = 5  ###
+        {
+          # Experiment F-3h
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "collude_%age": 0.8,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_collude\\"
+        }, 
+        ###  Collusion = 90%  / beta = 5  ###
+        {
+          # Experiment F-3i
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "collude_%age": 0.9,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_collude\\"
+        }, 
+        ###  Collusion = 100%  / beta = 5  ###
+        {
+          # Experiment F-3j
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "collude_%age": 1.0,
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_collude\\"
+        }, 
     ]
 

@@ -290,6 +290,7 @@ class Worker():
 
             if itr >= distill_iter:
                 distill_stats = {"loss" : running_loss / samples}
+                break
 
         # return distillation statistics
         return distill_stats

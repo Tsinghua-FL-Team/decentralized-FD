@@ -6,9 +6,7 @@
 import torch, torchvision
 import torchvision.transforms as transforms
 import numpy as np
-
 from torch.utils.data import Dataset
-from sklearn.model_selection import train_test_split as splitter
 
 #*****************************************************************************#
 #                                                                             #
@@ -138,7 +136,7 @@ def load_stl10(path):
 
     # Initialize Datasets. MNIST will automatically download if not present
     dataset = torchvision.datasets.STL10(
-        root=path+"STL10", split="train", download=True, transform=transform
+        root=path+"STL10", split="unlabeled", download=True, transform=transform
     )
 
     # Return the datasets

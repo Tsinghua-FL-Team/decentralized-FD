@@ -74,7 +74,7 @@ class Server():
                         continue
                     nPeers += 1
                     # Compute reward
-                    t0 += ((1.0/Ri[self.wr_predict[i][j]]) - 1) if self.wr_predict[i][j] == self.wr_predict[p][j] else (-1 * self.beta)
+                    t0 += ((1.0/Ri[self.wr_predict[i][j]]) - self.beta) if self.wr_predict[i][j] == self.wr_predict[p][j] else (-1 * self.beta)
                 # Reward Share for worker i
                 rewardShare[i] += self.alpha * (1.0/nPeers) * t0
         

@@ -167,7 +167,7 @@ def plot_graphs(experiments):
     #create_graph_confid_vs_reward(experiments[:15], tag="beta_1")
     #create_graph_confid_vs_reward(experiments[15:30], tag="beta_3")
     #create_graph_confid_vs_reward(experiments[30:45], tag="beta_5")
-    create_heatmap(experiments)
+    #create_heatmap(experiments)
 
 
 #*****************************************************************************#

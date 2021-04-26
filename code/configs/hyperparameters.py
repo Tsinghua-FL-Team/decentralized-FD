@@ -113,7 +113,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -136,7 +136,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -159,7 +159,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -182,7 +182,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -205,7 +205,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 1.0 / beta = 1  ###
         {
@@ -229,7 +229,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2b (Confidence vs Reward Graph)
@@ -252,7 +252,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2c (Confidence vs Reward Graph)
@@ -275,7 +275,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2d (Confidence vs Reward Graph)
@@ -298,7 +298,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2e (Confidence vs Reward Graph)
@@ -321,7 +321,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 100.0 / beta = 1  ###
         {
@@ -345,7 +345,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3b (Confidence vs Reward Graph)
@@ -368,7 +368,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3c (Confidence vs Reward Graph)
@@ -391,7 +391,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3d (Confidence vs Reward Graph)
@@ -414,7 +414,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3e (Confidence vs Reward Graph)
@@ -437,7 +437,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
 
 
@@ -466,7 +466,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -489,7 +489,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -512,7 +512,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -535,7 +535,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -558,7 +558,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 1.0 / beta = 3  ###
         {
@@ -582,7 +582,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2b (Confidence vs Reward Graph)
@@ -605,7 +605,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2c (Confidence vs Reward Graph)
@@ -628,7 +628,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2d (Confidence vs Reward Graph)
@@ -651,7 +651,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2e (Confidence vs Reward Graph)
@@ -674,7 +674,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 100.0 / beta = 3  ###
         {
@@ -698,7 +698,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3b (Confidence vs Reward Graph)
@@ -721,7 +721,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3c (Confidence vs Reward Graph)
@@ -744,7 +744,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3d (Confidence vs Reward Graph)
@@ -767,7 +767,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3e (Confidence vs Reward Graph)
@@ -790,7 +790,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
 
 
@@ -820,7 +820,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -843,7 +843,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -866,7 +866,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -889,7 +889,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -912,7 +912,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 1.0 / beta = 5  ###
         {
@@ -936,7 +936,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2b (Confidence vs Reward Graph)
@@ -959,7 +959,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2c (Confidence vs Reward Graph)
@@ -982,7 +982,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2d (Confidence vs Reward Graph)
@@ -1005,7 +1005,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2e (Confidence vs Reward Graph)
@@ -1028,7 +1028,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 100.0 / beta = 5  ###
         {
@@ -1052,7 +1052,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3b (Confidence vs Reward Graph)
@@ -1075,7 +1075,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3c (Confidence vs Reward Graph)
@@ -1098,7 +1098,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3d (Confidence vs Reward Graph)
@@ -1121,7 +1121,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3e (Confidence vs Reward Graph)
@@ -1144,7 +1144,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
 
 
@@ -1174,7 +1174,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -1197,7 +1197,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -1220,7 +1220,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -1243,7 +1243,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -1266,7 +1266,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 1.0 / beta = 7  ###
         {
@@ -1290,7 +1290,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2b (Confidence vs Reward Graph)
@@ -1313,7 +1313,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2c (Confidence vs Reward Graph)
@@ -1336,7 +1336,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2d (Confidence vs Reward Graph)
@@ -1359,7 +1359,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2e (Confidence vs Reward Graph)
@@ -1382,7 +1382,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 100.0 / beta = 7  ###
         {
@@ -1406,7 +1406,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3b (Confidence vs Reward Graph)
@@ -1429,7 +1429,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3c (Confidence vs Reward Graph)
@@ -1452,7 +1452,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3d (Confidence vs Reward Graph)
@@ -1475,7 +1475,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3e (Confidence vs Reward Graph)
@@ -1498,7 +1498,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
 
 
@@ -1528,7 +1528,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -1551,7 +1551,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -1574,7 +1574,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -1597,7 +1597,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -1620,7 +1620,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 1.0 / beta = 9  ###
         {
@@ -1644,7 +1644,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2b (Confidence vs Reward Graph)
@@ -1667,7 +1667,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2c (Confidence vs Reward Graph)
@@ -1690,7 +1690,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2d (Confidence vs Reward Graph)
@@ -1713,7 +1713,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-2e (Confidence vs Reward Graph)
@@ -1736,7 +1736,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
         ###  alpha = 100.0 / beta = 9  ###
         {
@@ -1760,7 +1760,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3b (Confidence vs Reward Graph)
@@ -1783,7 +1783,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3c (Confidence vs Reward Graph)
@@ -1806,7 +1806,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3d (Confidence vs Reward Graph)
@@ -1829,7 +1829,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         }, 
         {
           # Experiment C-3e (Confidence vs Reward Graph)
@@ -1852,7 +1852,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_confid\\"
         },
     ]
 

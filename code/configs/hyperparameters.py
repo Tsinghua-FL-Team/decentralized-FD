@@ -91,7 +91,384 @@ def init( ):
     # create a list of possible experimental setups
     global hyperparams
     hyperparams = [
+        ###  alpha = 100.0  / beta = 1  ###
+        {
+          # Experiment D-1a (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.6, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1c (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.7, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1e (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.8, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        },
+        {
+          # Experiment D-1f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100.0,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1g (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100.0,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.9, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-1h (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100.0,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.95, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
 
+#############################################################################
+#############################################################################
+
+        ###  alpha = 0.1  / beta = 1  ###
+        {
+          # Experiment D-2a (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.6, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2c (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.7, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2e (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.8, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        },
+        {
+          # Experiment D-2f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2g (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.9, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-2h (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 1,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.95, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+
+#############################################################################
+#############################################################################
+        
         ###  alpha = 100.0  / beta = 3  ###
         {
           # Experiment D-3a (Accuracy vs Reward Graph)
@@ -114,7 +491,30 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-3b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-3c (Accuracy vs Reward Graph)
@@ -137,7 +537,30 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-3d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-3e (Accuracy vs Reward Graph)
@@ -160,8 +583,31 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         },
+        {
+          # Experiment D-3f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100.0,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
         {
           # Experiment D-3g (Accuracy vs Reward Graph)
           "model": "lenet_mnist",
@@ -183,7 +629,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-3h (Accuracy vs Reward Graph)
@@ -206,7 +652,196 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+
+#############################################################################
+#############################################################################
+
+        ###  alpha = 0.1  / beta = 3  ###
+        {
+          # Experiment D-4a (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.6, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4c (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.7, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4e (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.8, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        },
+        {
+          # Experiment D-4f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4g (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.9, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-4h (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 3,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.95, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
 
 #############################################################################
@@ -234,7 +869,30 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-5b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-5c (Accuracy vs Reward Graph)
@@ -257,7 +915,30 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-5d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-5e (Accuracy vs Reward Graph)
@@ -280,8 +961,31 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         },
+        {
+          # Experiment D-5f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 100.0,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
         {
           # Experiment D-5g (Accuracy vs Reward Graph)
           "model": "lenet_mnist",
@@ -303,7 +1007,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         }, 
         {
           # Experiment D-5h (Accuracy vs Reward Graph)
@@ -326,7 +1030,196 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
+        }, 
+
+#############################################################################
+#############################################################################
+
+        ###  alpha = 0.1  / beta = 5  ###
+        {
+          # Experiment D-6a (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.6, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6b (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.65, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6c (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.7, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6d (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.75, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6e (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.8, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        },
+        {
+          # Experiment D-6f (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.85, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6g (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.9, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
+        }, 
+        {
+          # Experiment D-6h (Accuracy vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [0.95, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_acc_reward\\"
         }, 
 
 #############################################################################
@@ -353,7 +1246,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -376,7 +1269,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -399,7 +1292,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_acc_reward\\"
         }, 
     ]
 

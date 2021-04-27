@@ -114,7 +114,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 20%  / beta = 1  ###
         {
@@ -138,7 +138,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 30%  / beta = 1  ###
         {
@@ -162,7 +162,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 40%  / beta = 1  ###
         {
@@ -186,7 +186,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 50%  / beta = 1  ###
         {
@@ -210,7 +210,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 60%  / beta = 1  ###
         {
@@ -234,7 +234,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 70%  / beta = 1  ###
         {
@@ -258,7 +258,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 80%  / beta = 1  ###
         {
@@ -282,7 +282,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 90%  / beta = 1  ###
         {
@@ -306,7 +306,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 100%  / beta = 1  ###
         {
@@ -330,7 +330,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
 
 ###############################################################################
@@ -358,7 +358,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 20%  / beta = 3  ###
         {
@@ -382,7 +382,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 30%  / beta = 3  ###
         {
@@ -406,7 +406,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 40%  / beta = 3  ###
         {
@@ -430,7 +430,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 50%  / beta = 3  ###
         {
@@ -454,7 +454,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
 
         ###  Heuristic = 60%  / beta = 3  ###
@@ -479,7 +479,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 70%  / beta = 3  ###
         {
@@ -503,7 +503,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 80%  / beta = 3  ###
         {
@@ -527,7 +527,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 90%  / beta = 3  ###
         {
@@ -551,7 +551,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 100%  / beta = 3  ###
         {
@@ -575,7 +575,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
 
 ###############################################################################
@@ -603,7 +603,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 20%  / beta = 5  ###
         {
@@ -627,7 +627,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 30%  / beta = 5  ###
         {
@@ -651,7 +651,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 40%  / beta = 5  ###
         {
@@ -675,7 +675,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 50%  / beta = 5  ###
         {
@@ -699,7 +699,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 60%  / beta = 5  ###
         {
@@ -723,7 +723,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 70%  / beta = 5  ###
         {
@@ -747,7 +747,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 80%  / beta = 5  ###
         {
@@ -771,7 +771,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 90%  / beta = 5  ###
         {
@@ -795,7 +795,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
         ###  Heuristic = 100%  / beta = 5  ###
         {
@@ -819,7 +819,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 1.0,
           "random_seed": 42,
-          "log_path": "exp_heuristic\\"
+          "log_path": "exp_heuristic/"
         }, 
     ]
 

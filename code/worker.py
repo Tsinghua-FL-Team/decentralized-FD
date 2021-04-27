@@ -173,6 +173,7 @@ class Worker():
         
         # check if I am a colluding worker
         if self.collude:
+            #predictions[:] = 0
             predictions[predictions<5] = 0
             predictions[predictions>=5] = 9
         
@@ -209,8 +210,9 @@ class Worker():
 
         # check if I am a colluding worker
         if self.collude:
-            predictions[predictions<=5] = 0
-            predictions[predictions>5] = 9
+            #predictions[:] = 0
+            predictions[predictions<5] = 0
+            predictions[predictions>=5] = 9
         
         # append past resutls
         self.predictions.append(predictions)

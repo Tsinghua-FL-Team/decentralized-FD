@@ -114,7 +114,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 20%  / beta = 1  ###
         {
@@ -138,7 +138,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 30%  / beta = 1  ###
         {
@@ -162,7 +162,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 40%  / beta = 1  ###
         {
@@ -186,7 +186,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 50%  / beta = 1  ###
         {
@@ -210,7 +210,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 60%  / beta = 1  ###
         {
@@ -234,7 +234,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 70%  / beta = 1  ###
         {
@@ -258,7 +258,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 80%  / beta = 1  ###
         {
@@ -282,7 +282,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 90%  / beta = 1  ###
         {
@@ -306,7 +306,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 100%  / beta = 1  ###
         {
@@ -330,7 +330,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
 
 
@@ -359,7 +359,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 20%  / beta = 3  ###
         {
@@ -383,7 +383,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 30%  / beta = 3  ###
         {
@@ -407,7 +407,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 40%  / beta = 3  ###
         {
@@ -431,7 +431,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 50%  / beta = 3  ###
         {
@@ -455,7 +455,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 60%  / beta = 3  ###
         {
@@ -479,7 +479,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 70%  / beta = 3  ###
         {
@@ -503,7 +503,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 80%  / beta = 3  ###
         {
@@ -527,7 +527,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 90%  / beta = 3  ###
         {
@@ -551,7 +551,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 100%  / beta = 3  ###
         {
@@ -575,7 +575,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
 
 
@@ -605,7 +605,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 20%  / beta = 5  ###
         {
@@ -629,7 +629,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 30%  / beta = 5  ###
         {
@@ -653,7 +653,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 40%  / beta = 5  ###
         {
@@ -677,7 +677,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 50%  / beta = 5  ###
         {
@@ -701,7 +701,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 60%  / beta = 5  ###
         {
@@ -725,7 +725,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 70%  / beta = 5  ###
         {
@@ -749,7 +749,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 80%  / beta = 5  ###
         {
@@ -773,7 +773,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 90%  / beta = 5  ###
         {
@@ -797,7 +797,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
         ###  Collusion = 100%  / beta = 5  ###
         {
@@ -821,7 +821,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_collude\\"
+          "log_path": "exp_collude/"
         }, 
     ]
 

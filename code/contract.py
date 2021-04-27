@@ -56,7 +56,8 @@ class Server():
                     samples_predicted[i] += 1
             # compute all sample count
             total_samples_predicted += samples_predicted[i]
-            
+        
+        print(total_samples_predicted)
         # compute reward for each worker
         for j in range(0, self.n_samples):
             for i in range(0, self.n_workers):
@@ -64,9 +65,9 @@ class Server():
                 if self.wr_predict[i][j] == -1:
                     continue
                 # Compute R_i
-                Ri = (1.0/total_samples_predicted) * (Sum - self.label_dist[i])
+                Ri = (1.0/(total_samples_predicted-samples_predicted[i])) * (Sum - self.label_dist[i])
                 t0 = 0
-                nPeers = 1
+                nPeers = 0
                 # Reward worker i for each peer p
                 for p in range(0, self.n_workers):
                     # Skip if same worker
@@ -78,7 +79,9 @@ class Server():
                     nPeers += 1
                     # Compute reward
                     t0 += ((1.0/Ri[self.wr_predict[i][j]]) - self.beta) if self.wr_predict[i][j] == self.wr_predict[p][j] else (-1 * self.beta)
+                    
                 # Reward Share for worker i
+                nPeers = 1 if nPeers == 0 else nPeers
                 rewardShare[i] += self.alpha * (1.0/nPeers) * t0
         
         # Compute the majority vote

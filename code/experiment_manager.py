@@ -20,13 +20,13 @@ class Experiment():
     results = {}
     parameters = {}
 
-    def __init__(self, hyperparameters=None):
+    def __init__(self, hyperparameters=None, log_id=0):
         self.hyperparameters = hyperparameters
         self.hyperparameters_ = {}
         self.results = {}
         self.parameters = {}
         self.hyperparameters['finished'] = False
-        self.hyperparameters['log_id'] = np.random.randint(100000)
+        self.hyperparameters['log_id'] = log_id #np.random.randint(100000)
 
     def __str__(self):
         selfname = "Hyperparameters: \n"

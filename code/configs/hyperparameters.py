@@ -113,7 +113,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1b (Accuracy vs Reward Graph)
@@ -136,7 +136,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1c (Accuracy vs Reward Graph)
@@ -159,7 +159,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1d (Accuracy vs Reward Graph)
@@ -182,7 +182,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1e (Accuracy vs Reward Graph)
@@ -205,7 +205,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-1f (Accuracy vs Reward Graph)
@@ -228,7 +228,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1g (Accuracy vs Reward Graph)
@@ -251,7 +251,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-1h (Accuracy vs Reward Graph)
@@ -274,7 +274,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -302,7 +302,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2b (Accuracy vs Reward Graph)
@@ -325,7 +325,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2c (Accuracy vs Reward Graph)
@@ -348,7 +348,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2d (Accuracy vs Reward Graph)
@@ -371,7 +371,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2e (Accuracy vs Reward Graph)
@@ -394,7 +394,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-2f (Accuracy vs Reward Graph)
@@ -417,7 +417,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2g (Accuracy vs Reward Graph)
@@ -440,7 +440,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-2h (Accuracy vs Reward Graph)
@@ -463,7 +463,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -491,7 +491,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3b (Accuracy vs Reward Graph)
@@ -514,7 +514,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3c (Accuracy vs Reward Graph)
@@ -537,7 +537,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3d (Accuracy vs Reward Graph)
@@ -560,7 +560,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3e (Accuracy vs Reward Graph)
@@ -583,7 +583,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-3f (Accuracy vs Reward Graph)
@@ -606,7 +606,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3g (Accuracy vs Reward Graph)
@@ -629,7 +629,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-3h (Accuracy vs Reward Graph)
@@ -652,7 +652,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -680,7 +680,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4b (Accuracy vs Reward Graph)
@@ -703,7 +703,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4c (Accuracy vs Reward Graph)
@@ -726,7 +726,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4d (Accuracy vs Reward Graph)
@@ -749,7 +749,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4e (Accuracy vs Reward Graph)
@@ -772,7 +772,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-4f (Accuracy vs Reward Graph)
@@ -795,7 +795,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4g (Accuracy vs Reward Graph)
@@ -818,7 +818,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-4h (Accuracy vs Reward Graph)
@@ -841,7 +841,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -869,7 +869,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5b (Accuracy vs Reward Graph)
@@ -892,7 +892,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5c (Accuracy vs Reward Graph)
@@ -915,7 +915,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5d (Accuracy vs Reward Graph)
@@ -938,7 +938,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5e (Accuracy vs Reward Graph)
@@ -961,7 +961,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-5f (Accuracy vs Reward Graph)
@@ -984,7 +984,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5g (Accuracy vs Reward Graph)
@@ -1007,7 +1007,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-5h (Accuracy vs Reward Graph)
@@ -1030,7 +1030,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -1058,7 +1058,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6b (Accuracy vs Reward Graph)
@@ -1081,7 +1081,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6c (Accuracy vs Reward Graph)
@@ -1104,7 +1104,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6d (Accuracy vs Reward Graph)
@@ -1127,7 +1127,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6e (Accuracy vs Reward Graph)
@@ -1150,7 +1150,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-6f (Accuracy vs Reward Graph)
@@ -1173,7 +1173,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6g (Accuracy vs Reward Graph)
@@ -1196,7 +1196,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
         {
           # Experiment D-6h (Accuracy vs Reward Graph)
@@ -1219,7 +1219,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
 
 #############################################################################
@@ -1246,7 +1246,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -1269,7 +1269,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -1292,7 +1292,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_acc_reward\\"
+          "log_path": "exp_acc_reward/"
         }, 
     ]
 

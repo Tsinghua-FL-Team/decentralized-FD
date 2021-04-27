@@ -114,7 +114,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-3c (Accuracy vs Reward Graph)
@@ -137,7 +137,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-3e (Accuracy vs Reward Graph)
@@ -160,7 +160,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         },
         {
           # Experiment D-3g (Accuracy vs Reward Graph)
@@ -183,7 +183,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-3h (Accuracy vs Reward Graph)
@@ -206,7 +206,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
 
 #############################################################################
@@ -234,7 +234,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-5c (Accuracy vs Reward Graph)
@@ -257,7 +257,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-5e (Accuracy vs Reward Graph)
@@ -280,7 +280,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         },
         {
           # Experiment D-5g (Accuracy vs Reward Graph)
@@ -303,7 +303,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
         {
           # Experiment D-5h (Accuracy vs Reward Graph)
@@ -326,7 +326,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
 
 #############################################################################
@@ -353,7 +353,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -376,7 +376,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         },
         {
           # Experiment D-3 (Accuracy vs Reward Graph - Heterogeneous Group)
@@ -399,7 +399,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "experiment1/"
         }, 
     ]
 

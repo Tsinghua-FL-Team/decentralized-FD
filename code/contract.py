@@ -44,6 +44,7 @@ class Server():
         Votes = np.zeros((self.n_samples, self.n_classes), dtype=int)
         Sum = np.zeros(self.n_classes, dtype=float)
         samples_predicted = np.zeros(self.n_workers)
+        total_samples_predicted = 0
         
         # aggregate and store predictions
         for i, (prediction, freq) in enumerate(zip(self.wr_predict, self.label_dist)):
@@ -53,6 +54,8 @@ class Server():
                 if sample_predict != -1:
                     Votes[j, sample_predict] += 1
                     samples_predicted[i] += 1
+            # compute all sample count
+            total_samples_predicted += samples_predicted[i]
             
         # compute reward for each worker
         for j in range(0, self.n_samples):
@@ -61,7 +64,7 @@ class Server():
                 if self.wr_predict[i][j] == -1:
                     continue
                 # Compute R_i
-                Ri = (1.0/(self.n_workers*samples_predicted[i])) * (Sum - self.label_dist[i])
+                Ri = (1.0/total_samples_predicted) * (Sum - self.label_dist[i])
                 t0 = 0
                 nPeers = 1
                 # Reward worker i for each peer p

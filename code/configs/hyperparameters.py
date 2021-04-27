@@ -113,7 +113,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_samples/"
         }, 
         {
           # Experiment B (Datasize vs Reward Graph)
@@ -137,7 +137,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_samples/"
         },
         {
           # Experiment B (Datasize vs Reward Graph)
@@ -161,7 +161,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "experiment1\\"
+          "log_path": "exp_samples/"
         }, 
     ]
 

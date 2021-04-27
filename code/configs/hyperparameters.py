@@ -115,7 +115,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -138,7 +138,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -161,7 +161,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -184,7 +184,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -207,7 +207,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -230,7 +230,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -253,7 +253,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -276,7 +276,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -299,7 +299,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -322,7 +322,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -345,7 +345,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -368,7 +368,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -391,7 +391,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -414,7 +414,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -437,7 +437,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -460,7 +460,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -483,7 +483,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -506,7 +506,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -529,7 +529,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -552,7 +552,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -575,7 +575,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -598,7 +598,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -621,7 +621,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -644,7 +644,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -667,7 +667,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -690,7 +690,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -713,7 +713,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -736,7 +736,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -759,7 +759,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -782,7 +782,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -805,7 +805,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -828,7 +828,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -851,7 +851,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -874,7 +874,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -897,7 +897,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -920,7 +920,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -943,7 +943,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -966,7 +966,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -989,7 +989,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1012,7 +1012,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1035,7 +1035,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1058,7 +1058,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1081,7 +1081,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1104,7 +1104,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1127,7 +1127,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1150,7 +1150,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1173,7 +1173,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1196,7 +1196,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1219,7 +1219,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1242,7 +1242,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1265,7 +1265,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1288,7 +1288,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1311,7 +1311,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1334,7 +1334,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1357,7 +1357,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1380,7 +1380,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1403,7 +1403,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1426,7 +1426,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1449,7 +1449,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1472,7 +1472,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1495,7 +1495,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1518,7 +1518,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1541,7 +1541,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
 # 		{
 # 			'model': 'lenet_mnist',
@@ -1564,7 +1564,7 @@ def init( ):
 # 			'use_confidence': False,
 # 			'conf_measure': 0.3,
 # 			'random_seed': 42,
-# 			'log_path': 'exp_mnist\\'
+# 			'log_path': 'exp_hmap_mnist/'
 # 		},
         ##################################################################
         ####################   alpha = 0.1 / mnist   #####################
@@ -1590,7 +1590,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1613,7 +1613,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
     	
      	},
     	{
@@ -1637,7 +1637,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	
      	},
     	{
@@ -1661,7 +1661,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1684,7 +1684,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1707,7 +1707,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1730,7 +1730,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1753,7 +1753,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1776,7 +1776,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1799,7 +1799,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1822,7 +1822,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1845,7 +1845,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1868,7 +1868,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1891,7 +1891,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1914,7 +1914,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1937,7 +1937,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1960,7 +1960,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -1983,7 +1983,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2006,7 +2006,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2029,7 +2029,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2052,7 +2052,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2075,7 +2075,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2098,7 +2098,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2121,7 +2121,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2144,7 +2144,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2167,7 +2167,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2190,7 +2190,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2213,7 +2213,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2236,7 +2236,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2259,7 +2259,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2282,7 +2282,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2305,7 +2305,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2328,7 +2328,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2351,7 +2351,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2374,7 +2374,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2397,7 +2397,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2420,7 +2420,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2443,7 +2443,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2466,7 +2466,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2489,7 +2489,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2512,7 +2512,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2535,7 +2535,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2558,7 +2558,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2581,7 +2581,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2604,7 +2604,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2627,7 +2627,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2650,7 +2650,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2673,7 +2673,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2696,7 +2696,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2719,7 +2719,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2742,7 +2742,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2765,7 +2765,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2788,7 +2788,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2811,7 +2811,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2834,7 +2834,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2857,7 +2857,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2880,7 +2880,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2903,7 +2903,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2926,7 +2926,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2949,7 +2949,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2972,7 +2972,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -2995,7 +2995,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -3018,7 +3018,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
      	},
     	{
     		'model': 'lenet_mnist',
@@ -3041,7 +3041,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_mnist\\'
+    		'log_path': 'exp_hmap_mnist/'
     	},
         ##################################################################
         ####################   alpha = 100 / cifar  ######################
@@ -3067,7 +3067,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3090,7 +3090,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3113,7 +3113,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3136,7 +3136,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3159,7 +3159,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3182,7 +3182,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3205,7 +3205,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3228,7 +3228,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3251,7 +3251,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3274,7 +3274,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3297,7 +3297,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3320,7 +3320,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3343,7 +3343,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3366,7 +3366,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3389,7 +3389,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3412,7 +3412,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3435,7 +3435,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3458,7 +3458,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3481,7 +3481,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3504,7 +3504,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3527,7 +3527,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3550,7 +3550,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3573,7 +3573,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3596,7 +3596,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3619,7 +3619,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3642,7 +3642,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3665,7 +3665,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3688,7 +3688,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3711,7 +3711,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3734,7 +3734,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3757,7 +3757,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3780,7 +3780,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3803,7 +3803,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3826,7 +3826,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3849,7 +3849,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3872,7 +3872,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3895,7 +3895,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3918,7 +3918,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3941,7 +3941,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3964,7 +3964,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -3987,7 +3987,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4010,7 +4010,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4033,7 +4033,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4056,7 +4056,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4079,7 +4079,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4102,7 +4102,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4125,7 +4125,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4148,7 +4148,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4171,7 +4171,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4194,7 +4194,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4217,7 +4217,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4240,7 +4240,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4263,7 +4263,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4286,7 +4286,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4309,7 +4309,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4332,7 +4332,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4355,7 +4355,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4378,7 +4378,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4401,7 +4401,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4424,7 +4424,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4447,7 +4447,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4470,7 +4470,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4493,7 +4493,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
 		{
 			'model': 'resnet18',
@@ -4516,7 +4516,7 @@ def init( ):
 			'use_confidence': False,
 			'conf_measure': 0.3,
 			'random_seed': 42,
-			'log_path': 'exp_cifar\\'
+			'log_path': 'exp_hmap_cifar/'
 		},
         ##################################################################
         ####################   alpha = 0.1 / cifar   #####################
@@ -4542,7 +4542,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4565,7 +4565,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
     	
      	},
     	{
@@ -4589,7 +4589,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	
      	},
     	{
@@ -4613,7 +4613,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4636,7 +4636,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4659,7 +4659,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4682,7 +4682,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4705,7 +4705,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4728,7 +4728,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4751,7 +4751,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4774,7 +4774,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4797,7 +4797,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4820,7 +4820,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4843,7 +4843,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4866,7 +4866,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4889,7 +4889,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4912,7 +4912,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4935,7 +4935,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4958,7 +4958,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -4981,7 +4981,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5004,7 +5004,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5027,7 +5027,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5050,7 +5050,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5073,7 +5073,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5096,7 +5096,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5119,7 +5119,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5142,7 +5142,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5165,7 +5165,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5188,7 +5188,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5211,7 +5211,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5234,7 +5234,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5257,7 +5257,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5280,7 +5280,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5303,7 +5303,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5326,7 +5326,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5349,7 +5349,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5372,7 +5372,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5395,7 +5395,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5418,7 +5418,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5441,7 +5441,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5464,7 +5464,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5487,7 +5487,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5510,7 +5510,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5533,7 +5533,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5556,7 +5556,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5579,7 +5579,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5602,7 +5602,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5625,7 +5625,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5648,7 +5648,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5671,7 +5671,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5694,7 +5694,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5717,7 +5717,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5740,7 +5740,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5763,7 +5763,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5786,7 +5786,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5809,7 +5809,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5832,7 +5832,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5855,7 +5855,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5878,7 +5878,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5901,7 +5901,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5924,7 +5924,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5947,7 +5947,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5970,7 +5970,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
      	},
     	{
     		'model': 'resnet18',
@@ -5993,7 +5993,7 @@ def init( ):
     		'use_confidence': True,
     		'conf_measure': 0.8,
     		'random_seed': 42,
-    		'log_path': 'exp_cifar\\'
+    		'log_path': 'exp_hmap_cifar/'
     	}
     ]
 

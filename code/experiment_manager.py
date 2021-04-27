@@ -7,9 +7,6 @@ import glob, os
 import numpy as np
 import itertools as it
 
-import matplotlib.pyplot as plt
-
-
 
 #*****************************************************************************#
 #                                                                             #
@@ -29,7 +26,7 @@ class Experiment():
         self.results = {}
         self.parameters = {}
         self.hyperparameters['finished'] = False
-        self.hyperparameters['log_id'] = log_id     #np.random.randint(100000)
+        self.hyperparameters['log_id'] = log_id #np.random.randint(100000)
 
     def __str__(self):
         selfname = "Hyperparameters: \n"

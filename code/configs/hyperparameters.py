@@ -813,7 +813,7 @@ def init( ):
           "batch_size": 128,
           "communication_rounds": 1,
           "local_epochs": 10,
-          "heuristic_%age": 0.5,
+          "heuristic_%age": 1.0,
           "distill_iter": 500,
           "n_distill": 40000,
           "use_confidence": False,

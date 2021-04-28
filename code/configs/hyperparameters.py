@@ -91,7 +91,129 @@ def init( ):
     # create a list of possible experimental setups
     global hyperparams
     hyperparams = [
-        ###  alpha = 0.1 / beta = 1  ###
+        ###  alpha = 0.1 / beta = 0.5  ###
+        {
+          # Experiment C-1a (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 0.5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1b (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 0.5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1c (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 0.5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1d (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 0.5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1e (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 0.5,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        },
+
+
+#############################################################################
+#############################################################################
+
+ 
+       ###  alpha = 0.1 / beta = 1  ###
         {
           # Experiment C-1a (Confidence vs Reward Graph)
           "model": "lenet_mnist",
@@ -113,7 +235,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -136,7 +258,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -159,7 +281,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -182,7 +304,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -205,240 +327,130 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         },
-        # ###  alpha = 1.0 / beta = 1  ###
-        # {
-        #   # Experiment C-2a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
-        # ###  alpha = 100.0 / beta = 1  ###
-        # {
-        #   # Experiment C-3a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 1,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
+
+
+#############################################################################
+#############################################################################
+
+ 
+       ###  alpha = 0.1 / beta = 2  ###
+        {
+          # Experiment C-1a (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 2,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1b (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 2,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1c (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 2,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1d (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 2,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1e (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 2,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        },
 
 
 #############################################################################
@@ -466,7 +478,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -489,7 +501,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -512,7 +524,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -535,7 +547,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -558,240 +570,131 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         },
-        # ###  alpha = 1.0 / beta = 3  ###
-        # {
-        #   # Experiment C-2a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
-        # ###  alpha = 100.0 / beta = 3  ###
-        # {
-        #   # Experiment C-3a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 3,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
+
+
+
+#############################################################################
+#############################################################################
+
+ 
+       ###  alpha = 0.1 / beta = 4  ###
+        {
+          # Experiment C-1a (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 4,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1b (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 4,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1c (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 4,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1d (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 4,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1e (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 4,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        },
 
 
 #############################################################################
@@ -820,7 +723,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -843,7 +746,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -866,7 +769,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -889,7 +792,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -912,240 +815,130 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         },
-        # ###  alpha = 1.0 / beta = 5  ###
-        # {
-        #   # Experiment C-2a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
-        # ###  alpha = 100.0 / beta = 5  ###
-        # {
-        #   # Experiment C-3a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 5,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
+
+
+#############################################################################
+#############################################################################
+
+ 
+       ###  alpha = 0.1 / beta = 6  ###
+        {
+          # Experiment C-1a (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 6,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1b (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 6,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1c (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 6,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1d (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 6,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1e (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 6,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        },
 
 
 #############################################################################
@@ -1174,7 +967,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -1197,7 +990,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -1220,7 +1013,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -1243,7 +1036,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -1266,240 +1059,130 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         },
-        # ###  alpha = 1.0 / beta = 7  ###
-        # {
-        #   # Experiment C-2a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
-        # ###  alpha = 100.0 / beta = 7  ###
-        # {
-        #   # Experiment C-3a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 7,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
+
+
+#############################################################################
+#############################################################################
+
+ 
+       ###  alpha = 0.1 / beta = 8  ###
+        {
+          # Experiment C-1a (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 8,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": False,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1b (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 8,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.30,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1c (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 8,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.50,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1d (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 8,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.70,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        }, 
+        {
+          # Experiment C-1e (Confidence vs Reward Graph)
+          "model": "lenet_mnist",
+          "dataset": "emnist",
+          "distill-dataset": "mnist",
+          "dtrain": True,
+          "n_classes": 10,
+          "n_workers": 10,
+          "classes_per_worker": 0,
+          "alpha": 0.1,
+          "r_alpha": 1.0,
+          "r_beta": 8,
+          "batch_size": 128,
+          "communication_rounds": 1,
+          "local_epochs": 10,
+          "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+          "distill_iter": 500,
+          "n_distill": 40000,
+          "use_confidence": True,
+          "conf_measure": 0.90,
+          "random_seed": 42,
+          "log_path": "exp_confid/"
+        },
 
 
 #############################################################################
@@ -1528,7 +1211,7 @@ def init( ):
           "use_confidence": False,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1b (Confidence vs Reward Graph)
@@ -1551,7 +1234,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.30,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1c (Confidence vs Reward Graph)
@@ -1574,7 +1257,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.50,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1d (Confidence vs Reward Graph)
@@ -1597,7 +1280,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.70,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         }, 
         {
           # Experiment C-1e (Confidence vs Reward Graph)
@@ -1620,239 +1303,7 @@ def init( ):
           "use_confidence": True,
           "conf_measure": 0.90,
           "random_seed": 42,
-          "log_path": "exp_confid\\"
+          "log_path": "exp_confid/"
         },
-        # ###  alpha = 1.0 / beta = 9  ###
-        # {
-        #   # Experiment C-2a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-2e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 1.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
-        # ###  alpha = 100.0 / beta = 9  ###
-        # {
-        #   # Experiment C-3a (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": False,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3b (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.30,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3c (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.50,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3d (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.70,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # }, 
-        # {
-        #   # Experiment C-3e (Confidence vs Reward Graph)
-        #   "model": "lenet_mnist",
-        #   "dataset": "emnist",
-        #   "distill-dataset": "mnist",
-        #   "dtrain": True,
-        #   "n_classes": 10,
-        #   "n_workers": 10,
-        #   "classes_per_worker": 0,
-        #   "alpha": 100.0,
-        #   "r_alpha": 1.0,
-        #   "r_beta": 9,
-        #   "batch_size": 128,
-        #   "communication_rounds": 1,
-        #   "local_epochs": 10,
-        #   "early_stop": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        #   "distill_iter": 500,
-        #   "n_distill": 40000,
-        #   "use_confidence": True,
-        #   "conf_measure": 0.90,
-        #   "random_seed": 42,
-        #   "log_path": "exp_confid\\"
-        # },
     ]
 

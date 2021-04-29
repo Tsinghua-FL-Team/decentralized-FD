@@ -79,13 +79,26 @@ class Worker():
                 self.optimizer.step()  
 
                 # check for early stopping criteria
-                if (self.early_stop != -1) and (itr % 5 == 0):
-                    print("Checking early stop criteria...")
-                    accuracy = self.evaluate()["accuracy"]
-                    if accuracy >= self.early_stop:
-                        print("Stopping criteria reached for worker {}...".format(self.id))
+                if self.early_stop != -1:
+                    y_ = torch.argmax(self.predict(x), dim=1)
+                    acc = torch.eq(y,y_).sum() / len(y_)
+                    # update itr flag
+                    if acc > self.early_stop:
+                        itr += 1
+                    else:
+                        itr = 0
+                    # check for early stop
+                    if itr >= 2:
                         end_training = True
                         break
+                    
+                # if (self.early_stop != -1) and (itr % 5 == 0):
+                #     print("Checking early stop criteria...")
+                #     accuracy = self.evaluate()["accuracy"]
+                #     if accuracy >= self.early_stop:
+                #         print("Stopping criteria reached for worker {}...".format(self.id))
+                #         end_training = True
+                #         break
             # check if early stop criteria was reached
             if end_training:
                 break

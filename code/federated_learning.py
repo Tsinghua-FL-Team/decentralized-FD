@@ -65,6 +65,14 @@ def run_experiment(exp, exp_count, n_experiments):
                                      dtrain=hp["dtrain"],
                                      path=args.DATA_PATH)
 
+    # split distill data among communication rounds
+    distill_data_splits, _ = data.split_data(
+        distill_data,
+        n_workers=hp["communication_rounds"],
+        alpha=None,
+        worker_data=None,
+        classes_per_worker=None)
+    
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
     
@@ -80,7 +88,8 @@ def run_experiment(exp, exp_count, n_experiments):
     # create dataloaders for all datasets loaded so far
     worker_loaders = [DataLoader(local_data, batch_size=hp["batch_size"], shuffle=True) for local_data in worker_data]
     test_loader = DataLoader(test_data, batch_size=hp["batch_size"], shuffle=True)
-    distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
+    #distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
+    distill_loaders = [DataLoader(distill_data, batch_size=hp["batch_size"]) for data_split in distill_data_splits]
     
     # create instances of workers and the server (i.e. smart contract)
     workers = [
@@ -92,7 +101,7 @@ def run_experiment(exp, exp_count, n_experiments):
                n_classes=hp["n_classes"],
                early_stop=hp["early_stop"][i] if "early_stop" in hp.keys() else -1,
                ts_loader=test_loader,
-               ds_loader=distill_loader) 
+               ds_loader=distill_loaders) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
     server = Server(n_samples=len(distill_loader.dataset), 
@@ -125,7 +134,7 @@ def run_experiment(exp, exp_count, n_experiments):
             exp.log({"tr_accuracy_{}_worker_{}".format(c_round-1, worker.id): accuracy})
             
             # compute Predictions
-            worker.predict_public(ds_loader=distill_loader, 
+            worker.predict_public(ds_loader=distill_loaders[c_round-1], 
                                   use_confid=hp["use_confidence"], 
                                   confid=hp["conf_measure"])
             
@@ -148,7 +157,7 @@ def run_experiment(exp, exp_count, n_experiments):
             
             # local Training / Distillation ??
             distill_stats = worker.distill(distill_iter=hp["distill_iter"],
-                                            ds_loader=distill_loader)
+                                            ds_loader=distill_loaders[c_round-1])
         
             # print distill stats
             #print(distill_stats)

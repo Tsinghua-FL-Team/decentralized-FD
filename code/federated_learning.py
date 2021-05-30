@@ -104,11 +104,11 @@ def run_experiment(exp, exp_count, n_experiments):
                ds_loader=distill_loaders) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
-    server = Server(n_samples=len(distill_loader.dataset), 
-                    n_classes=hp["n_classes"], 
-                    n_workers=hp["n_workers"],
-                    alpha=hp["r_alpha"],
-                    beta=hp["r_beta"])
+    # server = Server(n_samples=len(distill_loader.dataset), 
+    #                 n_classes=hp["n_classes"], 
+    #                 n_workers=hp["n_workers"],
+    #                 alpha=hp["r_alpha"],
+    #                 beta=hp["r_beta"])
     
     print("Starting Distributed Training..\n")
     t1 = time.time()
@@ -120,6 +120,14 @@ def run_experiment(exp, exp_count, n_experiments):
         #participating_workers = server.select_workers(workers, hp["participation_rate"])
         #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
         #participating_workers = workers
+
+        server = Server(n_samples=len(distill_loaders[c_round-1].dataset), 
+                    n_classes=hp["n_classes"], 
+                    n_workers=hp["n_workers"],
+                    alpha=hp["r_alpha"],
+                    beta=hp["r_beta"])
+
+
         for worker in workers:
             print("Train WORKER: "+str(worker.id))
             

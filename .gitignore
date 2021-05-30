@@ -1,7 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 code/datasets
-code/results
+data/
+results/
 code/checkpoints
 .spyproject
 code/accuracy_reward.png

@@ -69,7 +69,7 @@ def run_experiment(exp, exp_count, n_experiments):
     distill_data_splits, _ = data.split_data(
         distill_data,
         n_workers=hp["communication_rounds"],
-        alpha=None,
+        alpha=100,
         worker_data=None,
         classes_per_worker=None)
     
@@ -104,11 +104,11 @@ def run_experiment(exp, exp_count, n_experiments):
                ds_loader=distill_loaders) 
         for i, (loader, counts) in enumerate(zip(worker_loaders,label_counts))
         ]
-    # server = Server(n_samples=len(distill_loader.dataset), 
-    #                 n_classes=hp["n_classes"], 
-    #                 n_workers=hp["n_workers"],
-    #                 alpha=hp["r_alpha"],
-    #                 beta=hp["r_beta"])
+    server = Server(n_samples=len(distill_loaders[0].dataset), 
+                    n_classes=hp["n_classes"], 
+                    n_workers=hp["n_workers"],
+                    alpha=hp["r_alpha"],
+                    beta=hp["r_beta"])
     
     print("Starting Distributed Training..\n")
     t1 = time.time()

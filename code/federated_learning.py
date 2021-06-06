@@ -172,7 +172,7 @@ def run_experiment(exp, exp_count, n_experiments):
             worker.get_from_server(server)
             
             # local Training / Distillation ??
-            distill_stats = worker.distill(distill_iter=hp["distill_iter"],
+            distill_stats = worker.distill(distill_epochs=hp["distill_epochs"],
                                             ds_loader=distill_loaders[c_round-1])
         
             # print distill stats

@@ -246,7 +246,7 @@ class Worker():
     #   Performs federated distillation step.                             #
     #                                                                     #
     #---------------------------------------------------------------------#
-    def distill(self, distill_iter, ds_loader=None, reset_optimizer=False):
+    def distill(self, distill_epochs=1, ds_loader=None, reset_optimizer=False):
         """Distillation function to perform Federated Distillation"""
         print("Distilling on Worker {}...".format(self.id))
         
@@ -266,11 +266,12 @@ class Worker():
         print("Global Accuracy of the Distillation set:", np.count_nonzero(self.global_labels == loader.dataset.oTargets)/len(loader.dataset.oTargets)) ### global accuracy
         print("Accuracy of Disitllation set per Worker", np.count_nonzero(self.predictions[-1] == loader.dataset.oTargets)/len(loader.dataset.oTargets)) ### predictions of the worker
         
-        itr = 0
-        while True: # for loop
-            running_loss, samples = 0.0, 0
+        # while True: # for loop
+        running_loss, samples = 0.0, 0
+
+        for epoch in range(distill_epochs):
             for x, y in loader:   
-                itr += 1
+
                 # create onehot encoding
                 onehot_y = torch.zeros((len(y), self.n_classes))
                 onehot_y[torch.arange(len(y)), y] = 1
@@ -289,9 +290,7 @@ class Worker():
                 loss.backward()
                 self.optimizer.step()  
 
-            if itr >= distill_iter:
-                distill_stats = {"loss" : running_loss / samples}
-                break
+        distill_stats = {"loss" : running_loss / samples}
 
         # return distillation statistics
         return distill_stats

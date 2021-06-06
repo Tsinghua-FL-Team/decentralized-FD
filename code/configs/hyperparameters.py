@@ -39,6 +39,8 @@
 
 # local_epochs          -     int     - Local training epochs at every worker.
 
+# distill_epochs        -     int     - Distill epochs training epochs at every worker.
+
 # early_stop            - list[float] - Early stopping accuracy, -1 means no criteria
 #                                       must be a list of size n_workers.
 
@@ -100,7 +102,8 @@ def init( ):
           "total_data": 60000,
           "n_distill": 40000,
           "communication_rounds": 10,
-          "local_epochs": 10,
+          "local_epochs": 1,
+          "distill_epochs": 1,
           "distill_iter": 3125,
           "n_classes": 10,
           "n_workers": 10,

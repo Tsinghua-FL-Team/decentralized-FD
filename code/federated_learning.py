@@ -4,7 +4,8 @@
 #                                                                             #
 #-----------------------------------------------------------------------------#
 import argparse, time
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
+
 import numpy as np
 
 #----------------------------------------------------------------------------#
@@ -55,10 +56,10 @@ def run_experiment(exp, exp_count, n_experiments):
     optimizer_fn = lambda x : optimizer(x, **{k : hp[k] if k in hp else v for k, v in optimizer_hp.items()})
     
     # get datasets needed for training and distillation
-    train_data, test_data = data.load_data(hp["dataset"], args.DATA_PATH)
+    train_data, test_data = data.load_data(dataset=hp["dataset"], path=args.DATA_PATH)
     
     # split test dataset into distill / test sets if requested otherwise
-    # load the required distillatio (public) dataset
+    # load the required distillation (public) dataset
     distill_data = data.load_distill(dataset=hp["distill-dataset"],
                                      random_seed=hp["random_seed"],
                                      n_distill=hp["n_distill"],
@@ -66,12 +67,19 @@ def run_experiment(exp, exp_count, n_experiments):
                                      path=args.DATA_PATH)
 
     # split distill data among communication rounds
-    distill_data_splits, _ = data.split_data(
-        distill_data,
-        n_workers=hp["communication_rounds"],
-        alpha=100,
-        worker_data=None,
-        classes_per_worker=None)
+    
+    distill_data_splits, _ = data.split_distill_data(distill_data=distill_data, 
+                                                    communication_rounds=hp["communication_rounds"],
+                                                    n_distill=hp["n_distill"]
+                                                    )
+
+    
+    # distill_data_splits, _ = data.split_data(
+    #     distill_data,
+    #     n_workers=hp["communication_rounds"],
+    #     alpha=100,
+    #     worker_data=None,
+    #     classes_per_worker=None)
     
     # setup up random seed as defined in hyperparameters
     np.random.seed(hp["random_seed"])
@@ -91,6 +99,12 @@ def run_experiment(exp, exp_count, n_experiments):
     #distill_loader = DataLoader(distill_data, batch_size=hp["batch_size"])
     distill_loaders = [DataLoader(distill_data, batch_size=hp["batch_size"]) for data_split in distill_data_splits]
     
+    # print("train_data Type {} | Length {} | ".format(type(train_data),len(train_data) ))
+    # print("distill_data Type {} | Length {} | ".format(type(distill_data),len(distill_data)))
+    # print("worker_data of worker 0 Type {} | Length {} | ".format(type(worker_data[0]),len(worker_data[0])))
+    # print("label_counts Type {} | Length {} | ".format(type(label_counts[0]),len(label_counts[0])))
+    # print("Worker loader for Worker 0 Type {} | Length {} | ".format(type(worker_loaders[0]),len(worker_loaders[0])))
+
     # create instances of workers and the server (i.e. smart contract)
     workers = [
         Worker(model_fn,
@@ -120,12 +134,6 @@ def run_experiment(exp, exp_count, n_experiments):
         #participating_workers = server.select_workers(workers, hp["participation_rate"])
         #exp.log({"participating_clients" : np.array([worker.id for worker in participating_workers])})
         #participating_workers = workers
-
-        server = Server(n_samples=len(distill_loaders[c_round-1].dataset), 
-                    n_classes=hp["n_classes"], 
-                    n_workers=hp["n_workers"],
-                    alpha=hp["r_alpha"],
-                    beta=hp["r_beta"])
 
 
         for worker in workers:
@@ -168,7 +176,7 @@ def run_experiment(exp, exp_count, n_experiments):
                                             ds_loader=distill_loaders[c_round-1])
         
             # print distill stats
-            #print(distill_stats)
+            print("Distill stats: ",distill_stats)
 
             # Evaluate each worker's performance 
             print(worker.evaluate(ts_loader=test_loader))

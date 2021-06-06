@@ -3,6 +3,7 @@ __pycache__/
 code/datasets
 data/
 results/
+graphs/
 code/checkpoints
 .spyproject
 code/accuracy_reward.png

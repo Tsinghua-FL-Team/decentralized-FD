@@ -9,7 +9,6 @@ import numpy as np
 
 from torch.utils.data import Dataset
 from sklearn.model_selection import train_test_split as splitter
-
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -393,7 +392,6 @@ def uneven_split(labels, n_workers, n_data, classes_per_worker):
     
     return idcs
 
-
 #*****************************************************************************#
 #                                                                             #
 #   description:                                                              #
@@ -410,9 +408,14 @@ def split_dirichlet(labels, n_workers, alpha, double_stochstic=True):
     
     # get label distibution
     label_distribution = np.random.dirichlet([alpha]*n_workers, n_classes)
+
+    print("label distribution before double_stochastic:\n", label_distribution)
+    print(label_distribution[i].sum for i in range(len(label_distribution)))
    
     if double_stochstic:
       label_distribution = make_double_stochstic(label_distribution)
+
+    print("label distribution after double_stochastic:\n", label_distribution)
 
     class_idcs = [np.argwhere(np.array(labels)==y).flatten() 
            for y in range(n_classes)]
@@ -469,6 +472,39 @@ def split_data(train_data, alpha, n_workers=10, worker_data=None, classes_per_wo
 
     # Return worker data splits
     return worker_data, label_counts
+
+
+
+#*****************************************************************************#
+#                                                                             #
+#   description:                                                              #
+#   split the distillation dataset evenly to the communication rounds         #
+#                                                                             #
+#*****************************************************************************#
+def split_distill_data(distill_data, communication_rounds, n_distill):
+    """Split data among Worker nodes."""
+    
+    #create a list of indices of the distill_dataset and then shuffle 
+    idxes = [i for i in range(n_distill)]
+    np.random.shuffle(idxes)
+
+    # split the shuffled distill_dataset labels into equal subsets - 1 subset per communication round 
+    subset_idx = []
+    for i in range(communication_rounds):
+        start = i*int(n_distill/communication_rounds)
+        end = (i+1)*int(n_distill/communication_rounds)
+        subset_idx.append(idxes[start:end])
+    
+    # Compute labels per worker
+    label_counts = [np.bincount(np.array(distill_data.targets)[i], minlength=10) 
+                    for i in subset_idx]
+    
+    # Get actual worker data
+    distill_data_splits = [IdxSubset(distill_data, subset_idx[i]) 
+                   for i in range(communication_rounds)]
+
+    # Return worker data splits
+    return distill_data_splits, label_counts
 
 
 #*****************************************************************************#

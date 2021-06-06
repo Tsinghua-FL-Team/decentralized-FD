@@ -496,3 +496,4 @@ def print_model(model):
         n += value.numel()
     print("Total number of Parameters: ", n) 
     print()
+

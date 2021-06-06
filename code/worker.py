@@ -177,6 +177,7 @@ class Worker():
 
             # find agrument max
             amax = torch.argmax(y_, dim=1).detach()
+            
             predictions += [amax]
 
         # collect results to cpu  memory and numpy arrays
@@ -257,16 +258,16 @@ class Worker():
         loader = self.ds_loader if not ds_loader else ds_loader
         
         # start training the worker using distill dataset
-        self.tr_model.train()  
+        self.tr_model.train()  #######
         
         # setup global labels
-        loader.dataset.setTargets(labels=self.global_labels)
+        loader.dataset.setTargets(labels=self.global_labels) ###
         
-        print(np.count_nonzero(self.global_labels == loader.dataset.oTargets))
-        print(np.count_nonzero(self.predictions[-1] == loader.dataset.oTargets))
+        print("Global Accuracy of the Distillation set:", np.count_nonzero(self.global_labels == loader.dataset.oTargets)/len(loader.dataset.oTargets)) ### global accuracy
+        print("Accuracy of Disitllation set per Worker", np.count_nonzero(self.predictions[-1] == loader.dataset.oTargets)/len(loader.dataset.oTargets)) ### predictions of the worker
         
         itr = 0
-        while True:
+        while True: # for loop
             running_loss, samples = 0.0, 0
             for x, y in loader:   
                 itr += 1

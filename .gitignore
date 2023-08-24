@@ -8,3 +8,6 @@ code/accuracy_reward.png
 code/configs/C.py
 code/configs/B.py
 code/configs/D.py
+
+# Temporary files
+temp/

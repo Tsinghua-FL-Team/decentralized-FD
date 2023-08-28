@@ -9,10 +9,6 @@
 #SBATCH --gpus-per-node=1
 #SBATCH --qos=short
 
-# Load required modules
-#modules use /sw/EasyBuild/snowy/modules/all/
-#module load PyTorch/1.7.1-fosscuda-2020b
-
 # Activate Anaconda work environment for OpenDrift
 source /home/${USER}/.bashrc
 conda activate fl_flower

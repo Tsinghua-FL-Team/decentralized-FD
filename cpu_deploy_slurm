@@ -10,6 +10,6 @@
 source /home/${USER}/.bashrc
 conda activate fl_flower
 
-./run_server.sh --outfile server_output &
-./run_clients.sh --outfile clients_output &
+./run_server.sh &
+./run_clients.sh &
 wait 

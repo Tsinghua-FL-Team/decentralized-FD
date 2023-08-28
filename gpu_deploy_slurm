@@ -1,0 +1,25 @@
+#!/bin/bash 
+#SBATCH -J gpu_run_test
+#SBATCH -A naiss2023-22-247
+#SBATCH -t 15:00 
+#SBATCH -p node
+#SBATCH -N 4
+#SBATCH -M snowy
+#SBATCH --gpus=4
+#SBATCH --gpus-per-node=1
+#SBATCH --qos=short
+
+# Load required modules
+#modules use /sw/EasyBuild/snowy/modules/all/
+#module load PyTorch/1.7.1-fosscuda-2020b
+
+# Activate Anaconda work environment for OpenDrift
+source /home/${USER}/.bashrc
+conda activate fl_flower
+
+./run_server.sh &
+./run_clients.sh &
+
+wait
+
+cp -r $SNIC_TMP/ ~/deeplearning/decentralized-FD/temp/results/

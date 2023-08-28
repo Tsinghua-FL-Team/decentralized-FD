@@ -1,5 +1,6 @@
 from multiprocessing import Process
 
+import time
 import argparse
 
 import torch
@@ -25,10 +26,14 @@ def client_runner(
     # Load user configurations
     user_configs = configs.parse_configs(config_file)
 
+    # Check for available GPUs
+    # available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]
+    # print(available_gpus)
+    
     # Check for runnable device
     local_device = user_configs["CLIENT_CONFIGS"]["RUN_DEVICE"]
     if local_device == "auto":
-        local_device = f"cuda:{client_id%max_gpus}" if torch.cuda.is_available() else "cpu"
+        local_device = f"cuda:{int(client_id%max_gpus)}" if torch.cuda.is_available() else "cpu"
     
     # Load model and data
     model = models.load_model(model_configs=user_configs["MODEL_CONFIGS"])
@@ -77,10 +82,14 @@ def client_runner(
         device=local_device,
     )
     
-    #try:
-    fl.client.start_client(server_address=server_address, client=custom_client)
-    #except:
-    #    print("Either something went wrong or server finished execution!!")
+    finished = False
+    while not finished:
+        try:
+            fl.client.start_client(server_address=server_address, client=custom_client)
+            finished = True
+        except:
+            print("Connection Failure! Retrying after 30 seconds.")
+            time.sleep(30)
 
 def main() -> None:
     

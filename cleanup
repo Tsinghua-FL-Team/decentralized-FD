@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scancel -M snowy -u usamazf
+rm -f slurm-* server_output client_output_m*

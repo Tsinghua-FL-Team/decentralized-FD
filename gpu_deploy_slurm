@@ -4,22 +4,26 @@
 #SBATCH -p node
 #SBATCH -N 4
 #SBATCH -t 15:00 
-#SBATCH --gres=gpu:1 --gpus-per-node=1
+#SBATCH --gpus=4
+#SBATCH --gpus-per-node=1
+#SBATCH --ntasks-per-node=1
 #SBATCH -J gpu_run_test
 #SBATCH -D ./
-#SBATCH -n 1
-#SBATCH --gpus=4
 #SBATCH --qos=short
-#SBATCH --ntasks-per-node=1
 
 # Activate anaconda environment for flower framework
 source /home/${USER}/.bashrc
 conda activate fl_flower
 
-srun --exclusive --nodelist=s177 --output="server_output" run_server.sh --server_address="0.0.0.0:59999" --config_file="src/configs/exp_configs.yaml" &
-srun --exclusive --output="client_output_m1" run_clients.sh --server_address="s177:59999" --total_clients=5 --num_clients=2 --start_cid=0 --config_file="src/configs/exp_configs.yaml" &
-srun --exclusive --output="client_output_m2" run_clients.sh --server_address="s177:59999" --total_clients=5 --num_clients=2 --start_cid=2 --config_file="src/configs/exp_configs.yaml" &
-srun --exclusive --output="client_output_m3" run_clients.sh --server_address="s177:59999" --total_clients=5 --num_clients=1 --start_cid=4 --config_file="src/configs/exp_configs.yaml" &
+hostnames=$(srun hostname)
+echo $hostnames
+
+FILES="exp_configs/*"
+for f in $FILES
+do  
+    echo "Running experiment with $f config file."
+    srun run_experiment.sh $hostnames $f
+done
 wait
 
 cp -r $SNIC_TMP/ ~/deeplearning/decentralized-FD/temp/results/

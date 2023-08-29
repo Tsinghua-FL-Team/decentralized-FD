@@ -1,0 +1,40 @@
+SERVER_CONFIGS:
+    SERVER_TYPE: NORMAL             # Options: [NORMAL]
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
+    AGGREGATE_STRAT: DECFD          # Options: [DECFD]
+    EVALUATE_SERVER: False          # Options: [True, False]
+    NUM_TRAIN_ROUND: 20
+    SAMPLE_FRACTION: 1.0
+    MIN_SAMPLE_SIZE: 5
+    MIN_NUM_CLIENTS: 5
+
+CLIENT_CONFIGS:
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
+    LOCAL_EPCH: 5
+    DIST_EPOCH: 5
+    BATCH_SIZE: 32
+    LEARN_RATE: 0.001
+    ONEHOT_OUT: True                # Options: [True, False]
+    OPTIMIZER: ADAM                 # Options: [ADAM, SGD]
+    CRITERION: CROSSENTROPY         # Options: [CROSSENTROPY, NLLL]
+    PRED_CONF: 0.6
+
+DATASET_CONFIGS:
+    DATASET_PATH: ./temp/data
+    DATASET_NAME: MNIST             # Options: [MNIST, EMNIST-DIGITS, CIFAR-10, STL-10, FMNIST]
+    DISTILL_DATA: EMNIST-DIGITS     # Options: [MNIST, EMNIST-DIGITS, CIFAR-10, STL-10, FMNIST]
+    DISTILL_TEST: False             # Options: [True, False]
+    REPLACE_TEST: False             # Options: [True, False]
+    DISTILL_SAMPLES: 12800
+    DIRICHLET_ALPHA: 0.1
+    RANDOM_SEED: 333
+
+MODEL_CONFIGS:
+    MODEL_NAME: LENET-MNIST          # Options: [SIMPLE-MLP, SIMPLE-CNN, RESNET8, LENET-MNIST, LENET-CIFAR]
+    NUM_CLASSES: 10
+
+MISC_CONFIGS:
+    EARLY_STOPS: [-1, -1, -1, -1, -1]
+    RANDOM_SEED: 500
+    HEURISTIC_RATIO: 0.0
+    COLLUSION_RATIO: 0.0

@@ -15,15 +15,17 @@
 source /home/${USER}/.bashrc
 conda activate fl_flower
 
-hostnames=$(srun hostname)
-echo $hostnames
+#hostnames=$(srun hostname)
+hostnames=$SLURM_NODELIST
+echo "Fetched Hostnames are $hostnames"
+wait
 
 FILES="exp_configs/*"
 for f in $FILES
 do  
     echo "Running experiment with $f config file."
     srun run_experiment.sh $hostnames $f
+    wait
 done
-wait
 
 cp -r $SNIC_TMP/ ~/deeplearning/decentralized-FD/temp/results/

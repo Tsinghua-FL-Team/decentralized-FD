@@ -5,8 +5,8 @@ SERVER_CONFIGS:
     EVALUATE_SERVER: False          # Options: [True, False]
     NUM_TRAIN_ROUND: 20
     SAMPLE_FRACTION: 1.0
-    MIN_SAMPLE_SIZE: 5
-    MIN_NUM_CLIENTS: 5
+    MIN_SAMPLE_SIZE: 3
+    MIN_NUM_CLIENTS: 3
 
 CLIENT_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]

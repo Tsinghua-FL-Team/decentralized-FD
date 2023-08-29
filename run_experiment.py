@@ -39,15 +39,15 @@ def main():
         if current_host[0] == allocated_hosts[0]:
             # need to run server on the first
             # allocated node of the cluster
-            server_call = f"python src/run_fl_server.py --server_address='0.0.0.0:59999' --config_file={args.configs_file}"
+            server_call = f'python src/run_fl_server.py --server_address="0.0.0.0:59999" --config_file="{args.configs_file}"'
             print(f"Client Call: {server_call}")
-            subprocess.call([server_call])
+            subprocess.call([server_call], shell=True)
         else:
             # need to run client instance on
             # all other allocated nodes
-            client_call = f"python src/run_fl_clients.py --server_address='{allocated_hosts[0]}:59999' --total_clients={len(allocated_hosts)} --num_clients=1 --start_cid={allocated_hosts.index(current_host[0])-1} --config_file={args.configs_file}"
+            client_call = f'python src/run_fl_clients.py --server_address="{allocated_hosts[0]}:59999" --total_clients={len(allocated_hosts)} --num_clients=1 --start_cid={allocated_hosts.index(current_host[0])-1} --config_file="{args.configs_file}"'
             print(f"Client Call: {client_call}")
-            subprocess.call([client_call])
+            subprocess.call([client_call], shell=True)
 
 if __name__=="__main__":
     main()

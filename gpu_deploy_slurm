@@ -2,14 +2,13 @@
 #SBATCH -A naiss2023-22-247
 #SBATCH -M snowy
 #SBATCH -p node
-#SBATCH -N 4
-#SBATCH -t 15:00 
-#SBATCH --gpus=4
+#SBATCH -N 20
+#SBATCH -t 2:00:00 
+#SBATCH --gpus=20
 #SBATCH --gpus-per-node=1
 #SBATCH --ntasks-per-node=1
 #SBATCH -J gpu_run_test
 #SBATCH -D ./
-#SBATCH --qos=short
 
 # Activate anaconda environment for flower framework
 source /home/${USER}/.bashrc

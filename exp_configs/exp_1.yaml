@@ -3,10 +3,10 @@ SERVER_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
-    NUM_TRAIN_ROUND: 20
+    NUM_TRAIN_ROUND: 100
     SAMPLE_FRACTION: 1.0
-    MIN_SAMPLE_SIZE: 3
-    MIN_NUM_CLIENTS: 3
+    MIN_SAMPLE_SIZE: 20
+    MIN_NUM_CLIENTS: 20
 
 CLIENT_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
@@ -17,7 +17,7 @@ CLIENT_CONFIGS:
     ONEHOT_OUT: True                # Options: [True, False]
     OPTIMIZER: ADAM                 # Options: [ADAM, SGD]
     CRITERION: CROSSENTROPY         # Options: [CROSSENTROPY, NLLL]
-    PRED_CONF: 0.6
+    PRED_CONF: 0.0
 
 DATASET_CONFIGS:
     DATASET_PATH: ./temp/data

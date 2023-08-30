@@ -49,7 +49,8 @@ def main() -> None:
     # create a server
     custom_server = server.Server(
         client_manager=client_manager, 
-        strategy=agg_strat
+        strategy=agg_strat,
+        display_results=display_stats,
     )
 
     # Configure logger and start server
@@ -65,21 +66,38 @@ def main() -> None:
     exp_config = ntpath.basename(args.config_file)
     print(exp_config[:-5])
 
+    # Display final stats
     print("\n\n")
-    all_pre_accuracies = []
-    all_pos_accuracies = []
-    for item in custom_server.fit_metrics:
-        preacc = [0] * len(item)
-        posacc = [0] * len(item)
+    print("Final Results!!!")
+    display_stats(custom_server.fit_metrics)
+    print("\n\n")
+
+def display_stats(fit_metrics):
+    all_tr_accu = []
+    all_ds_accu = []
+    all_co_accu = []
+    for item in fit_metrics:
+        tr_accu = [0] * len(item)
+        ds_accu = [0] * len(item)
+        co_accu = [0] * len(item)
         for client_data in item:
-            preacc[client_data["client_id"]] = client_data["pr_accuracy"]
-            posacc[client_data["client_id"]] = client_data["ps_accuracy"]
-        all_pre_accuracies.append(preacc)
-        all_pos_accuracies.append(posacc)
+            tr_accu[client_data["client_id"]] = client_data["train_accuracy"]
+            ds_accu[client_data["client_id"]] = client_data["distill_accuracy"]
+            co_accu[client_data["client_id"]] = client_data["codistill_accuracy"]
+        # append results
+        all_tr_accu.append(tr_accu)
+        all_ds_accu.append(ds_accu)
+        all_co_accu.append(co_accu)
     
     # print results
-    for i in range(len(all_pre_accuracies)):
-        print(f"D -> {all_pre_accuracies[i]}\n     {all_pos_accuracies[i]}")
+    for i in range(len(all_tr_accu)):
+        print(f"T -> {all_tr_accu[i]}")
+    
+    for i in range(len(all_ds_accu)):
+        print(f"D -> {all_ds_accu[i]}")
+    
+    for i in range(len(all_co_accu)):
+        print(f"C -> {all_co_accu[i]}")
     
 if __name__ == "__main__":
     main()

@@ -25,12 +25,17 @@ FitResultsAndFailures = Tuple[
 
 class Server(fl.server.Server):
     def __init__(
-        self, *, client_manager: ClientManager, strategy: Optional[Strategy] = None
+        self, 
+        *, 
+        client_manager: ClientManager, 
+        strategy: Optional[Strategy] = None,
+        display_results: callable = None,
     ) -> None:
         super().__init__(client_manager=client_manager, strategy=strategy)
         self.majority_votes = []
         self.reward_shares = []
         self.fit_metrics = []
+        self.display_results = display_results
 
     def fit_round(
         self,
@@ -79,6 +84,9 @@ class Server(fl.server.Server):
             self.majority_votes.append(mj_vote)
             self.reward_shares.append(rw_share)
             self.fit_metrics.append(fit_metrics)
+
+        if self.display_results is not None:
+            self.display_results(self.fit_metrics)
 
         return None
     

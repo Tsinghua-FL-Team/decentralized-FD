@@ -36,8 +36,8 @@ def client_runner(
         local_device = f"cuda:{int(client_id%max_gpus)}" if torch.cuda.is_available() else "cpu"
     
     # Load model and data
-    model = models.load_model(model_configs=user_configs["MODEL_CONFIGS"])
-    model.to(local_device)
+    model_fn = models.load_model(model_configs=user_configs["MODEL_CONFIGS"])
+    #model.to(local_device)
     
     trainset, distillset, testset = datasets.load_and_fetch_split(
         client_id=client_id,
@@ -63,7 +63,7 @@ def client_runner(
     # Start client
     custom_client = client.Client(
         client_id=client_id,
-        local_model=model,
+        model_fn=model_fn,
         trainset=trainset[0],
         testset=testset,
         distillset=distillset,
@@ -72,6 +72,7 @@ def client_runner(
         criterion_str=user_configs["CLIENT_CONFIGS"]["CRITERION"],
         optimizer_str=user_configs["CLIENT_CONFIGS"]["OPTIMIZER"],
         num_classes=user_configs["MODEL_CONFIGS"]["NUM_CLASSES"],
+        co_distill_epochs=user_configs["CLIENT_CONFIGS"]["CO_DIST_EPOCH"],
         distill_epochs=user_configs["CLIENT_CONFIGS"]["DIST_EPOCH"],
         trainer_epochs=user_configs["CLIENT_CONFIGS"]["LOCAL_EPCH"],
         learning_rate=user_configs["CLIENT_CONFIGS"]["LEARN_RATE"],
@@ -84,12 +85,12 @@ def client_runner(
     
     finished = False
     while not finished:
-        try:
-            fl.client.start_client(server_address=server_address, client=custom_client)
-            finished = True
-        except:
-            print("Connection Failure! Retrying after 30 seconds.")
-            time.sleep(30)
+        # try:
+        fl.client.start_client(server_address=server_address, client=custom_client)
+        finished = True
+        # except:
+        #     print("Connection Failure! Retrying after 30 seconds.")
+        #     finished = True
 
 def main() -> None:
     

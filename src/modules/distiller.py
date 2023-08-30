@@ -16,11 +16,12 @@ def predict_public(
     ) -> List[int]:
     
     """Validate the model on the entire test set."""
+    model.eval()
     predictions = []
     with torch.no_grad():
-        for data in distill_loader:
-            images, labels = data[0].to(device), data[1].to(device)
-            outputs = F.softmax(model(images), dim=1)
+        for x, y in distill_loader:
+            x, y = x.to(device), y.to(device)
+            outputs = F.softmax(model(x), dim=1)
             # return probabilities or one-hot 
             # encoded class predictions
             if onehot:
@@ -37,7 +38,7 @@ def predict_public(
                 predictions += [outputs]
 
         # Collect all results and convert to numpy arrays
-        predictions = torch.cat(predictions, dim=0).detach().cpu().numpy()
+        predictions = torch.cat(predictions, dim=0).detach()
 
     return predictions
 
@@ -51,6 +52,7 @@ def distill_train(
         device: str,
     ) -> Dict[str, float]:
     
+    model.train()
     running_loss, samples = 0.0, 0
     for epoch in range(distill_epochs):
         for x, y in distill_loader:   
@@ -64,7 +66,8 @@ def distill_train(
             y_ = F.softmax(model(x), dim = 1)
             
             # compute loss
-            loss = nn.KLDivLoss(reduction="batchmean")(y_, onehot_y.detach())
+            loss = kulbach_leibler_divergence(y_, onehot_y.detach())
+            #loss = nn.KLDivLoss(reduction="batchmean")(y_, onehot_y.detach())
             
             running_loss += loss.item() * y.shape[0]
             samples += y.shape[0]
@@ -76,3 +79,44 @@ def distill_train(
 
     return distill_stats
 
+
+def co_distill_train(
+        distill_model: nn.Module,
+        co_distill_model: nn.Module,
+        distill_loader: torch.utils.data.DataLoader,
+        num_classes: int,
+        optimizer,
+        distill_epochs: int,
+        device: str,
+    ) -> Dict[str, float]:
+    
+    distill_model.train()
+    co_distill_model.train()
+    
+    running_loss, samples = 0.0, 0
+    for epoch in range(distill_epochs):
+        for x, _ in distill_loader:   
+            x = x.to(device)
+            y = F.softmax(distill_model(x), dim = 1)
+            
+            optimizer.zero_grad()
+            y_ = F.softmax(co_distill_model(x), dim = 1)
+            
+            # compute loss
+            loss = kulbach_leibler_divergence(y_, y.detach())
+            # loss = nn.KLDivLoss(reduction="batchmean")(y_, y)
+            
+            running_loss += loss.item() * y.shape[0]
+            samples += y.shape[0]
+            
+            loss.backward()
+            optimizer.step()  
+
+    distill_stats = {"loss" : running_loss / samples}
+
+    return distill_stats
+
+
+# Custom KL-Divergence Code
+def kulbach_leibler_divergence(predicted, target):
+  return -(target * torch.log(predicted.clamp_min(1e-7))).sum(dim=-1).mean() 

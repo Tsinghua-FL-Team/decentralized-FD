@@ -12,7 +12,7 @@ def get_optimizer(
     assert optimizer_str in ["SGD", "ADAM"], f"Invalid optimizer {optimizer_str} requested."
 
     if optimizer_str == "SGD":
-        return nn.CrossEntropyLoss()
+        return torch.optim.SGD(local_model.parameters(), lr=learning_rate)
     elif optimizer_str == "ADAM":
         return torch.optim.Adam(local_model.parameters(), lr=learning_rate)
     else:

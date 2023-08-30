@@ -104,10 +104,10 @@ class DecentralizedFederatedDistillation(fl.server.strategy.Strategy):
     ) -> Tuple[Optional[Parameters], Dict[str, Scalar]]:
         """Aggregate fit results using weighted average."""
         if not results:
-            return None, None
+            return None, None, None
         # Do not aggregate if there are failures and failures are not accepted
         if not self.accept_failures and failures:
-            return None, None
+            return None, None, None
 
         # Convert results
         predictions = [parameters_to_ndarrays(fit_res.parameters)[0] for _, fit_res in results]

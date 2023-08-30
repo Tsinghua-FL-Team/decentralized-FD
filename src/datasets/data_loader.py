@@ -3,7 +3,7 @@
 def load_data(dataset_name: str, 
               dataset_path: str):
     
-    assert dataset_name in ["MNIST", "CIFAR-10", "EMNIST-DIGITS"], f"Invalid dataset {dataset_name} requested."
+    assert dataset_name in ["MNIST", "CIFAR-10", "EMNIST-DIGITS", "EMNIST-BYCLASS"], f"Invalid dataset {dataset_name} requested."
 
     if dataset_name == "MNIST":
         from .dt_mnist import load_mnist
@@ -11,6 +11,9 @@ def load_data(dataset_name: str,
     elif dataset_name == "EMNIST-DIGITS":
         from .dt_emnist import load_emnist
         return load_emnist(data_root=dataset_path, split="digits")
+    elif dataset_name == "EMNIST-BYCLASS":
+        from .dt_emnist import load_emnist
+        return load_emnist(data_root=dataset_path, split="byclass")
     elif dataset_name == "CIFAR-10":
         from .dt_cifar10 import load_cifar10
         return load_cifar10(data_root=dataset_path)

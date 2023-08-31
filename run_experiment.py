@@ -31,8 +31,11 @@ def main():
     print(f"Current: {args.current_host}")
     print(f"Configs: {args.config_file}")
     
-    allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[2:-1])]
     current_host = [f"{args.current_host[0]}{s}" for s in re.findall(r'\d+', args.current_host)]
+    if '[' not in args.allocated_hosts:
+    	allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[1:])] 
+    else:
+        allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[2:-1])] 
     
     print(f"Processed Allocated: {allocated_hosts}")
     print(f"Processed Current: {current_host}")

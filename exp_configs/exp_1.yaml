@@ -1,6 +1,6 @@
 SERVER_CONFIGS:
     SERVER_TYPE: NORMAL             # Options: [NORMAL]
-    RUN_DEVICE: cuda                # Options: [auto, cpu, cuda]
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
     NUM_TRAIN_ROUND: 50
@@ -9,7 +9,7 @@ SERVER_CONFIGS:
     MIN_NUM_CLIENTS: 20
 
 CLIENT_CONFIGS:
-    RUN_DEVICE: cuda                # Options: [auto, cpu, cuda]
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     LOCAL_EPCH: 10
     DIST_EPOCH: 10
     CO_DIST_EPOCH: 10

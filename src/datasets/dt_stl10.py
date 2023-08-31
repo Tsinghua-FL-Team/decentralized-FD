@@ -18,7 +18,7 @@ def load_stl10(data_root) -> Tuple[torchvision.datasets.VisionDataset, torchvisi
     
     # Initialize Datasets. STL-10 will automatically download if not present
     trainset = torchvision.datasets.STL10(
-        root=data_root, split='train', folds=None, download=True, transform=transform
+        root=data_root, split='unlabeled', folds=None, download=True, transform=transform
     )
     testset = torchvision.datasets.STL10(
         root=data_root, split='test', folds=None, download=True, transform=transform

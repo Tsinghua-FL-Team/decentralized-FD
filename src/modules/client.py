@@ -182,6 +182,7 @@ class Client(Client):
                     print(f"Global Accuracy of the distillation set: {np.count_nonzero(self.distillloader.dataset.targets == self.distillloader.dataset.oTargets) / len(self.distillloader.dataset)}")
 
 
+                # Perform co-distillation if requested
                 if self.co_distill and self.distill_model is not None:
                     self.co_distill_model = self.model_fn(num_classes=self.num_classes).to(self.device)
                     self.co_distill_optimizer = modules.get_optimizer(
@@ -189,17 +190,6 @@ class Client(Client):
                         local_model=self.co_distill_model,
                         learning_rate=self.learning_rate,
                     )
-                    # Get distill predictions
-                    # distill_predicts = modules.predict_public(
-                    #     model=self.distill_model,
-                    #     distill_loader=distillloader,
-                    #     predict_confid=0.0,
-                    #     onehot=True,
-                    #     device=self.device,
-                    # )
-                    # Setup distill predictions
-                    # distill_targets = torch.argmax(distill_predicts, dim=1).detach().cpu().numpy()
-                    # distillloader.dataset.setTargets(labels=distill_targets)
                     # Train co-distill model
                     co_distill_stats = modules.co_distill_train(
                         co_distill_model=self.co_distill_model,
@@ -210,20 +200,6 @@ class Client(Client):
                         num_classes=self.num_classes,
                         distill_epochs=self.co_distill_epochs,
                     )
-
-            distill_loss, distill_accuracy = modules.evaluate(
-                model=self.distill_model, 
-                testloader=self.testloader, 
-                criterion=self.criterion,
-                device=self.device
-            )
-            
-            co_distill_loss, co_distill_accuracy = modules.evaluate(
-                model=self.co_distill_model, 
-                testloader=self.testloader, 
-                criterion=self.criterion,
-                device=self.device
-            )
 
             # Setup the training model for
             # training with local dataset
@@ -284,6 +260,23 @@ class Client(Client):
             criterion=self.criterion,
             device=self.device
         )
+
+        # Evaluate distillation model
+        distill_loss, distill_accuracy = modules.evaluate(
+            model=self.distill_model, 
+            testloader=self.testloader, 
+            criterion=self.criterion,
+            device=self.device
+        )
+        
+        if self.co_distill and self.co_distill_model is not None:
+            # Evaluate co-distillation model
+            co_distill_loss, co_distill_accuracy = modules.evaluate(
+                model=self.co_distill_model, 
+                testloader=self.testloader, 
+                criterion=self.criterion,
+                device=self.device
+            )   
 
         # Build and return response
         status = Status(code=Code.OK, message="Success")

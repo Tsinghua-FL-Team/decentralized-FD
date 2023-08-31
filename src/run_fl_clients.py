@@ -81,6 +81,7 @@ def client_runner(
         batch_size=user_configs["CLIENT_CONFIGS"]["BATCH_SIZE"],
         random_seed=user_configs["MISC_CONFIGS"]["RANDOM_SEED"],
         onehot_output=user_configs["CLIENT_CONFIGS"]["ONEHOT_OUT"],
+        co_distill=user_configs["CLIENT_CONFIGS"]["CO_DISTILL"],
         client_type=client_type,
         rand_seeder=random_seeder,
         device=local_device,

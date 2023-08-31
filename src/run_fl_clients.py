@@ -41,7 +41,7 @@ def client_runner(
     model_fn = models.load_model(model_configs=user_configs["MODEL_CONFIGS"])
 
     random_seeder()
-    trainset, trainset_labels, distillset, testset = datasets.load_and_fetch_split(
+    (trainset, trainset_labels), distillset, testset = datasets.load_and_fetch_split(
         client_id=client_id,
         n_clients=total_clients,
         dataset_conf=user_configs["DATASET_CONFIGS"],

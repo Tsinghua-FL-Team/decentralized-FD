@@ -27,12 +27,16 @@ def main():
     args = parser.parse_args()
     user_configs = parse_configs(args.config_file)
 
-    allocated_hosts = [f"{args.allocated_hosts[0]}{s}" for s in re.findall(r'\d+', args.allocated_hosts)]
+    print(f"Allocated: {args.allocated_hosts[2:-1]}")
+    print(f"Current: {args.current_host}")
+    print(f"Configs: {args.config_file}")
+    
+    allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[2:-1])]
     current_host = [f"{args.current_host[0]}{s}" for s in re.findall(r'\d+', args.current_host)]
     
-    print(f"Allocated: {allocated_hosts}")
-    print(f"Current: {current_host}")
-    print(f"Configs: {args.configs_file}")
+    print(f"Processed Allocated: {allocated_hosts}")
+    print(f"Processed Current: {current_host}")
+    
 
     if len(current_host) > 1:
         print("Something Went Horribly Wrong!!!")
@@ -60,6 +64,16 @@ def main():
             client_call = f'python src/run_fl_clients.py --server_address="{allocated_hosts[0]}:59999" --total_clients={total_num_client} --num_clients={clients_per_node} --start_cid={start_client_id} --config_file="{args.config_file}"'
             print(f"Client Call: {client_call}")
             subprocess.call([client_call], shell=True)
+
+def expand_range(in_str):
+    list_range = []
+    for token in in_str.split(','):
+        if '-' not in token:
+            list_range.append(int(token))
+        else:
+            low, high = map(int, token.split('-'))
+            list_range += range(low, high+1)
+    return list_range
 
 if __name__=="__main__":
     main()

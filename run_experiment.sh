@@ -9,5 +9,5 @@ conda activate fl_flower
 current_host=$(hostname)
 
 # Run the python based experiment manager
-python run_experiment.py --allocated_hosts=$1 --current_host=$current_host --configs_file=$2
+python run_experiment.py --allocated_hosts=$1 --current_host=$current_host --config_file=$2
 

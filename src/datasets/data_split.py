@@ -54,8 +54,15 @@ class CustomSubset(Dataset):
     def __init__(self, dataset, indices, labels=None):
         self.dataset = dataset
         self.indices = indices
-        if not labels:
-            targets = np.array(self.dataset.targets)[indices]
+        if labels is None:
+            if hasattr(self.dataset, 'targets'):
+                targets = np.array(self.dataset.targets)[indices]
+            elif hasattr(self.dataset, 'labels'):
+                targets = np.array(self.dataset.labels)[indices]
+            else:
+                # no targets or labels attribute in
+                # the given dataset set it to all -1
+                targets = np.array([-1]*len(indices))
             self.targets = torch.tensor(targets.copy()).long()
         else:
             self.targets = torch.tensor(labels).long()

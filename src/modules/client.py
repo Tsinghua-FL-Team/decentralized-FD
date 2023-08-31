@@ -123,8 +123,8 @@ class Client(Client):
             parameters=parameters
         )
 
-    def distill(self, global_labels):
-        self.distillset.setTargets(labels=global_labels)
+    # def distill(self, global_labels):
+    #     self.distillset.setTargets(labels=global_labels)
 
     def fit(self, ins: FitIns) -> FitRes:
         print(f"[Client {self.client_id}] fit, config: {ins.config}")
@@ -178,8 +178,8 @@ class Client(Client):
                     distill_epochs=self.distill_epochs,
                 )
                 ### Predictions Accuracy of the Global Labels
-                if self.client_id == 0:
-                    print(f"Global Accuracy of the distillation set: {np.count_nonzero(self.distillloader.dataset.targets == self.distillloader.dataset.oTargets) / len(self.distillloader.dataset)}")
+                # if self.client_id == 0:
+                #     print(f"Global Accuracy of the distillation set: {np.count_nonzero(self.distillloader.dataset.targets == self.distillloader.dataset.oTargets) / len(self.distillloader.dataset)}")
 
 
                 # Perform co-distillation if requested
@@ -248,7 +248,7 @@ class Client(Client):
             public_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
 
         ### Predictions Accuracy of the Worker
-        print(f"Accuracy of disitllation set for Worker {self.client_id}: {np.count_nonzero(np.argmax(public_predicts, axis=-1) == self.distillloader.dataset.oTargets.detach().cpu().numpy()) / len(self.distillloader.dataset)}")
+        #print(f"Accuracy of disitllation set for Worker {self.client_id}: {np.count_nonzero(np.argmax(public_predicts, axis=-1) == self.distillloader.dataset.oTargets.detach().cpu().numpy()) / len(self.distillloader.dataset)}")
         
         # Return the refined predictions
         predict_parameters = ndarrays_to_parameters([public_predicts])

@@ -33,7 +33,7 @@ def main():
     
     current_host = [f"{args.current_host[0]}{s}" for s in re.findall(r'\d+', args.current_host)]
     if '[' not in args.allocated_hosts:
-    	allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[1:])] 
+        allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[1:])] 
     else:
         allocated_hosts = [f"{args.allocated_hosts[0]}{num}" for num in expand_range(args.allocated_hosts[2:-1])] 
     

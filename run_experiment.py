@@ -1,6 +1,8 @@
 import subprocess
 import argparse
 import re
+import math
+from src.configs import parse_configs
 
 def main():
     parser = argparse.ArgumentParser(description="Flower")
@@ -17,12 +19,13 @@ def main():
         help="Current host node (no default)",
     )
     parser.add_argument(
-        "--configs_file",
+        "--config_file",
         type=str,
         required=True,
         help="Experiment configurations file (no default)",
     )
     args = parser.parse_args()
+    user_configs = parse_configs(args.config_file)
 
     allocated_hosts = [f"{args.allocated_hosts[0]}{s}" for s in re.findall(r'\d+', args.allocated_hosts)]
     current_host = [f"{args.current_host[0]}{s}" for s in re.findall(r'\d+', args.current_host)]
@@ -35,17 +38,26 @@ def main():
         print("Something Went Horribly Wrong!!!")
         return
     else:
+        # Compute how many process to allocate per host
+        total_num_client = user_configs["SERVER_CONFIGS"]["MIN_NUM_CLIENTS"]
+        clients_per_node = int(math.ceil(total_num_client / len(allocated_hosts)))
+        clients_on_node0 = total_num_client - (clients_per_node * (len(allocated_hosts)-1))
 
         if current_host[0] == allocated_hosts[0]:
             # need to run server on the first
             # allocated node of the cluster
-            server_call = f'python src/run_fl_server.py --server_address="0.0.0.0:59999" --config_file="{args.configs_file}"'
-            print(f"Client Call: {server_call}")
-            subprocess.call([server_call], shell=True)
+            server_call = f'python src/run_fl_server.py --server_address="0.0.0.0:59999" --config_file="{args.config_file}"'
+            server_proc = subprocess.Popen([server_call], shell=True)
+            client_call = f'python src/run_fl_clients.py --server_address="127.0.0.1:59999" --total_clients={total_num_client} --num_clients={clients_on_node0} --start_cid=0 --config_file="{args.config_file}"'
+            client_proc = subprocess.Popen([client_call], shell=True)
+            # Wait for processes to terminate
+            client_proc.wait()
+            server_proc.wait()
         else:
+            start_client_id = clients_on_node0 + (clients_per_node * (allocated_hosts.index(current_host[0]) - 1))
             # need to run client instance on
             # all other allocated nodes
-            client_call = f'python src/run_fl_clients.py --server_address="{allocated_hosts[0]}:59999" --total_clients={len(allocated_hosts)} --num_clients=1 --start_cid={allocated_hosts.index(current_host[0])-1} --config_file="{args.configs_file}"'
+            client_call = f'python src/run_fl_clients.py --server_address="{allocated_hosts[0]}:59999" --total_clients={total_num_client} --num_clients={clients_per_node} --start_cid={start_client_id} --config_file="{args.config_file}"'
             print(f"Client Call: {client_call}")
             subprocess.call([client_call], shell=True)
 

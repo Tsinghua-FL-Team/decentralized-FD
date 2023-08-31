@@ -3,15 +3,15 @@ SERVER_CONFIGS:
     RUN_DEVICE: cuda                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
-    NUM_TRAIN_ROUND: 20
+    NUM_TRAIN_ROUND: 50
     SAMPLE_FRACTION: 1.0
-    MIN_SAMPLE_SIZE: 6
-    MIN_NUM_CLIENTS: 6
+    MIN_SAMPLE_SIZE: 20
+    MIN_NUM_CLIENTS: 20
 
 CLIENT_CONFIGS:
     RUN_DEVICE: cuda                # Options: [auto, cpu, cuda]
     LOCAL_EPCH: 10
-    DIST_EPOCH: 5
+    DIST_EPOCH: 10
     CO_DIST_EPOCH: 10
     BATCH_SIZE: 128
     LEARN_RATE: 0.001

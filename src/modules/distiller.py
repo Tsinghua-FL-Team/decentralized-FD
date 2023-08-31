@@ -44,7 +44,7 @@ def predict_public(
 
 
 def distill_train(
-        model: nn.Module,
+        distill_model: nn.Module,
         distill_loader: torch.utils.data.DataLoader,
         num_classes: int,
         optimizer,
@@ -52,7 +52,7 @@ def distill_train(
         device: str,
     ) -> Dict[str, float]:
     
-    model.train()
+    distill_model.train()
     running_loss, samples = 0.0, 0
     for epoch in range(distill_epochs):
         for x, y in distill_loader:   
@@ -63,7 +63,7 @@ def distill_train(
             x, onehot_y = x.to(device), onehot_y.to(device)
             
             optimizer.zero_grad()
-            y_ = F.softmax(model(x), dim = 1)
+            y_ = F.softmax(distill_model(x), dim = 1)
             
             # compute loss
             loss = kulbach_leibler_divergence(y_, onehot_y.detach())

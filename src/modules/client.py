@@ -49,6 +49,7 @@ class Client(Client):
             random_seed: int,
             onehot_output: bool,
             device: str,
+            rand_seeder: callable,
             reset_model: bool = False,
             reset_optim: bool = False,
             co_distill: bool = True,
@@ -76,12 +77,16 @@ class Client(Client):
         self.reset_model = reset_model
         self.reset_optim = reset_optim
         self.co_distill = co_distill
+        self.rand_seeder = rand_seeder
         self.device = device
 
+        # Setup randomness with a seed value
+        # to obtain deterministic results
+        self.rand_seeder(rand_seed=self.random_seed)
+        
         # Initialize models
-        torch.manual_seed(self.random_seed)
-        self.train_model = self.model_fn(num_classes=self.num_classes).to(self.device)
         self.distill_model = self.model_fn(num_classes=self.num_classes).to(self.device)
+        self.train_model = self.model_fn(num_classes=self.num_classes).to(self.device)
         self.co_distill_model = None
 
         # Setup Optimizers
@@ -96,6 +101,13 @@ class Client(Client):
             learning_rate=self.learning_rate,
         )
         self.co_distill_optimizer = None
+
+        # Initialize data loaders
+        self.trainloader = torch.utils.data.DataLoader(self.trainset, batch_size=self.batch_size, shuffle=True)
+        self.testloader = torch.utils.data.DataLoader(self.testset, batch_size=self.batch_size, shuffle=False)        
+        self.distillloader = torch.utils.data.DataLoader(self.distillset, batch_size=self.batch_size, shuffle=False)        
+            
+        self.criterion = modules.get_criterion(criterion_str=self.criterion_str)
     
     def get_parameters(self, ins: GetParametersIns) -> GetParametersRes:
         """Module to fetch model parameters of current client."""
@@ -125,22 +137,6 @@ class Client(Client):
         #learning_rate = float(config["learning_rate"])
 
         # Train model
-        trainloader = torch.utils.data.DataLoader(
-            self.trainset, batch_size=self.batch_size, shuffle=True
-        )
-        
-        testloader = torch.utils.data.DataLoader(
-            self.testset, batch_size=self.batch_size, shuffle=False
-        )        
-        
-        distillloader = torch.utils.data.DataLoader(
-            self.distillset, batch_size=self.batch_size, shuffle=False
-        )        
-            
-        criterion = modules.get_criterion(
-            criterion_str=self.criterion_str
-        )
-        
         if self.reset_optim:
             self.train_optimizer = modules.get_optimizer(
                 optimizer_str=self.optimizer_str,            
@@ -168,14 +164,14 @@ class Client(Client):
                 # Initialize distillation model if this
                 # is the first run of model training
                 if self.reset_model:
-                    torch.manual_seed(self.random_seed)
+                    self.rand_seeder(rand_seed=self.random_seed)
                     self.distill_model = self.model_fn(num_classes=self.num_classes).to(self.device)
                 
                 # Assign public labels to the distill dataset
-                distillloader.dataset.setTargets(labels=public_labels[0][0])
+                self.distillloader.dataset.setTargets(labels=public_labels[0][0])
                 distill_stats = modules.distill_train(
-                    model=self.distill_model,
-                    distill_loader=distillloader,
+                    distill_model=self.distill_model,
+                    distill_loader=self.distillloader,
                     optimizer=self.distill_optimizer,
                     device=self.device,
                     num_classes=self.num_classes,
@@ -183,7 +179,7 @@ class Client(Client):
                 )
                 ### Predictions Accuracy of the Global Labels
                 if self.client_id == 0:
-                    print(f"Global Accuracy of the distillation set: {np.count_nonzero(distillloader.dataset.targets == distillloader.dataset.oTargets) / len(distillloader.dataset.oTargets)}")
+                    print(f"Global Accuracy of the distillation set: {np.count_nonzero(self.distillloader.dataset.targets == self.distillloader.dataset.oTargets) / len(self.distillloader.dataset)}")
 
 
                 if self.co_distill and self.distill_model is not None:
@@ -208,7 +204,7 @@ class Client(Client):
                     co_distill_stats = modules.co_distill_train(
                         co_distill_model=self.co_distill_model,
                         distill_model=self.distill_model,
-                        distill_loader=distillloader,
+                        distill_loader=self.distillloader,
                         optimizer=self.co_distill_optimizer,
                         device=self.device,
                         num_classes=self.num_classes,
@@ -217,15 +213,15 @@ class Client(Client):
 
             distill_loss, distill_accuracy = modules.evaluate(
                 model=self.distill_model, 
-                testloader=testloader, 
-                criterion=criterion,
+                testloader=self.testloader, 
+                criterion=self.criterion,
                 device=self.device
             )
             
             co_distill_loss, co_distill_accuracy = modules.evaluate(
                 model=self.co_distill_model, 
-                testloader=testloader, 
-                criterion=criterion,
+                testloader=self.testloader, 
+                criterion=self.criterion,
                 device=self.device
             )
 
@@ -244,10 +240,10 @@ class Client(Client):
             # using the local training data
             train_stats = modules.train_early_stop(
                 model=self.train_model, 
-                trainloader=trainloader,
-                testloader=testloader,
+                trainloader=self.trainloader,
+                testloader=self.testloader,
                 epochs=self.trainer_epochs, 
-                criterion=criterion,
+                criterion=self.criterion,
                 optimizer=self.train_optimizer,
                 early_stop=self.early_stop,
                 device=self.device
@@ -256,7 +252,7 @@ class Client(Client):
             # Get public predictions
             public_predicts = modules.predict_public(
                 model=self.train_model,
-                distill_loader=distillloader,
+                distill_loader=self.distillloader,
                 predict_confid=self.predict_confid,
                 onehot=self.onehot_output,
                 device=self.device,
@@ -272,12 +268,11 @@ class Client(Client):
         
         elif self.client_type == "colluding":
             ## Colluding Client Case - Predict similar by colluding
-            
-            np.random.seed(self.random_seed)
+            self.rand_seeder(rand_seed=self.random_seed)
             public_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
 
         ### Predictions Accuracy of the Worker
-        print(f"Accuracy of disitllation set for Worker {self.client_id}: {np.count_nonzero(np.argmax(public_predicts, axis=-1) == distillloader.dataset.oTargets.detach().cpu().numpy()) / len(distillloader.dataset)}")
+        print(f"Accuracy of disitllation set for Worker {self.client_id}: {np.count_nonzero(np.argmax(public_predicts, axis=-1) == self.distillloader.dataset.oTargets.detach().cpu().numpy()) / len(self.distillloader.dataset)}")
         
         # Return the refined predictions
         predict_parameters = ndarrays_to_parameters([public_predicts])
@@ -285,8 +280,8 @@ class Client(Client):
 
         train_loss, train_accuracy = modules.evaluate(
             model=self.train_model, 
-            testloader=testloader, 
-            criterion=criterion,
+            testloader=self.testloader, 
+            criterion=self.criterion,
             device=self.device
         )
 
@@ -295,7 +290,7 @@ class Client(Client):
         return FitRes(
             status=status,
             parameters=predict_parameters,
-            num_examples=len(trainloader),
+            num_examples=len(self.trainloader),
             metrics={
                 "client_id": self.client_id,
                 "client_type": self.client_type,
@@ -315,27 +310,34 @@ class Client(Client):
     def evaluate(self, ins: EvaluateIns) -> EvaluateRes:
         print(f"[Client {self.client_id}] evaluate, config: {ins.config}")
         
-        criterion = modules.get_criterion(
-            criterion_str=self.criterion_str
-        )
-
-        # Evaluate the updated model on the local dataset
-        testloader = torch.utils.data.DataLoader(
-            self.testset, batch_size=self.batch_size, shuffle=False
-        )
-        loss, accuracy = modules.evaluate(
+        # Evaluate train model
+        train_loss, train_accuracy = modules.evaluate(
             model=self.train_model, 
-            testloader=testloader, 
-            criterion=criterion,
+            testloader=self.testloader, 
+            criterion=self.criterion,
             device=self.device
         )
+        
+        # Evaluate distill model
+        distill_loss, distill_accuracy = modules.evaluate(
+            model=self.distill_model, 
+            testloader=self.testloader, 
+            criterion=self.criterion,
+            device=self.device
+        )        
         
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(
             status=status,
-            loss=float(loss),
-            num_examples=len(testloader),
-            metrics={"accuracy": float(accuracy),
-                     "loss": float(loss)},
+            loss=float(train_loss),
+            num_examples=len(self.testloader),
+            metrics={
+                "client_id": self.client_id,
+                "client_type": self.client_type,
+                "distill_loss": float(distill_loss),
+                "distill_accuracy": float(distill_accuracy),
+                "train_loss": float(train_loss),
+                "train_accuracy": float(train_accuracy),
+            },
         )

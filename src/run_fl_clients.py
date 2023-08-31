@@ -11,6 +11,10 @@ import models
 import configs
 import datasets
 
+import numpy as np
+import random
+
+
 def client_runner(
         client_id: int,
         total_clients: int,
@@ -25,20 +29,18 @@ def client_runner(
 
     # Load user configurations
     user_configs = configs.parse_configs(config_file)
-
-    # Check for available GPUs
-    # available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]
-    # print(available_gpus)
     
     # Check for runnable device
     local_device = user_configs["CLIENT_CONFIGS"]["RUN_DEVICE"]
     if local_device == "auto":
         local_device = f"cuda:{int(client_id%max_gpus)}" if torch.cuda.is_available() else "cpu"
     
+    random_seeder = get_random_seeder(seed_value=user_configs["MISC_CONFIGS"]["RANDOM_SEED"], use_cuda=True if local_device[:4]=="cuda" else False)
+    
     # Load model and data
     model_fn = models.load_model(model_configs=user_configs["MODEL_CONFIGS"])
-    #model.to(local_device)
-    
+
+    random_seeder()
     trainset, distillset, testset = datasets.load_and_fetch_split(
         client_id=client_id,
         n_clients=total_clients,
@@ -80,6 +82,7 @@ def client_runner(
         random_seed=user_configs["MISC_CONFIGS"]["RANDOM_SEED"],
         onehot_output=user_configs["CLIENT_CONFIGS"]["ONEHOT_OUT"],
         client_type=client_type,
+        rand_seeder=random_seeder,
         device=local_device,
     )
     
@@ -91,6 +94,15 @@ def client_runner(
         # except:
         #     print("Connection Failure! Retrying after 30 seconds.")
         #     finished = True
+
+def get_random_seeder(seed_value, use_cuda):
+    def random_seeder(rand_seed=seed_value, cuda=use_cuda):
+        np.random.seed(rand_seed)
+        torch.manual_seed(rand_seed)
+        random.seed(rand_seed)
+        if cuda:
+            torch.cuda.manual_seed_all(rand_seed)
+    return random_seeder
 
 def main() -> None:
     

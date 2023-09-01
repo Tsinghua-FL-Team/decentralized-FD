@@ -1,5 +1,6 @@
 """Module to run the Federated Learning server specified by experiment configurations."""
 
+import ntpath
 import argparse
 from typing import List, Tuple, Union
 
@@ -13,6 +14,7 @@ FitResultsAndFailures = Tuple[
     List[Union[Tuple[ClientProxy, FitRes], BaseException]],
 ]
 
+from exp_manager import ExperimentManager
 from modules import server
 import configs
 import strategy
@@ -39,6 +41,10 @@ def main() -> None:
     )
     args = parser.parse_args()
     user_configs = configs.parse_configs(args.config_file)
+    
+    # Fetch stats and store them locally?
+    exp_config = ntpath.basename(args.config_file)
+    exp_manager = ExperimentManager(experiment_id=exp_config[:-5], hyperparameters=user_configs)
 
     # Create strategy
     agg_strat = strategy.get_strategy(user_configs)
@@ -54,6 +60,7 @@ def main() -> None:
         client_manager=client_manager, 
         strategy=agg_strat,
         display_results=display_stats,
+        experiment_manager=exp_manager,
     )
 
     # Configure logger and start server
@@ -64,11 +71,8 @@ def main() -> None:
         server=custom_server,
     )
 
-    # Fetch stats and store them locally?
-    import ntpath
-    exp_config = ntpath.basename(args.config_file)
-    print(exp_config[:-5])
-
+    exp_manager.save_to_disc(user_configs["SERVER_CONFIGS"]["LOG_RESULT_PATH"], exp_config[:-5])
+    
     # Display final stats
     print("\n\n")
     print("Final Results!!!")
@@ -81,13 +85,13 @@ def get_display_stat_function(num_clients):
         all_ds_accu = []
         all_co_accu = []
         for item in fit_metrics:
-            tr_accu = [0] * num_clients
-            ds_accu = [0] * num_clients
-            co_accu = [0] * num_clients
-            for client_data in item:
-                tr_accu[client_data["client_id"]] = client_data["train_accuracy"]
-                ds_accu[client_data["client_id"]] = client_data["distill_accuracy"]
-                co_accu[client_data["client_id"]] = client_data["codistill_accuracy"]
+            tr_accu = []
+            ds_accu = []
+            co_accu = []
+            for i in range(num_clients):
+                tr_accu.append(item[f"client_{i}_train_acc"])
+                ds_accu.append(item[f"client_{i}_disti_acc"])
+                co_accu.append(item[f"client_{i}_codis_acc"])
             # append results
             all_tr_accu.append(tr_accu)
             all_ds_accu.append(ds_accu)

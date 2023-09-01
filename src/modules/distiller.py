@@ -13,6 +13,7 @@ def predict_public(
         predict_confid: float,
         device: str,
         onehot: bool = False,
+        num_classes: int = 10,
     ) -> List[int]:
     
     """Validate the model on the entire test set."""
@@ -29,7 +30,7 @@ def predict_public(
                 # probability class and apply confidence
                 # check on it.
                 amax = torch.argmax(outputs, dim=1).detach()
-                onehot_encoded = F.one_hot(amax, num_classes=10)
+                onehot_encoded = F.one_hot(amax, num_classes=num_classes)
                 pred_conf = outputs[np.arange(outputs.shape[0]), amax]
                 onehot_encoded[pred_conf < predict_confid, :] = 0
                 predictions += [onehot_encoded]

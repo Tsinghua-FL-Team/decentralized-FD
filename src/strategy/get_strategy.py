@@ -45,6 +45,8 @@ def get_strategy(user_configs: dict):
             on_fit_config_fn=fit_config_fn,
             num_classes=user_configs["MODEL_CONFIGS"]["NUM_CLASSES"],
             num_samples=user_configs["DATASET_CONFIGS"]["DISTILL_SAMPLES"],
+            reward_scale_alpha=user_configs["SERVER_CONFIGS"]["REWARD_SCALER_ALPHA"],
+            penalty_term_beta=user_configs["SERVER_CONFIGS"]["REWARD_PENALTY_BETA"],
         )
         return stratgy
     else:

@@ -28,6 +28,7 @@ class Server(fl.server.Server):
         self, 
         *, 
         client_manager: ClientManager, 
+        experiment_manager,
         strategy: Optional[Strategy] = None,
         display_results: callable = None,
     ) -> None:
@@ -36,6 +37,7 @@ class Server(fl.server.Server):
         self.reward_shares = []
         self.fit_metrics = []
         self.display_results = display_results
+        self.experiment_manager = experiment_manager
 
     def fit_round(
         self,
@@ -79,6 +81,7 @@ class Server(fl.server.Server):
 
         # Aggregate training results
         mj_vote, rw_share, fit_metrics = self.strategy.aggregate_fit(server_round, results, failures)
+        self.experiment_manager.log(fit_metrics)
 
         if (mj_vote is not None) and (rw_share is not None):
             self.majority_votes.append(mj_vote)

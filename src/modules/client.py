@@ -177,10 +177,6 @@ class Client(Client):
                     num_classes=self.num_classes,
                     distill_epochs=self.distill_epochs,
                 )
-                ### Predictions Accuracy of the Global Labels
-                # if self.client_id == 0:
-                #     print(f"Global Accuracy of the distillation set: {np.count_nonzero(self.distillloader.dataset.targets == self.distillloader.dataset.oTargets) / len(self.distillloader.dataset)}")
-
 
                 # Perform co-distillation if requested
                 if self.co_distill and self.distill_model is not None:
@@ -230,6 +226,7 @@ class Client(Client):
                 model=self.train_model,
                 distill_loader=self.distillloader,
                 predict_confid=self.predict_confid,
+                num_classes=self.num_classes,
                 onehot=self.onehot_output,
                 device=self.device,
             )
@@ -240,15 +237,16 @@ class Client(Client):
             
             t = 1000 * time.time() # current time in milliseconds
             np.random.seed(int(t) % 2**32)
-            public_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
+            class_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
+            public_predicts = np.zeros((class_predicts.size, self.num_classes))
+            public_predicts[np.arange(class_predicts.size), class_predicts] = 1
         
         elif self.client_type == "colluding":
             ## Colluding Client Case - Predict similar by colluding
             self.rand_seeder(rand_seed=self.random_seed)
-            public_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
-
-        ### Predictions Accuracy of the Worker
-        #print(f"Accuracy of disitllation set for Worker {self.client_id}: {np.count_nonzero(np.argmax(public_predicts, axis=-1) == self.distillloader.dataset.oTargets.detach().cpu().numpy()) / len(self.distillloader.dataset)}")
+            class_predicts = np.random.randint(0, self.num_classes, len(self.distillset))
+            public_predicts = np.zeros((class_predicts.size, self.num_classes))
+            public_predicts[np.arange(class_predicts.size), class_predicts] = 1
         
         # Return the refined predictions
         predict_parameters = ndarrays_to_parameters([public_predicts])
@@ -285,7 +283,7 @@ class Client(Client):
             parameters=predict_parameters,
             num_examples=len(self.trainloader),
             metrics={
-                "client_id": self.client_id,
+                "client_id": int(self.client_id),
                 "client_type": self.client_type,
                 "fit_duration": fit_duration,
                 # "distill_stats": distill_stats,

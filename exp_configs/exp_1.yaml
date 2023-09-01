@@ -1,5 +1,4 @@
 SERVER_CONFIGS:
-    SERVER_TYPE: NORMAL             # Options: [NORMAL]
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
@@ -7,6 +6,9 @@ SERVER_CONFIGS:
     SAMPLE_FRACTION: 1.0
     MIN_SAMPLE_SIZE: 25
     MIN_NUM_CLIENTS: 25
+    LOG_RESULT_PATH: ./temp/run_results/
+    REWARD_SCALER_ALPHA: 1.0
+    REWARD_PENALTY_BETA: 1.0
 
 CLIENT_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]

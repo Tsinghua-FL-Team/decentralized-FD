@@ -44,6 +44,8 @@ class DecentralizedFederatedDistillation(fl.server.strategy.Strategy):
         initial_parameters: Optional[Parameters] = None,
         fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
         evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+        reward_scale_alpha: int = 1.0,
+        penalty_term_beta: int = 1.0,
     ) -> None:
         super().__init__()
         self.fraction_fit = fraction_fit
@@ -60,6 +62,8 @@ class DecentralizedFederatedDistillation(fl.server.strategy.Strategy):
         self.evaluate_metrics_aggregation_fn = evaluate_metrics_aggregation_fn
         self.number_of_classes = num_classes
         self.number_of_samples = num_samples
+        self.alpha = reward_scale_alpha
+        self.beta = penalty_term_beta
     
     def __repr__(self) -> str:
         return "FederatedAverage"
@@ -109,54 +113,72 @@ class DecentralizedFederatedDistillation(fl.server.strategy.Strategy):
         if not self.accept_failures and failures:
             return None, None, None
 
+        # collect client_ids
+        results_by_client_id = [(res.metrics["client_id"], res) for _, res in results]
+        sorted_results = sorted(results_by_client_id, key=lambda tup: tup[0])
+
+        def my_argmax(a):
+            rows = np.where(a == a.max(axis=1)[:, None])[0]
+            rows_multiple_max = rows[:-1][rows[:-1] == rows[1:]]
+            my_argmax = a.argmax(axis=1)
+            my_argmax[rows_multiple_max] = -1
+            return my_argmax
+
         # Convert results
-        predictions = [parameters_to_ndarrays(fit_res.parameters)[0] for _, fit_res in results]
+        predictions = [parameters_to_ndarrays(fit_res.parameters)[0] for (_, fit_res) in sorted_results]
+        pred_argmax = [my_argmax(item) for item in predictions]
+
         class_votes = np.sum(predictions, axis=0)
         class_sums = np.sum(class_votes, axis=0)
-        samples_predicted = [np.count_nonzero(np.sum(worker_prediction, axis=1) > 0) for worker_prediction in predictions]
-
-        # freq = np.apply_along_axis(lambda x: np.bincount(x, minlength=self.number_of_classes), axis=1, arr=predictions)
-        # class_vote = np.zeros([self.number_of_samples, self.number_of_classes], dtype=int)
-        # class_sums = np.zeros(self.number_of_classes, dtype=float)
-        # samples_predicted = np.zeros(len(results))
-        # total_predicted = 0
-
-        # # Aggregate and store predictions
-        # for i, (predict, freq) in enumerate(zip(predictions, freq)):
-        #     class_sums += freq
-        #     for j, sample_predict in enumerate(predict):
-        #         # Compute the vote only if prediction
-        #         # made by the respective worker
-        #         if sample_predict != -1:
-        #             class_vote[j, sample_predict] += 1
-        #             samples_predicted[i] += 1
-        #     # compute all sample count
-        #     total_predicted += samples_predicted[i]
-
-        majority_vote = np.argmax(class_votes, axis=-1).astype("uint8")
-        reward_shares = 0
+        per_worker_sums = [np.sum(worker_prediction, axis=0) for worker_prediction in predictions]
+        per_worker_pred = [np.count_nonzero(np.sum(worker_prediction, axis=1) > 0) for worker_prediction in predictions]
+        total_predicted = np.sum(per_worker_pred)
         
         # Compute the reward for each client based
         # on their contribution and majority vote
+        rewardShare = np.zeros(len(predictions))
 
+        for j in range(len(predictions[0])):
+            for i in range(len(predictions)):
+                # skip if no prediction made by worker i
+                if pred_argmax[i][j] == -1:
+                    continue
+                # Compute R_i
+                Ri = (1.0/(total_predicted-per_worker_pred[i])) * (class_sums - per_worker_sums[i])
+                t0 = 0
+                nPeers = 0
+                # Reward worker i for each peer p
+                for p in range(len(predictions)):
+                    # Skip if same worker
+                    if i == p:
+                        continue
+                    # skip if no prediction made by peer worker p
+                    if pred_argmax[p][j] == -1:
+                        continue
+                    nPeers += 1
+                    # Compute reward
+                    t0 += ((1.0/Ri[pred_argmax[i][j]]) - self.beta) if pred_argmax[i][j] == pred_argmax[p][j] else (-1 * self.beta)
 
+                # Reward Share for worker i
+                nPeers = 1 if nPeers == 0 else nPeers
+                rewardShare[i] += self.alpha * (1.0/nPeers) * t0
 
-        # Clean up
-        del class_votes, samples_predicted
-
+        majority_vote = np.argmax(class_votes, axis=-1).astype("uint8")
+        
         # Collect metrics from clients and store them to disk
-        fit_metrics = [res.metrics for _, res in results]
-        # print(fit_metrics)
+        organized_metrics = dict()
+        fit_metrics = [res.metrics for (_, res) in sorted_results]
 
-        # Aggregate custom metrics if aggregation fn was provided
-        # metrics_aggregated = {}
-        # if self.fit_metrics_aggregation_fn:
-        #     fit_metrics = [(res.num_examples, res.metrics) for _, res in results]
-        #     metrics_aggregated = self.fit_metrics_aggregation_fn(fit_metrics)
-        # elif server_round == 1:  # Only log this warning once
-        #     log(WARNING, "No fit_metrics_aggregation_fn provided")
+        for client_dict in fit_metrics:
+            organized_metrics[f"client_{client_dict['client_id']}_disti_acc"] = client_dict["distill_accuracy"]
+            organized_metrics[f"client_{client_dict['client_id']}_codis_acc"] = client_dict["codistill_accuracy"]
+            organized_metrics[f"client_{client_dict['client_id']}_train_acc"] = client_dict["train_accuracy"]
+            organized_metrics[f"client_{client_dict['client_id']}_disti_loss"] = client_dict["distill_loss"]
+            organized_metrics[f"client_{client_dict['client_id']}_codis_loss"] = client_dict["codistill_loss"]
+            organized_metrics[f"client_{client_dict['client_id']}_train_loss"] = client_dict["train_loss"]
+            organized_metrics[f"client_{client_dict['client_id']}_reward"] = rewardShare[client_dict['client_id']]
 
-        return majority_vote, reward_shares, fit_metrics
+        return majority_vote, rewardShare, organized_metrics
 
     def configure_evaluate(
         self, server_round: int, parameters: Parameters, client_manager: ClientManager

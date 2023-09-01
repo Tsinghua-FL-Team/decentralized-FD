@@ -1,19 +1,21 @@
 SERVER_CONFIGS:
-    SERVER_TYPE: NORMAL             # Options: [NORMAL]
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
     NUM_TRAIN_ROUND: 15
     SAMPLE_FRACTION: 1.0
-    MIN_SAMPLE_SIZE: 25
-    MIN_NUM_CLIENTS: 25
+    MIN_SAMPLE_SIZE: 2
+    MIN_NUM_CLIENTS: 2
+    LOG_RESULT_PATH: ./temp/run_results/
+    REWARD_SCALER_ALPHA: 1.0
+    REWARD_PENALTY_BETA: 1.0
 
 CLIENT_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
-    LOCAL_EPCH: 10
-    DIST_EPOCH: 10
+    LOCAL_EPCH: 1
+    DIST_EPOCH: 1
     CO_DISTILL: False               # Options: [True, False]
-    CO_DIST_EPOCH: 10
+    CO_DIST_EPOCH: 1
     BATCH_SIZE: 128
     LEARN_RATE: 0.001
     ONEHOT_OUT: True                # Options: [True, False]

@@ -177,6 +177,7 @@ class DecentralizedFederatedDistillation(fl.server.strategy.Strategy):
             organized_metrics[f"client_{client_dict['client_id']}_codis_loss"] = client_dict["codistill_loss"]
             organized_metrics[f"client_{client_dict['client_id']}_train_loss"] = client_dict["train_loss"]
             organized_metrics[f"client_{client_dict['client_id']}_reward"] = rewardShare[client_dict['client_id']]
+            organized_metrics[f"client_{client_dict['client_id']}_type"] = client_dict['client_type']
 
         return majority_vote, rewardShare, organized_metrics
 

@@ -3,7 +3,7 @@
 def load_data(dataset_name: str, 
               dataset_path: str):
     
-    assert dataset_name in ["MNIST", "CIFAR-10", "STL-10", "EMNIST-DIGITS", "EMNIST-BYCLASS"], f"Invalid dataset {dataset_name} requested."
+    assert dataset_name in ["MNIST", "CIFAR-10", "STL-10", "EMNIST-DIGITS", "EMNIST-BYCLASS", "Fashion-MNIST"], f"Invalid dataset {dataset_name} requested."
 
     if dataset_name == "MNIST":
         from .dt_mnist import load_mnist
@@ -20,9 +20,11 @@ def load_data(dataset_name: str,
     elif dataset_name == "STL-10":
         from .dt_stl10 import load_stl10
         return load_stl10(data_root=dataset_path)
+    elif dataset_name == "Fashion-MNIST":
+        from .dt_fmnist import load_fmnist
+        return load_fmnist(data_root=dataset_path)
     else:
         raise Exception(f"Invalid dataset {dataset_name} requested.")
-
 
 def load_and_fetch_split(
         client_id: int,

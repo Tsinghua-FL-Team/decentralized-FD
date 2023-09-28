@@ -2,10 +2,10 @@ SERVER_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     AGGREGATE_STRAT: DECFD          # Options: [DECFD]
     EVALUATE_SERVER: False          # Options: [True, False]
-    NUM_TRAIN_ROUND: 3
+    NUM_TRAIN_ROUND: 15
     SAMPLE_FRACTION: 1.0
-    MIN_SAMPLE_SIZE: 5
-    MIN_NUM_CLIENTS: 5
+    MIN_SAMPLE_SIZE: 25
+    MIN_NUM_CLIENTS: 25
     LOG_RESULT_PATH: ./temp/run_results/
     REWARD_SCALER_ALPHA: 1.0
     REWARD_PENALTY_BETA: 1.0
@@ -14,7 +14,7 @@ CLIENT_CONFIGS:
     RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
     LOCAL_EPCH: 10
     DIST_EPOCH: 10
-    CO_DISTILL: True                # Options: [True, False]
+    CO_DISTILL: False                # Options: [True, False]
     CO_DIST_EPOCH: 10
     BATCH_SIZE: 128
     LEARN_RATE: 0.001
@@ -41,4 +41,4 @@ MISC_CONFIGS:
     EARLY_STOPS: [-1, -1, -1, -1, -1]
     RANDOM_SEED: 500
     HEURISTIC_RATIO: 0.0
-    COLLUSION_RATIO: 0.50
+    COLLUSION_RATIO: 0.0

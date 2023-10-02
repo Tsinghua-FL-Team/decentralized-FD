@@ -14,9 +14,7 @@ class Net(SqueezeNet):
     """Multilayer percenptron (MLP) network."""
     def __init__(self, num_classes) -> None:
         super(Net, self).__init__(num_classes=num_classes)
-        print(self.features)
         self.features[0] = nn.Conv2d(1, 96, kernel_size=7, stride=2)
-        print(self.features)
         self._num_classes = num_classes
 
     def get_weights(self) -> fl.common.NDArrays:

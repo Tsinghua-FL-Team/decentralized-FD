@@ -1,4 +1,4 @@
-Bootstrap: docker
+Bootstrap: localimage
 From: ./flwr_env.sif
 
 %files
@@ -10,4 +10,4 @@ From: ./flwr_env.sif
 %runscript
     cd /opt/run_code
     python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(available_gpus);'
-    python -m run_experiment_alvis.py --num_gpus=4 --configs_path="current_experiments/"
+    python -m run_experiment_alvis --num_gpus=4 --configs_path="current_experiments/"

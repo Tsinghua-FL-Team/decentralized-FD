@@ -4,10 +4,14 @@ From: ./flwr_env.sif
 %files
     # Copy source code and respective runners
     ../src/   /opt/run_code/src
-    ../run_experiment_alvis.py /opt/run_code/
+    ../run_experiment_slurm.py /opt/run_code/
     ../current_experiments /opt/run_code/current_experiments
+
+%post
+    cd /opt/run_code/
+    mkdir temp temp/data
+    python -m src.datasets.data_loader -d --data_path "temp/data"
 
 %runscript
     cd /opt/run_code
-    python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(available_gpus);'
-    python -m run_experiment_alvis --num_gpus=4 --configs_path="current_experiments/"
+    python run_experiment_slurm.py --num_gpus=-1 --configs_path="current_experiments/"

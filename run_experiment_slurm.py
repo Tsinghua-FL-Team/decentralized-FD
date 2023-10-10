@@ -2,8 +2,6 @@ from os import listdir
 from os.path import isfile, join
 import subprocess
 import argparse
-import re
-import math
 from src.configs import parse_configs
 
 def main():
@@ -21,6 +19,11 @@ def main():
         help="Configuration file path (no default)",
     )
     args = parser.parse_args()
+    # Auto update GPU count
+    if args.num_gpus == -1:
+        import torch
+        args.num_gpus = torch.cuda.device_count()
+
     print(f"# of GPUs    : {args.num_gpus}")
     print(f"Configs Path : {args.configs_path}")
     all_configs = [join(args.configs_path, f) for f in listdir(args.configs_path) if isfile(join(args.configs_path, f))]

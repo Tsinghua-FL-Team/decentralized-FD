@@ -77,3 +77,33 @@ def load_and_fetch_split(
         testset = split_test
 
     return (split_train, split_labels), split_distill, testset
+
+def download_all_datasets(dataset_path):
+    load_data("MNIST", dataset_path)
+    load_data("CIFAR-10", dataset_path)
+    load_data("STL-10", dataset_path)
+    load_data("EMNIST-DIGITS", dataset_path)
+    load_data("Fashion-MNIST", dataset_path)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Flower")
+    parser.add_argument(
+        "--data_path",
+        type=str,
+        required=False,
+        help="Path to store downloaded datasets (no default)",
+    )
+    parser.add_argument(
+        "-d",
+        action="store_true",
+        help="Flag to set download datasets",
+    )
+    args = parser.parse_args()
+    
+    # Called the module, download all datasets
+    if args.d and args.data_path:
+        download_all_datasets(args.data_path)
+    else:
+        print("Not Implemented to handle this case!!!")
+        raise NotImplementedError

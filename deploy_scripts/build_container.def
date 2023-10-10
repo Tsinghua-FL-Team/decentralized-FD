@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: pytorch/pytorch:1.1.0-cuda10.0-cudnn7.5-runtime
+From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
 
 %files
     # Copy source code and respective runners
@@ -18,6 +18,6 @@ From: pytorch/pytorch:1.1.0-cuda10.0-cudnn7.5-runtime
 
 %runscript
     cd /opt/run_code
-    # python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(f"available_gpus");'
+    python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(f"available_gpus");'
     # python  -m  run_experiment_alvis.py   train   ./dataset   "$@"
     python -m run_experiment_alvis.py --num_gpus=4 --configs_path="current_experiments/"

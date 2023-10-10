@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: pytorch/pytorch:1.1.0-cuda10.0-cudnn7.5-runtime
+
+%files
+    # Copies files (source code) for the LeNet5 training script
+    # lenet5_single_gpu   /opt/lenet5_single_gpu
+
+%post
+    export "PATH=/opt/conda/bin:$PATH"
+    conda install -y python-dateutil
+    conda install -y -c conda-forge pyyaml
+    cond install -y pip
+    python -m pip install flwr==1.4.0
+    # conda install termcolor
+    # cd /opt
+    # python  -m  lenet5_single_gpu   download-dataset   ./dataset
+
+%runscript
+    cd /opt
+    python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(f"available_gpus");'
+    # python  -m  run_experiment_alvis.py   train   ./dataset   "$@"

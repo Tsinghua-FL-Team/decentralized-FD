@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
+
+#%files
+#    # Copy source code and respective runners
+#    ../src/   /opt/run_code/src
+#    ../run_experiment_alvis.py /opt/run_code/
+#    ../current_experiments /opt/run_code/current_experiments
+
+%post
+    export "PATH=/opt/conda/bin:$PATH"
+    conda install -y pip python-dateutil
+    conda install -y -c conda-forge pyyaml
+    python -m pip install flwr==1.4.0
+
+#%runscript
+#    cd /opt/run_code
+#    python -c 'import torch; available_gpus = [torch.cuda.device(i) for i in range(torch.cuda.device_count())]; print(available_gpus);'
+#    # python  -m  run_experiment_alvis.py   train   ./dataset   "$@"
+#    python -m run_experiment_alvis.py --num_gpus=4 --configs_path="current_experiments/"

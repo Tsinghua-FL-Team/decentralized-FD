@@ -1,9 +1,8 @@
 #!/bin/bash -l
 #SBATCH -A NAISS2023-22-904 -p alvis
-#SBATCH --gpus=4
+#SBATCH -t 0-00:01:00 
 #SBATCH --gpus-per-node=T4:4
 #SBATCH --nodes=1 --ntasks=1
-#SBATCH -t 0-00:01:00 
 #SBATCH -J cifar10_modified_run
 #SBATCH --output cifar10_modified_run.txt
 

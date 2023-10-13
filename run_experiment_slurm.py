@@ -18,6 +18,12 @@ def main():
         required=True,
         help="Configuration file path (no default)",
     )
+    parser.add_argument(
+        "--connect_port",
+        type=int,
+        required=True,
+        help="Connection Port to use (no default)",
+    )
     args = parser.parse_args()
     # Auto update GPU count
     if args.num_gpus == -1:
@@ -32,9 +38,9 @@ def main():
         print(f"Running experiments for: {config_file}")
         user_configs = parse_configs(config_file)
         total_client = user_configs["SERVER_CONFIGS"]["MIN_NUM_CLIENTS"]
-        server_call = f'python src/run_fl_server.py --server_address="0.0.0.0:59999" --config_file="{config_file}"'
+        server_call = f'python src/run_fl_server.py --server_address="0.0.0.0:{args.connect_port}" --config_file="{config_file}"'
         server_proc = subprocess.Popen([server_call], shell=True)
-        client_call = f'python src/run_fl_clients.py --server_address="127.0.0.1:59999" --max_gpus={args.num_gpus} --total_clients={total_client} --num_clients={total_client} --start_cid=0 --config_file="{config_file}"'
+        client_call = f'python src/run_fl_clients.py --server_address="127.0.0.1:{args.connect_port}" --max_gpus={args.num_gpus} --total_clients={total_client} --num_clients={total_client} --start_cid=0 --config_file="{config_file}"'
         client_proc = subprocess.Popen([client_call], shell=True)
         # Wait for processes to terminate
         client_proc.wait()

@@ -1,0 +1,44 @@
+SERVER_CONFIGS:
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
+    AGGREGATE_STRAT: DECFD          # Options: [DECFD]
+    EVALUATE_SERVER: False          # Options: [True, False]
+    NUM_TRAIN_ROUND: 50
+    SAMPLE_FRACTION: 1.0
+    MIN_SAMPLE_SIZE: 4
+    MIN_NUM_CLIENTS: 4
+    LOG_RESULT_PATH: ./temp/run_results/
+    REWARD_SCALER_ALPHA: 1.0
+    REWARD_PENALTY_BETA: 1.0
+
+CLIENT_CONFIGS:
+    RUN_DEVICE: auto                # Options: [auto, cpu, cuda]
+    LOCAL_EPCH: 10
+    DIST_EPOCH: 10
+    CO_DISTILL: True                # Options: [True, False]
+    CO_DIST_EPOCH: 10
+    BATCH_SIZE: 128
+    LEARN_RATE: 0.001
+    ONEHOT_OUT: True                # Options: [True, False]
+    OPTIMIZER: ADAM                 # Options: [ADAM, SGD]
+    CRITERION: CROSSENTROPY         # Options: [CROSSENTROPY, NLLL]
+    PRED_CONF: 0.0
+
+DATASET_CONFIGS:
+    DATASET_PATH: ./temp/data
+    DATASET_NAME: CIFAR-10          # Options: [MNIST, EMNIST-DIGITS, EMNIST-BYCLASS, CIFAR-10, STL-10, FMNIST]
+    DISTILL_DATA: CIFAR-10          # Options: [MNIST, EMNIST-DIGITS, EMNIST-BYCLASS, CIFAR-10, STL-10, FMNIST]
+    DISTILL_TEST: True              # Options: [True, False]
+    REPLACE_TEST: False             # Options: [True, False]
+    DISTILL_SAMPLES: 10000
+    DIRICHLET_ALPHA: 100.0
+    RANDOM_SEED: 333
+
+MODEL_CONFIGS:
+    MODEL_NAME: RESNET18-CIFAR         # Options: [SIMPLE-MLP, SIMPLE-CNN, RESNET8, LENET-MNIST, LENET-CIFAR]
+    NUM_CLASSES: 10
+
+MISC_CONFIGS:
+    EARLY_STOPS: [-1, -1, -1, -1, -1]
+    RANDOM_SEED: 500
+    HEURISTIC_RATIO: 0.0
+    COLLUSION_RATIO: 0.0

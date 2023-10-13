@@ -32,6 +32,7 @@ def main():
 
     print(f"# of GPUs    : {args.num_gpus}")
     print(f"Configs Path : {args.configs_path}")
+    print(f"Connect Port : {args.connect_port}")
     all_configs = [join(args.configs_path, f) for f in listdir(args.configs_path) if isfile(join(args.configs_path, f))]
 
     for config_file in all_configs:

@@ -2,7 +2,7 @@
 
 def load_model(model_configs: dict):
     
-    assert model_configs["MODEL_NAME"] in ["SIMPLE-CNN", "SIMPLE-MLP", "LENET-MNIST", "LENET-CIFAR", "RESNET8-CIFAR", "RESNET18-CIFAR", "SQUEEZE-FMNIST"], f"Invalid model {model_configs['MODEL_NAME']} requested."
+    assert model_configs["MODEL_NAME"] in ["SIMPLE-CNN", "SIMPLE-MLP", "LENET-MNIST", "LENET-CIFAR", "RESNET8-CIFAR", "RESNET18-CIFAR", "SQUEEZE-FMNIST", "SQUEEZE-CIFAR"], f"Invalid model {model_configs['MODEL_NAME']} requested."
 
     if model_configs["MODEL_NAME"] == "SIMPLE-MLP":
         from .simple_mlp import Net
@@ -24,6 +24,9 @@ def load_model(model_configs: dict):
         return Net 
     elif model_configs["MODEL_NAME"] == "SQUEEZE-FMNIST":
         from .squenet_fmnist import Net
+        return Net 
+    elif model_configs["MODEL_NAME"] == "SQUEEZE-CIFAR":
+        from .squenet_cifar10 import Net
         return Net 
     else:
         raise Exception(f"Invalid model {model_configs['MODEL_NAME']} requested.")
